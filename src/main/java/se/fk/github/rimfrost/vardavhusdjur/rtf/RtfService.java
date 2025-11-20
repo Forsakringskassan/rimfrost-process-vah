@@ -9,21 +9,20 @@ import se.fk.rimfrost.VahRtfResponseMessageData;
 public class RtfService
 {
 
-   public RattTillForsakring onVahRtfResponse(VahRtfResponseMessageData response)
+   public RattTillForsakring onRtfMaskinellResponse(RtfMaskinellResponseMessageData response)
    {
       System.out.print(response.toString());
-      System.out.printf("Received VahRtfResponse for processId: %s with rattTillForsakring: %s%n",
-            response.getProcessId(),
+      System.out.printf("Received RtfMaskinellResponse for processId: %s with rattTillForsakring: %s%n",
+            response.getKundbehovsflodeId(),
             response.getRattTillForsakring().toString());
       return response.getRattTillForsakring();
    }
 
-   public VahRtfRequestMessageData createVahRtfRequest(String pnr, String processId)
+   public RtfMaskinellRequestMessageData createRtfMaskinellRequest(String kundbehovsflodeId)
    {
-      System.out.printf("Created VahRtfRequest with pnr: %s with processId: %s%n", pnr, processId);
-      VahRtfRequestMessageData requestMessageData = new VahRtfRequestMessageData();
-      requestMessageData.setProcessId(processId);
-      requestMessageData.setPersonNummer(pnr);
+      System.out.printf("Created RtfMaskinellRequest with kundbehovsflodeId: %s%n", kundbehovsflodeId);
+      RtfMaskinellRequestMessageData requestMessageData = new RtfMaskinellRequestMessageData();
+      requestMessageData.setKundbehovsflodeId(kundbehovsflodeId);
       return requestMessageData;
    }
 

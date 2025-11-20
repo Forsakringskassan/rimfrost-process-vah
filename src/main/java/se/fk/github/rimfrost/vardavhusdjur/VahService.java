@@ -1,6 +1,7 @@
 package se.fk.github.rimfrost.vardavhusdjur;
 
 import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
+import se.fk.rimfrost.VahKundbehovsflodeRequestMessagePayload;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -8,21 +9,20 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class VahService
 {
 
-   public String startProcess(String pnr, KogitoProcessContext context)
+   public String startProcess(VahKundbehovsflodeRequestMessagePayload kundbehovsflodeRequest, KogitoProcessContext context)
    {
-      var processId = context.getProcessInstance().getId();
-      System.out.printf("Started vård av husdjur process for pnr %s with processId %s%n", pnr, processId);
-      return processId;
+      System.out.printf("Started vård av husdjur process for kundbehovsflode %s", kundbehovsflodeRequest);
+      return kundbehovsflodeRequest.getKundbehovsflodeId();
    }
 
-   public void informAboutDecision(String pnr, String processId)
+   public void informAboutDecision(String kundbehovsflodeId)
    {
-      System.out.printf("Vård av husdjur application for pnr %s with processId %s finished with success!%n", pnr, processId);
+      System.out.printf("Vård av husdjur application for kundbehovsflodeId %s finished with success!%n", kundbehovsflodeId);
    }
 
-   public void registerDecline(String pnr, String processId)
+   public void registerDecline(String kundbehovsflodeId)
    {
-      System.out.printf("Vård av husdjur application for pnr %s with processId %s is declined!%n", pnr, processId);
+      System.out.printf("Vård av husdjur application for kundbehovsflodeId %s is declined!%n", kundbehovsflodeId);
    }
 
 }

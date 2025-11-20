@@ -97,13 +97,18 @@
     <!-- Generated models from API -->
     <dependency>
       <groupId>se.fk.rimfrost</groupId>
+      <artifactId>rimfrost-process-vah-asyncapi</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>se.fk.rimfrost</groupId>
       <artifactId>rimfrost-vah-regel-rtf-api</artifactId>
       <version>0.2.0</version>
     </dependency>
     <dependency>
       <groupId>se.fk.rimfrost</groupId>
-      <artifactId>rimfrost-vah-regel-rtf-manuellt-api</artifactId>
-      <version>0.2.1</version>
+      <artifactId>rimfrost-regel-rtf-manuell-asyncapi</artifactId>
+      <version>0.3.0</version>
     </dependency>
   </dependencies>
 

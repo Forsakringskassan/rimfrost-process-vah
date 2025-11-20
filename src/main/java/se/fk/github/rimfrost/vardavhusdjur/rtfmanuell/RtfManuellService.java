@@ -1,28 +1,26 @@
 package se.fk.github.rimfrost.vardavhusdjur.rtfmanuell;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import se.fk.rimfrost.VahRtfManuellRequestMessageData;
-import se.fk.rimfrost.VahRtfManuellResponseMessageData;
+import se.fk.rimfrost.RtfManuellRequestMessageData;
+import se.fk.rimfrost.RtfManuellResponseMessageData;
 
 @ApplicationScoped
 public class RtfManuellService
 {
 
-   public VahRtfManuellRequestMessageData createVahRtfManuellRequest(String pnr, String processId)
+   public RtfManuellRequestMessageData createRtfManuellRequest(String kundbehovsflodeId)
    {
-      System.out.printf("Created VahRtfManuellRequest with pnr: %s with processId: %s%n", pnr, processId);
-      VahRtfManuellRequestMessageData vahRtfManuellRequestMessageData = new VahRtfManuellRequestMessageData();
-      vahRtfManuellRequestMessageData.setPersonNummer(pnr);
-      vahRtfManuellRequestMessageData.setProcessId(processId);
-      return vahRtfManuellRequestMessageData;
+      System.out.printf("Created RtfManuellRequestMessageData with kundbehovsflodeId: %s%N", kundbehovsflodeId);
+      RtfManuellRequestMessageData rtfManuellRequestMessageData = new RtfManuellRequestMessageData();
+      rtfManuellRequestMessageData.setKundbehovsflodeId(kundbehovsflodeId);
+      return rtfManuellRequestMessageData;
    }
 
-   public Boolean onVahRtfManuellResponse(VahRtfManuellResponseMessageData vahRtfManuellResponse)
+   public String onRtfManuellResponse(RtfManuellResponseMessageData rtfManuellResponse)
    {
-
-      System.out.printf("Received VahRtfManuellResponse for processId: %s with result: %s%n",
-            vahRtfManuellResponse.getProcessId(), vahRtfManuellResponse.getRattTillForsakring());
-      return vahRtfManuellResponse.getRattTillForsakring();
+      System.out.printf("Received VahRtfManuellResponse for kundbehovsflodeId: %s with result: %s%n",
+            rtfManuellResponse.getKundbehovsflodeId(), rtfManuellResponse.getResult());
+      return rtfManuellResponse.getResult();
    }
 
 }
