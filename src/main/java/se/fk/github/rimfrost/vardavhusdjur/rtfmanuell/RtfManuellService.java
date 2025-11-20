@@ -1,28 +1,26 @@
 package se.fk.github.rimfrost.vardavhusdjur.rtfmanuell;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import se.fk.rimfrost.VahRtfManuellRequestMessageData;
-import se.fk.rimfrost.VahRtfManuellResponseMessageData;
+import se.fk.rimfrost.regel.rtf.manuell.*;
 
 @ApplicationScoped
 public class RtfManuellService
 {
 
-   public VahRtfManuellRequestMessageData createVahRtfManuellRequest(String pnr, String processId)
+   public RtfManuellRequestMessageData createRtfManuellRequest(String kundbehovsflodeId)
    {
-      System.out.printf("Created VahRtfManuellRequest with pnr: %s with processId: %s%n", pnr, processId);
-      VahRtfManuellRequestMessageData vahRtfManuellRequestMessageData = new VahRtfManuellRequestMessageData();
-      vahRtfManuellRequestMessageData.setPersonNummer(pnr);
-      vahRtfManuellRequestMessageData.setProcessId(processId);
-      return vahRtfManuellRequestMessageData;
+      System.out.printf("Created RtfManuellRequestMessageData with kundbehovsflodeId: %s%n", kundbehovsflodeId);
+      RtfManuellRequestMessageData rtfManuellRequestMessageData = new RtfManuellRequestMessageData();
+      rtfManuellRequestMessageData.setKundbehovsflodeId(kundbehovsflodeId);
+      return rtfManuellRequestMessageData;
    }
 
-   public Boolean onVahRtfManuellResponse(VahRtfManuellResponseMessageData vahRtfManuellResponse)
+   public RattTillForsakring onRtfManuellResponse(RtfManuellResponseMessageData rtfManuellResponse)
    {
-
-      System.out.printf("Received VahRtfManuellResponse for processId: %s with result: %s%n",
-            vahRtfManuellResponse.getProcessId(), vahRtfManuellResponse.getRattTillForsakring());
-      return vahRtfManuellResponse.getRattTillForsakring();
+      System.out.println("onRtfManuellResponse. received response: " + rtfManuellResponse.toString());
+      System.out.printf("Received VahRtfManuellResponse for kundbehovsflodeId: %s with result: %s%n",
+            rtfManuellResponse.getKundbehovsflodeId(), rtfManuellResponse.getRattTillForsakring());
+      return rtfManuellResponse.getRattTillForsakring();
    }
 
 }
