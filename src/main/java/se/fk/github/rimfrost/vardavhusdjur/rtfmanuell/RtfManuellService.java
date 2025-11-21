@@ -1,8 +1,10 @@
 package se.fk.github.rimfrost.vardavhusdjur.rtfmanuell;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import se.fk.rimfrost.RtfManuellRequestMessageData;
-import se.fk.rimfrost.RtfManuellResponseMessageData;
+import se.fk.rimfrost.regel.rtf.manuell.RattTillForsakring;
+import se.fk.rimfrost.regel.rtf.manuell.RtfManuellRequestMessageData;
+import se.fk.rimfrost.regel.rtf.manuell.RtfManuellResponseMessageData;
+
 
 @ApplicationScoped
 public class RtfManuellService
@@ -10,17 +12,17 @@ public class RtfManuellService
 
    public RtfManuellRequestMessageData createRtfManuellRequest(String kundbehovsflodeId)
    {
-      System.out.printf("Created RtfManuellRequestMessageData with kundbehovsflodeId: %s%N", kundbehovsflodeId);
+      System.out.printf("Created RtfManuellRequestMessageData with kundbehovsflodeId: %s%n", kundbehovsflodeId);
       RtfManuellRequestMessageData rtfManuellRequestMessageData = new RtfManuellRequestMessageData();
       rtfManuellRequestMessageData.setKundbehovsflodeId(kundbehovsflodeId);
       return rtfManuellRequestMessageData;
    }
 
-   public String onRtfManuellResponse(RtfManuellResponseMessageData rtfManuellResponse)
+   public RattTillForsakring onRtfManuellResponse(RtfManuellResponseMessageData rtfManuellResponse)
    {
       System.out.printf("Received VahRtfManuellResponse for kundbehovsflodeId: %s with result: %s%n",
-            rtfManuellResponse.getKundbehovsflodeId(), rtfManuellResponse.getResult());
-      return rtfManuellResponse.getResult();
+            rtfManuellResponse.getKundbehovsflodeId(), rtfManuellResponse.getRattTillForsakring());
+      return rtfManuellResponse.getRattTillForsakring();
    }
 
 }

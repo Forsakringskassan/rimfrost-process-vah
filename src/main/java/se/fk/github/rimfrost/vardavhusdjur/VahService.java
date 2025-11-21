@@ -2,7 +2,6 @@ package se.fk.github.rimfrost.vardavhusdjur;
 
 import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
 import se.fk.rimfrost.VahKundbehovsflodeRequestMessagePayload;
-
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped

@@ -101,14 +101,14 @@
       <version>0.1.0</version>
     </dependency>
     <dependency>
-      <groupId>se.fk.rimfrost</groupId>
+      <groupId>se.fk.rimfrost.regel.rtf.maskinell</groupId>
       <artifactId>rimfrost-vah-regel-rtf-api</artifactId>
-      <version>0.2.0</version>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
-      <groupId>se.fk.rimfrost</groupId>
+      <groupId>se.fk.rimfrost.regel.rtf.manuell</groupId>
       <artifactId>rimfrost-regel-rtf-manuell-asyncapi</artifactId>
-      <version>0.3.0</version>
+      <version>0.3.1</version>
     </dependency>
   </dependencies>
 
