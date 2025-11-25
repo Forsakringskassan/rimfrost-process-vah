@@ -226,10 +226,10 @@
           <drools:metaValue><![CDATA[Start vård av husdjur process]]></drools:metaValue>
         </drools:metaData>
         <drools:onEntry-script scriptFormat="http://www.java.com/java">
-          <drools:script><![CDATA[System.out.println("Entry Start vård av husdjur process");]]></drools:script>
+          <drools:script><![CDATA[System.out.print("Entry Start vård av husdjur process");]]></drools:script>
         </drools:onEntry-script>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
-          <drools:script><![CDATA[System.out.println("Exit Start vård av husdjur process");]]></drools:script>
+          <drools:script><![CDATA[System.out.print("Exit Start vård av husdjur process");]]></drools:script>
         </drools:onExit-script>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F</bpmn2:incoming>

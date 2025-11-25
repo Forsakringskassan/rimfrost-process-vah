@@ -10,8 +10,8 @@ public class VahService
 
    public String startProcess(VahKundbehovsflodeRequestMessageData kundbehovsflodeRequest)
    {
-      System.out.println("VahService.startProcess");
-      System.out.println("triggered by VahKundbehovsflodeRequestMessageData: " + kundbehovsflodeRequest.toString());
+      System.out.print("VahService.startProcess\n");
+      System.out.printf("triggered by VahKundbehovsflodeRequestMessageData: %s%n", kundbehovsflodeRequest.toString());
       var kundbehovsflodeId = kundbehovsflodeRequest.getKundbehovsflodeId();
       System.out.printf("Started vård av husdjur process for kundbehovsflode %s%n", kundbehovsflodeId);
       return kundbehovsflodeId;

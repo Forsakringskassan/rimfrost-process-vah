@@ -119,7 +119,7 @@ public class VahContainerSmokeIT
       {
          NewTopic topic = new NewTopic(topicName, numPartitions, replicationFactor);
          admin.createTopics(List.of(topic)).all().get();
-         System.out.println("Created topic: " + topicName);
+         System.out.printf("Created topic: %S%n", topicName);
       }
    }
 
@@ -144,7 +144,7 @@ public class VahContainerSmokeIT
 
       try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props))
       {
-         System.out.println("New kafka consumer subscribing to topic: " + topic);
+         System.out.printf("New kafka consumer subscribing to topic: %s%n", topic);
          consumer.subscribe(Collections.singletonList(topic));
          ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(120));
 
@@ -254,7 +254,7 @@ public class VahContainerSmokeIT
                vahKundbehovsflodeRequestTopic,
                messageKey,
                eventJson);
-         System.out.println("Kafka sending to topic :" + vahKundbehovsflodeRequestTopic + " json: " + eventJson);
+         System.out.printf("Kafka sending to topic : %s, json: %s%n", vahKundbehovsflodeRequestTopic, eventJson);
          producer.send(record).get();
       }
    }
@@ -295,7 +295,7 @@ public class VahContainerSmokeIT
                topic,
                request.getId(), // message key
                eventJson);
-         System.out.println("Kafka mock sending:\n" + eventJson);
+         System.out.printf("Kafka mock sending: %s\n", eventJson);
          producer.send(record).get();
       }
    }
@@ -337,7 +337,7 @@ public class VahContainerSmokeIT
                topic,
                request.getId(), // message key
                eventJson);
-         System.out.println("Kafka mock sending:\n" + eventJson);
+         System.out.printf("Kafka mock sending: %s\n", eventJson);
          producer.send(record).get();
       }
    }

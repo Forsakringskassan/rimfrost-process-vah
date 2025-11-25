@@ -9,7 +9,7 @@ public class RtfMaskinellService
 
    public RattTillForsakring onRtfMaskinellResponse(RtfMaskinellResponseMessageData response)
    {
-      System.out.println("onRtfMaskinellResponse. received response: " + response.toString());
+      System.out.printf("onRtfMaskinellResponse. received response: %s", response.toString());
       System.out.printf("Received RtfMaskinellResponse for processId: %s with rattTillForsakring: %s%n",
             response.getKundbehovsflodeId(),
             response.getRattTillForsakring().toString());

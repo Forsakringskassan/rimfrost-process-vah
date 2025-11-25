@@ -17,7 +17,7 @@ public class RtfManuellService
 
    public RattTillForsakring onRtfManuellResponse(RtfManuellResponseMessageData rtfManuellResponse)
    {
-      System.out.println("onRtfManuellResponse. received response: " + rtfManuellResponse.toString());
+      System.out.printf("onRtfManuellResponse. received response: %s%n", rtfManuellResponse.toString());
       System.out.printf("Received VahRtfManuellResponse for kundbehovsflodeId: %s with result: %s%n",
             rtfManuellResponse.getKundbehovsflodeId(), rtfManuellResponse.getRattTillForsakring());
       return rtfManuellResponse.getRattTillForsakring();
