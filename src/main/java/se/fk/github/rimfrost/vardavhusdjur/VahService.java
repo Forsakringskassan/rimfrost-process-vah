@@ -1,28 +1,29 @@
 package se.fk.github.rimfrost.vardavhusdjur;
 
-import org.kie.kogito.internal.process.runtime.KogitoProcessContext;
-
+import se.fk.rimfrost.VahKundbehovsflodeRequestMessageData;
+import se.fk.rimfrost.VahKundbehovsflodeResponseMessageData;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class VahService
 {
 
-   public String startProcess(String pnr, KogitoProcessContext context)
+   public String startProcess(VahKundbehovsflodeRequestMessageData kundbehovsflodeRequest)
    {
-      var processId = context.getProcessInstance().getId();
-      System.out.printf("Started vård av husdjur process for pnr %s with processId %s%n", pnr, processId);
-      return processId;
+      System.out.print("VahService.startProcess\n");
+      System.out.printf("triggered by VahKundbehovsflodeRequestMessageData: %s%n", kundbehovsflodeRequest.toString());
+      var kundbehovsflodeId = kundbehovsflodeRequest.getKundbehovsflodeId();
+      System.out.printf("Started vård av husdjur process for kundbehovsflode %s%n", kundbehovsflodeId);
+      return kundbehovsflodeId;
    }
 
-   public void informAboutDecision(String pnr, String processId)
+   public VahKundbehovsflodeResponseMessageData informAboutDecision(String kundbehovsflodeId, String resultat)
    {
-      System.out.printf("Vård av husdjur application for pnr %s with processId %s finished with success!%n", pnr, processId);
-   }
-
-   public void registerDecline(String pnr, String processId)
-   {
-      System.out.printf("Vård av husdjur application for pnr %s with processId %s is declined!%n", pnr, processId);
+      System.out.printf("VAH application for kundbehovsflodeId %s finished with result %s !%n", kundbehovsflodeId, resultat);
+      VahKundbehovsflodeResponseMessageData vahKundbehovsflodeResponseMessageData = new VahKundbehovsflodeResponseMessageData();
+      vahKundbehovsflodeResponseMessageData.setKundbehovsflodeId(kundbehovsflodeId);
+      vahKundbehovsflodeResponseMessageData.setResultat(resultat);
+      return vahKundbehovsflodeResponseMessageData;
    }
 
 }
