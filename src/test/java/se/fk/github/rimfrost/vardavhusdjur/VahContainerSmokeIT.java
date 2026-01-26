@@ -17,26 +17,19 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.Network;
-import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import se.fk.rimfrost.SpecVersion;
 import se.fk.rimfrost.VahKundbehovsflodeRequestMessageData;
 import se.fk.rimfrost.VahKundbehovsflodeRequestMessagePayload;
 import se.fk.rimfrost.VahKundbehovsflodeResponseMessagePayload;
-import se.fk.rimfrost.regel.rtf.manuell.RtfManuellRequestMessageData;
-import se.fk.rimfrost.regel.rtf.manuell.RtfManuellRequestMessagePayload;
-import se.fk.rimfrost.regel.rtf.manuell.RtfManuellResponseMessageData;
-import se.fk.rimfrost.regel.rtf.manuell.RtfManuellResponseMessagePayload;
-import se.fk.rimfrost.regel.rtf.maskinell.RtfMaskinellRequestMessageData;
-import se.fk.rimfrost.regel.rtf.maskinell.RtfMaskinellRequestMessagePayload;
-import se.fk.rimfrost.regel.rtf.maskinell.RtfMaskinellResponseMessageData;
-import se.fk.rimfrost.regel.rtf.maskinell.RtfMaskinellResponseMessagePayload;
+import se.fk.rimfrost.regel.common.RegelRequestMessagePayload;
+import se.fk.rimfrost.regel.common.RegelRequestMessagePayloadData;
+import se.fk.rimfrost.regel.common.RegelResponseMessagePayload;
+import se.fk.rimfrost.regel.common.RegelResponseMessagePayloadData;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -170,18 +163,18 @@ public class VahContainerSmokeIT
 
             // Deserialize request message into typed payload
             String message = records.iterator().next().value();
-            RtfMaskinellRequestMessagePayload request = mapper.readValue(message, RtfMaskinellRequestMessagePayload.class);
+            RegelRequestMessagePayload request = mapper.readValue(message, RegelRequestMessagePayload.class);
             // Extract data safely
-            RtfMaskinellRequestMessageData requestData = request.getData();
+            RegelRequestMessagePayloadData requestData = request.getData();
             if (requestData == null)
             {
                throw new IllegalStateException("Missing data field in Kafka message: " + message);
             }
             String kundbehovsflodeId = requestData.getKundbehovsflodeId();
             // Create typed response data object
-            RtfMaskinellResponseMessageData responseData = new RtfMaskinellResponseMessageData();
+            RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
             responseData.setKundbehovsflodeId(kundbehovsflodeId);
-            responseData.setRattTillForsakring(se.fk.rimfrost.regel.rtf.maskinell.RattTillForsakring.UTREDNING);
+            responseData.setUtfall(se.fk.rimfrost.regel.common.Utfall.UTREDNING);
 
             sendMaskinellRtfResponse(request, rtfMaskinellResponseTopic, responseData);
             System.out.printf("Sent mock Kafka response for kundbehovsflodeId=%s%n", kundbehovsflodeId);
@@ -207,18 +200,18 @@ public class VahContainerSmokeIT
 
             // Deserialize request message into typed payload
             String message = records.iterator().next().value();
-            RtfManuellRequestMessagePayload request = mapper.readValue(message, RtfManuellRequestMessagePayload.class);
+            RegelRequestMessagePayload request = mapper.readValue(message, RegelRequestMessagePayload.class);
             // Extract data safely
-            RtfManuellRequestMessageData requestData = request.getData();
+            RegelRequestMessagePayloadData requestData = request.getData();
             if (requestData == null)
             {
                throw new IllegalStateException("Missing data field in Kafka message: " + message);
             }
             String kundbehovsflodeId = requestData.getKundbehovsflodeId();
             // Create typed response data object
-            RtfManuellResponseMessageData responseData = new RtfManuellResponseMessageData();
+            RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
             responseData.setKundbehovsflodeId(kundbehovsflodeId);
-            responseData.setRattTillForsakring(se.fk.rimfrost.regel.rtf.manuell.RattTillForsakring.JA);
+            responseData.setUtfall(se.fk.rimfrost.regel.common.Utfall.JA);
 
             sendManuellRtfResponse(request, rtfManuellResponseTopic, responseData);
             System.out.printf("Sent mock Kafka response for kundbehovsflodeId=%s%n", kundbehovsflodeId);
@@ -259,11 +252,11 @@ public class VahContainerSmokeIT
       }
    }
 
-   private void sendMaskinellRtfResponse(RtfMaskinellRequestMessagePayload request,
+   private void sendMaskinellRtfResponse(RegelRequestMessagePayload request,
          String topic,
-         RtfMaskinellResponseMessageData messageData) throws Exception
+         RegelResponseMessagePayloadData messageData) throws Exception
    {
-      RtfMaskinellResponseMessagePayload payload = new RtfMaskinellResponseMessagePayload();
+      RegelResponseMessagePayload payload = new RegelResponseMessagePayload();
       payload.setSpecversion(request.getSpecversion());
       payload.setId(request.getId());
       payload.setSource(request.getSource());
@@ -300,12 +293,12 @@ public class VahContainerSmokeIT
       }
    }
 
-   private void sendManuellRtfResponse(RtfManuellRequestMessagePayload request,
+   private void sendManuellRtfResponse(RegelRequestMessagePayload request,
          String topic,
-         RtfManuellResponseMessageData messageData) throws Exception
+         RegelResponseMessagePayloadData messageData) throws Exception
    {
 
-      RtfManuellResponseMessagePayload payload = new RtfManuellResponseMessagePayload();
+      RegelResponseMessagePayload payload = new RegelResponseMessagePayload();
       payload.setSpecversion(request.getSpecversion());
       payload.setId(request.getId());
       payload.setSource(request.getSource());
@@ -368,16 +361,16 @@ public class VahContainerSmokeIT
       // Verify rtf maskinell message produced by VAH
       String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic);
       System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
-      RtfMaskinellRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
-            RtfMaskinellRequestMessagePayload.class);
+      RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
+            RegelRequestMessagePayload.class);
       assertEquals(kundbehovsflodeId, rtfMaskinellRequestMessagePayload.getData().getKundbehovsflodeId());
       // Wait for kafka responder to complete
       responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
       // Verify rtf manuell message produced by VAH
       String rtfManuellRequest = readKafkaRequestMessage(rtfManuellRequestTopic);
       System.out.println("Received rtfManuellRequest: " + rtfManuellRequest);
-      RtfManuellRequestMessagePayload rtfManuellRequestMessagePayload = mapper.readValue(rtfManuellRequest,
-            RtfManuellRequestMessagePayload.class);
+      RegelRequestMessagePayload rtfManuellRequestMessagePayload = mapper.readValue(rtfManuellRequest,
+            RegelRequestMessagePayload.class);
       assertEquals(kundbehovsflodeId, rtfManuellRequestMessagePayload.getData().getKundbehovsflodeId());
       // Wait for kafka responder to complete
       responderRtfManuell.get(topicTimeout, TimeUnit.SECONDS);
