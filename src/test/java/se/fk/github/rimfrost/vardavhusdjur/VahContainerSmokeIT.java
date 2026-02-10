@@ -26,10 +26,11 @@ import se.fk.rimfrost.SpecVersion;
 import se.fk.rimfrost.VahKundbehovsflodeRequestMessageData;
 import se.fk.rimfrost.VahKundbehovsflodeRequestMessagePayload;
 import se.fk.rimfrost.VahKundbehovsflodeResponseMessagePayload;
-import se.fk.rimfrost.regel.common.RegelRequestMessagePayload;
-import se.fk.rimfrost.regel.common.RegelRequestMessagePayloadData;
-import se.fk.rimfrost.regel.common.RegelResponseMessagePayload;
-import se.fk.rimfrost.regel.common.RegelResponseMessagePayloadData;
+import se.fk.rimfrost.framework.regel.RegelRequestMessagePayload;
+import se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData;
+import se.fk.rimfrost.framework.regel.RegelResponseMessagePayload;
+import se.fk.rimfrost.framework.regel.RegelResponseMessagePayloadData;
+import se.fk.rimfrost.framework.regel.Utfall;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -174,7 +175,7 @@ public class VahContainerSmokeIT
             // Create typed response data object
             RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
             responseData.setKundbehovsflodeId(kundbehovsflodeId);
-            responseData.setUtfall(se.fk.rimfrost.regel.common.Utfall.UTREDNING);
+            responseData.setUtfall(Utfall.UTREDNING);
 
             sendMaskinellRtfResponse(request, rtfMaskinellResponseTopic, responseData);
             System.out.printf("Sent mock Kafka response for kundbehovsflodeId=%s%n", kundbehovsflodeId);
@@ -211,7 +212,7 @@ public class VahContainerSmokeIT
             // Create typed response data object
             RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
             responseData.setKundbehovsflodeId(kundbehovsflodeId);
-            responseData.setUtfall(se.fk.rimfrost.regel.common.Utfall.JA);
+            responseData.setUtfall(Utfall.JA);
 
             sendManuellRtfResponse(request, rtfManuellResponseTopic, responseData);
             System.out.printf("Sent mock Kafka response for kundbehovsflodeId=%s%n", kundbehovsflodeId);
