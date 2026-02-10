@@ -102,24 +102,14 @@
       <version>0.1.2</version>
     </dependency>
     <dependency>
-      <groupId>se.fk.rimfrost.regel.rtf.maskinell</groupId>
-      <artifactId>rimfrost-vah-regel-rtf-api</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>se.fk.rimfrost.regel.rtf.manuell</groupId>
-      <artifactId>rimfrost-regel-rtf-manuell-asyncapi</artifactId>
-      <version>0.3.2</version>
-    </dependency>
-    <dependency>
       <groupId>se.fk.rimfrost.regel.bekraftabeslut</groupId>
       <artifactId>rimfrost-regel-bekraftabeslut-asyncapi</artifactId>
       <version>0.0.2</version>
     </dependency>
     <dependency>
-      <groupId>se.fk.rimfrost.regel.common</groupId>
-      <artifactId>rimfrost-regel-common-asyncapi</artifactId>
-      <version>0.2.1</version>
+      <groupId>se.fk.rimfrost.framework.regel</groupId>
+      <artifactId>rimfrost-framework-regel-asyncapi</artifactId>
+      <version>0.0.0</version>
     </dependency>
   </dependencies>
 

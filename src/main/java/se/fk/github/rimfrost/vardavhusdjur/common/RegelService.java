@@ -1,9 +1,9 @@
 package se.fk.github.rimfrost.vardavhusdjur.common;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import se.fk.rimfrost.regel.common.RegelRequestMessagePayloadData;
-import se.fk.rimfrost.regel.common.RegelResponseMessagePayloadData;
-import se.fk.rimfrost.regel.common.Utfall;
+import se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData;
+import se.fk.rimfrost.framework.regel.RegelResponseMessagePayloadData;
+import se.fk.rimfrost.framework.regel.Utfall;
 
 @ApplicationScoped
 public class RegelService
