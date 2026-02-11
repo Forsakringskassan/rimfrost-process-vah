@@ -39,7 +39,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -63,6 +62,8 @@ public class VahContainerSmokeIT
    private static final String rtfMaskinellResponseTopic = TestConfig.get("rtf.maskinell.responses.topic");
    private static final String rtfManuellRequestTopic = TestConfig.get("rtf.manuell.requests.topic");
    private static final String rtfManuellResponseTopic = TestConfig.get("rtf.manuell.responses.topic");
+   private static final String bekraftaBeslutRequestTopic = TestConfig.get("bekraftabeslut.requests.topic");
+   private static final String bekraftaBeslutResponseTopic = TestConfig.get("bekraftabeslut.responses.topic");
    private static final int topicTimeout = TestConfig.getInt("topic.timeout");
    private static final String networkAlias = TestConfig.get("network.alias");
    private static final String smallryeKafkaBootstrapServers = networkAlias + ":9092";
@@ -150,16 +151,16 @@ public class VahContainerSmokeIT
       }
    }
 
-   private CompletableFuture<Void> startKafkaResponderRtfMaskinell(ExecutorService executor)
+   private CompletableFuture<Void> startKafkaResponder(String requesttopic, String responseTopic, Utfall utfall)
    {
       return CompletableFuture.runAsync(() -> {
          try (KafkaConsumer<String, String> consumer = createConsumer())
          {
-            consumer.subscribe(Collections.singletonList(rtfMaskinellRequestTopic));
+            consumer.subscribe(Collections.singletonList(requesttopic));
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(10));
             if (records.isEmpty())
             {
-               throw new IllegalStateException("No Kafka message received on " + rtfMaskinellRequestTopic);
+               throw new IllegalStateException("No Kafka message received on " + requesttopic);
             }
 
             // Deserialize request message into typed payload
@@ -175,53 +176,17 @@ public class VahContainerSmokeIT
             // Create typed response data object
             RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
             responseData.setKundbehovsflodeId(kundbehovsflodeId);
-            responseData.setUtfall(Utfall.UTREDNING);
+            responseData.setUtfall(utfall);
 
-            sendMaskinellRtfResponse(request, rtfMaskinellResponseTopic, responseData);
-            System.out.printf("Sent mock Kafka response for kundbehovsflodeId=%s%n", kundbehovsflodeId);
+            sendRegelResponse(request, responseTopic, responseData);
+            System.out.printf("Sent mock Kafka response for kundbehovsflodeId=%s%n on topic %s", kundbehovsflodeId,
+                  responseTopic);
          }
          catch (Exception e)
          {
             throw new RuntimeException("Kafka responder failed", e);
          }
-      }, executor);
-   }
-
-   private CompletableFuture<Void> startKafkaResponderRtfManuell(ExecutorService executor)
-   {
-      return CompletableFuture.runAsync(() -> {
-         try (KafkaConsumer<String, String> consumer = createConsumer())
-         {
-            consumer.subscribe(Collections.singletonList(rtfManuellRequestTopic));
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(10));
-            if (records.isEmpty())
-            {
-               throw new IllegalStateException("No Kafka message received on " + rtfManuellRequestTopic);
-            }
-
-            // Deserialize request message into typed payload
-            String message = records.iterator().next().value();
-            RegelRequestMessagePayload request = mapper.readValue(message, RegelRequestMessagePayload.class);
-            // Extract data safely
-            RegelRequestMessagePayloadData requestData = request.getData();
-            if (requestData == null)
-            {
-               throw new IllegalStateException("Missing data field in Kafka message: " + message);
-            }
-            String kundbehovsflodeId = requestData.getKundbehovsflodeId();
-            // Create typed response data object
-            RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
-            responseData.setKundbehovsflodeId(kundbehovsflodeId);
-            responseData.setUtfall(Utfall.JA);
-
-            sendManuellRtfResponse(request, rtfManuellResponseTopic, responseData);
-            System.out.printf("Sent mock Kafka response for kundbehovsflodeId=%s%n", kundbehovsflodeId);
-         }
-         catch (Exception e)
-         {
-            throw new RuntimeException("Kafka responder failed", e);
-         }
-      }, executor);
+      }, Executors.newSingleThreadExecutor());
    }
 
    private void sendVahKundbehovsflodeRequest(String kundbehovsflodeId, String messageKey) throws Exception
@@ -253,48 +218,7 @@ public class VahContainerSmokeIT
       }
    }
 
-   private void sendMaskinellRtfResponse(RegelRequestMessagePayload request,
-         String topic,
-         RegelResponseMessagePayloadData messageData) throws Exception
-   {
-      RegelResponseMessagePayload payload = new RegelResponseMessagePayload();
-      payload.setSpecversion(request.getSpecversion());
-      payload.setId(request.getId());
-      payload.setSource(request.getSource());
-      payload.setType(topic); // Hardcoded but should be taken from reply-to in header
-      payload.setTime(OffsetDateTime.now());
-      payload.setKogitoparentprociid(request.getKogitoparentprociid());
-      payload.setKogitorootprocid(request.getKogitorootprocid());
-      payload.setKogitoproctype(request.getKogitoproctype());
-      payload.setKogitoprocinstanceid(request.getKogitoprocinstanceid());
-      payload.setKogitoprocist(request.getKogitoprocist());
-      payload.setKogitoprocversion(request.getKogitoprocversion());
-      payload.setKogitorootprociid(request.getKogitorootprociid());
-      payload.setKogitoprocid(request.getKogitoprocid());
-      payload.setKogitoprocrefid(request.getKogitoprocinstanceid());
-
-      payload.setData(messageData);
-
-      // Serialize entire payload to JSON
-      String eventJson = mapper.writeValueAsString(payload);
-
-      Properties props = new Properties();
-      props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers());
-      props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-      props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-
-      try (KafkaProducer<String, String> producer = new KafkaProducer<>(props))
-      {
-         ProducerRecord<String, String> record = new ProducerRecord<>(
-               topic,
-               request.getId(), // message key
-               eventJson);
-         System.out.printf("Kafka mock sending: %s\n", eventJson);
-         producer.send(record).get();
-      }
-   }
-
-   private void sendManuellRtfResponse(RegelRequestMessagePayload request,
+   private void sendRegelResponse(RegelRequestMessagePayload request,
          String topic,
          RegelResponseMessagePayloadData messageData) throws Exception
    {
@@ -353,10 +277,12 @@ public class VahContainerSmokeIT
       var kundbehovsflodeId = UUID.randomUUID().toString();
       System.out.println("Starting TestVahSmoke");
       // Start background Kafka responders
-      ExecutorService executorRtfMaskinell = Executors.newSingleThreadExecutor();
-      CompletableFuture<Void> responderRtfMaskinell = startKafkaResponderRtfMaskinell(executorRtfMaskinell);
-      ExecutorService executorRtfManuell = Executors.newSingleThreadExecutor();
-      CompletableFuture<Void> responderRtfManuell = startKafkaResponderRtfManuell(executorRtfManuell);
+      CompletableFuture<Void> responderRtfMaskinell = startKafkaResponder(rtfMaskinellRequestTopic, rtfMaskinellResponseTopic,
+            Utfall.UTREDNING);
+      CompletableFuture<Void> responderRtfManuell = startKafkaResponder(rtfManuellRequestTopic, rtfManuellResponseTopic,
+            Utfall.JA);
+      CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
+            bekraftaBeslutResponseTopic, Utfall.JA);
       // Send Kundbehovsflöde request to start workflow
       sendVahKundbehovsflodeRequest(kundbehovsflodeId, "A1");
       // Verify rtf maskinell message produced by VAH
@@ -373,8 +299,20 @@ public class VahContainerSmokeIT
       RegelRequestMessagePayload rtfManuellRequestMessagePayload = mapper.readValue(rtfManuellRequest,
             RegelRequestMessagePayload.class);
       assertEquals(kundbehovsflodeId, rtfManuellRequestMessagePayload.getData().getKundbehovsflodeId());
+
       // Wait for kafka responder to complete
       responderRtfManuell.get(topicTimeout, TimeUnit.SECONDS);
+
+      // Verify bekraftaBeslut message produced by VAH
+      String bekraftaBeslutRequest = readKafkaRequestMessage(bekraftaBeslutRequestTopic);
+      System.out.println("Received bekraftaBeslutRequest: " + bekraftaBeslutRequest);
+      RegelRequestMessagePayload bekraftaBeslutRequestMessagePayload = mapper.readValue(bekraftaBeslutRequest,
+            RegelRequestMessagePayload.class);
+      assertEquals(kundbehovsflodeId, bekraftaBeslutRequestMessagePayload.getData().getKundbehovsflodeId());
+
+      // Wait for kafka responder to complete
+      responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
+
       // Wait for response from VAH
       String vahKundbehovsflodeResponse = readKafkaRequestMessage(vahKundbehovsflodeResponseTopic);
       System.out.println("Received vahKundbehovsflodeResponse: " + vahKundbehovsflodeResponse);

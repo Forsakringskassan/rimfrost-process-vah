@@ -102,11 +102,6 @@
       <version>0.1.2</version>
     </dependency>
     <dependency>
-      <groupId>se.fk.rimfrost.regel.bekraftabeslut</groupId>
-      <artifactId>rimfrost-regel-bekraftabeslut-asyncapi</artifactId>
-      <version>0.0.2</version>
-    </dependency>
-    <dependency>
       <groupId>se.fk.rimfrost.framework.regel</groupId>
       <artifactId>rimfrost-framework-regel-asyncapi</artifactId>
       <version>0.0.0</version>
