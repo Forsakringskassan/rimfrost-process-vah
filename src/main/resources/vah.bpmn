@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_idStIOlRED6Fs_kd0VwMLg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_VobuoPLVED6FZ6OddSWqqQ" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_rtfManuellResultItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
   <bpmn2:itemDefinition id="_kundbehovsflodeIdItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_rtfMaskinellResultItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
+  <bpmn2:itemDefinition id="_beraknaersattningResultItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
   <bpmn2:itemDefinition id="_vahKundbehovsflodeResponseMessageDataItem" structureRef="se.fk.rimfrost.VahKundbehovsflodeResponseMessageData"/>
   <bpmn2:itemDefinition id="_vahKundbehovsflodeRequestMessageDataItem" structureRef="se.fk.rimfrost.VahKundbehovsflodeRequestMessageData"/>
   <bpmn2:itemDefinition id="_bekraftabeslutResultItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
+  <bpmn2:itemDefinition id="_beraknaersattningResultItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
   <bpmn2:itemDefinition id="__7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputXItem" structureRef="se.fk.rimfrost.VahKundbehovsflodeRequestMessageData"/>
   <bpmn2:itemDefinition id="vah-kundbehovsflode-requestsType" structureRef="se.fk.rimfrost.VahKundbehovsflodeRequestMessageData"/>
-  <bpmn2:itemDefinition id="_F195447A-F826-4E55-AEEE-FFB565D7C598" structureRef=""/>
-  <bpmn2:itemDefinition id="_8AAE3391-9D26-4226-B689-BD383DEDB1DA" structureRef=""/>
+  <bpmn2:itemDefinition id="_DC64162B-2761-4A5A-9EC1-3EF85D7E748A" structureRef=""/>
+  <bpmn2:itemDefinition id="_E18B8018-C94F-4EF1-9C15-D6EA7126058C" structureRef=""/>
   <bpmn2:itemDefinition id="__5DAB8314-5034-4D58-B2AA-8CF62303409F_kundbehovsflodeIdInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__5DAB8314-5034-4D58-B2AA-8CF62303409F_resultOutputXItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
   <bpmn2:itemDefinition id="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_kundbehovsflodeIdInputXItem" structureRef="String"/>
@@ -27,7 +28,9 @@
   <bpmn2:itemDefinition id="vah-kundbehovsflode-responsesType" structureRef="se.fk.rimfrost.VahKundbehovsflodeResponseMessageData"/>
   <bpmn2:itemDefinition id="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_kundbehovsflodeIdInputXItem" structureRef="String"/>
   <bpmn2:itemDefinition id="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputXItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
-  <bpmn2:message id="_idTUMOlRED6Fs_kd0VwMLg" itemRef="vah-kundbehovsflode-requestsType" name="vah-kundbehovsflode-requests"/>
+  <bpmn2:itemDefinition id="__C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_kundbehovsflodeIdInputXItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="__C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_resultOutputXItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
+  <bpmn2:message id="_Voc8wPLVED6FZ6OddSWqqQ" itemRef="vah-kundbehovsflode-requestsType" name="vah-kundbehovsflode-requests"/>
   <bpmn2:message id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessage" itemRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessageType"/>
   <bpmn2:message id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessage" itemRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessageType"/>
   <bpmn2:interface id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_ServiceInterface" name="se.fk.github.rimfrost.vardavhusdjur.VahService" implementationRef="se.fk.github.rimfrost.vardavhusdjur.VahService">
@@ -44,36 +47,45 @@
       <bpmn2:outMessageRef>_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_OutMessage</bpmn2:outMessageRef>
     </bpmn2:operation>
   </bpmn2:interface>
-  <bpmn2:message id="_idT7QOlRED6Fs_kd0VwMLg" itemRef="vah-kundbehovsflode-responsesType" name="vah-kundbehovsflode-responses"/>
-  <bpmn2:collaboration id="_ED87A5A1-B761-421C-82B8-803C1D065B5A" name="Default Collaboration">
-    <bpmn2:participant id="_85B37EDC-24D2-4D5E-8000-459BC67D1802" name="Pool Participant" processRef="vah"/>
+  <bpmn2:message id="_Vodj0PLVED6FZ6OddSWqqQ" itemRef="vah-kundbehovsflode-responsesType" name="vah-kundbehovsflode-responses"/>
+  <bpmn2:collaboration id="_4CBD364A-2901-4740-8EED-6234455B4D3E" name="Default Collaboration">
+    <bpmn2:participant id="_0F07A685-12C1-40C3-A322-B7AE9FBE1490" name="Pool Participant" processRef="vah"/>
   </bpmn2:collaboration>
   <bpmn2:process id="vah" drools:packageName="vah" drools:version="1.0" drools:adHoc="false" name="vah" isExecutable="true" processType="Public">
     <bpmn2:property id="rtfManuellResult" itemSubjectRef="_rtfManuellResultItem" name="rtfManuellResult"/>
     <bpmn2:property id="kundbehovsflodeId" itemSubjectRef="_kundbehovsflodeIdItem" name="kundbehovsflodeId"/>
-    <bpmn2:property id="rtfMaskinellResult" itemSubjectRef="_rtfMaskinellResultItem" name="rtfMaskinellResult"/>
+    <bpmn2:property id="beraknaersattningResult" itemSubjectRef="_beraknaersattningResultItem" name="beraknaersattningResult"/>
     <bpmn2:property id="vahKundbehovsflodeResponseMessageData" itemSubjectRef="_vahKundbehovsflodeResponseMessageDataItem" name="vahKundbehovsflodeResponseMessageData"/>
     <bpmn2:property id="vahKundbehovsflodeRequestMessageData" itemSubjectRef="_vahKundbehovsflodeRequestMessageDataItem" name="vahKundbehovsflodeRequestMessageData"/>
     <bpmn2:property id="bekraftabeslutResult" itemSubjectRef="_bekraftabeslutResultItem" name="bekraftabeslutResult"/>
-    <bpmn2:sequenceFlow id="_BC111E98-FFF4-4E08-965C-93F4D250AFB2" sourceRef="_48636A54-33E2-46E4-8736-787AB637276C" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2"/>
+    <bpmn2:property id="beraknaersattningResult" itemSubjectRef="_beraknaersattningResultItem" name="beraknaersattningResult"/>
+    <bpmn2:sequenceFlow id="_4F2189BE-A11D-4838-8310-BCC6D9E90206" sourceRef="_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2"/>
+    <bpmn2:sequenceFlow id="_03819F1D-CEB6-4D9C-8992-C5C75731FFBE" sourceRef="_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2"/>
+    <bpmn2:sequenceFlow id="_D5157A05-A43C-450D-9DAA-18ACD57CFD02" sourceRef="_48636A54-33E2-46E4-8736-787AB637276C" targetRef="_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_152B7D50-C575-4C6E-AB02-90BA1261CAA0" sourceRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" targetRef="_6D6EDF56-89D6-4DBB-9237-365C2737DD47"/>
     <bpmn2:sequenceFlow id="_7B96966C-4DA2-42DC-9C1E-73D13351AD7E" sourceRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" targetRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E"/>
     <bpmn2:sequenceFlow id="_F3A50196-2E2B-4E0E-8061-CCF4441B4FF2" sourceRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" targetRef="_48636A54-33E2-46E4-8736-787AB637276C"/>
-    <bpmn2:sequenceFlow id="_4BDD402F-000B-4D37-9C25-AE7A12A25E88" name="Utredning" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Utredning]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return rtfMaskinellResult == se.fk.rimfrost.framework.regel.Utfall.UTREDNING;]]></bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_331439CA-81B3-42E6-B26F-D74D6C3529B1" name="!= Utredning" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_48636A54-33E2-46E4-8736-787AB637276C">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue><![CDATA[!= Utredning]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return rtfMaskinellResult != se.fk.rimfrost.framework.regel.Utfall.UTREDNING;]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return beraknaersattningResult != se.fk.rimfrost.framework.regel.Utfall.UTREDNING;]]></bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_4BDD402F-000B-4D37-9C25-AE7A12A25E88" name="Utredning" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Utredning]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return beraknaersattningResult == se.fk.rimfrost.framework.regel.Utfall.UTREDNING;]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_1BE34C21-17A0-4EBF-8ABA-31114FB5ACD5" sourceRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" targetRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711">
       <bpmn2:extensionElements>
@@ -84,6 +96,37 @@
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_CAC39F18-D56B-417C-951C-0B1457304806" sourceRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF" targetRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F"/>
     <bpmn2:sequenceFlow id="_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F" sourceRef="_7C020ABA-9324-4EE3-857B-401B3C43FD84" targetRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF"/>
+    <bpmn2:callActivity id="_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B" drools:independent="false" drools:waitForCompletion="true" name="Beräkna ersättning" calledElement="beraknaersattning">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Beräkna ersättning]]></drools:metaValue>
+        </drools:metaData>
+        <drools:onEntry-script scriptFormat="http://www.java.com/java">
+          <drools:script><![CDATA[System.out.println("bekraftaErsattningt entry");]]></drools:script>
+        </drools:onEntry-script>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_D5157A05-A43C-450D-9DAA-18ACD57CFD02</bpmn2:incoming>
+      <bpmn2:outgoing>_03819F1D-CEB6-4D9C-8992-C5C75731FFBE</bpmn2:outgoing>
+      <bpmn2:outgoing>_4F2189BE-A11D-4838-8310-BCC6D9E90206</bpmn2:outgoing>
+      <bpmn2:ioSpecification>
+        <bpmn2:dataInput id="_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_kundbehovsflodeIdInputX" drools:dtype="String" itemSubjectRef="__C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_kundbehovsflodeIdInputXItem" name="kundbehovsflodeId"/>
+        <bpmn2:dataOutput id="_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_resultOutputX" drools:dtype="se.fk.rimfrost.framework.regel.Utfall" itemSubjectRef="__C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_resultOutputXItem" name="result"/>
+        <bpmn2:inputSet>
+          <bpmn2:dataInputRefs>_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_kundbehovsflodeIdInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet>
+          <bpmn2:dataOutputRefs>_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_resultOutputX</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:sourceRef>kundbehovsflodeId</bpmn2:sourceRef>
+        <bpmn2:targetRef>_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_kundbehovsflodeIdInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_resultOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>beraknaersattningResult</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:callActivity>
     <bpmn2:callActivity id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" drools:independent="false" drools:waitForCompletion="true" name="Bekräfta beslut" calledElement="bekraftabeslut">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
@@ -96,7 +139,8 @@
           <drools:metaValue><![CDATA[false]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:incoming>_BC111E98-FFF4-4E08-965C-93F4D250AFB2</bpmn2:incoming>
+      <bpmn2:incoming>_03819F1D-CEB6-4D9C-8992-C5C75731FFBE</bpmn2:incoming>
+      <bpmn2:incoming>_4F2189BE-A11D-4838-8310-BCC6D9E90206</bpmn2:incoming>
       <bpmn2:outgoing>_7B96966C-4DA2-42DC-9C1E-73D13351AD7E</bpmn2:outgoing>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_kundbehovsflodeIdInputX" drools:dtype="String" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_kundbehovsflodeIdInputXItem" name="kundbehovsflodeId"/>
@@ -127,12 +171,12 @@
       <bpmn2:inputSet>
         <bpmn2:dataInputRefs>_6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahKundbehovsflodeResponseMessageDataInputX</bpmn2:dataInputRefs>
       </bpmn2:inputSet>
-      <bpmn2:messageEventDefinition drools:msgref="vah-kundbehovsflode-responses" messageRef="_idT7QOlRED6Fs_kd0VwMLg"/>
+      <bpmn2:messageEventDefinition drools:msgref="vah-kundbehovsflode-responses" messageRef="_Vodj0PLVED6FZ6OddSWqqQ"/>
     </bpmn2:endEvent>
-    <bpmn2:exclusiveGateway id="_48636A54-33E2-46E4-8736-787AB637276C" drools:dg="_BC111E98-FFF4-4E08-965C-93F4D250AFB2" gatewayDirection="Converging" default="_BC111E98-FFF4-4E08-965C-93F4D250AFB2">
+    <bpmn2:exclusiveGateway id="_48636A54-33E2-46E4-8736-787AB637276C" drools:dg="_BC111E98-FFF4-4E08-965C-93F4D250AFB2" gatewayDirection="Converging">
       <bpmn2:incoming>_331439CA-81B3-42E6-B26F-D74D6C3529B1</bpmn2:incoming>
       <bpmn2:incoming>_F3A50196-2E2B-4E0E-8061-CCF4441B4FF2</bpmn2:incoming>
-      <bpmn2:outgoing>_BC111E98-FFF4-4E08-965C-93F4D250AFB2</bpmn2:outgoing>
+      <bpmn2:outgoing>_D5157A05-A43C-450D-9DAA-18ACD57CFD02</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:serviceTask id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.github.rimfrost.vardavhusdjur.VahService" drools:serviceoperation="informAboutDecision" name="Informera om beslut" implementation="Java" operationRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_ServiceOperation">
       <bpmn2:extensionElements>
@@ -235,8 +279,8 @@
     </bpmn2:callActivity>
     <bpmn2:exclusiveGateway id="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" drools:dg="_4BDD402F-000B-4D37-9C25-AE7A12A25E88" gatewayDirection="Diverging" default="_4BDD402F-000B-4D37-9C25-AE7A12A25E88">
       <bpmn2:incoming>_1BE34C21-17A0-4EBF-8ABA-31114FB5ACD5</bpmn2:incoming>
-      <bpmn2:outgoing>_331439CA-81B3-42E6-B26F-D74D6C3529B1</bpmn2:outgoing>
       <bpmn2:outgoing>_4BDD402F-000B-4D37-9C25-AE7A12A25E88</bpmn2:outgoing>
+      <bpmn2:outgoing>_331439CA-81B3-42E6-B26F-D74D6C3529B1</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:callActivity id="_5DAB8314-5034-4D58-B2AA-8CF62303409F" drools:independent="false" drools:waitForCompletion="true" name="Rätt till försäkring maskinell kontroll" calledElement="rtfMaskinell">
       <bpmn2:extensionElements>
@@ -265,7 +309,7 @@
       </bpmn2:dataInputAssociation>
       <bpmn2:dataOutputAssociation>
         <bpmn2:sourceRef>_5DAB8314-5034-4D58-B2AA-8CF62303409F_resultOutputX</bpmn2:sourceRef>
-        <bpmn2:targetRef>rtfMaskinellResult</bpmn2:targetRef>
+        <bpmn2:targetRef>beraknaersattningResult</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:callActivity>
     <bpmn2:startEvent id="_7C020ABA-9324-4EE3-857B-401B3C43FD84">
@@ -278,7 +322,7 @@
       <bpmn2:outputSet>
         <bpmn2:dataOutputRefs>_7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputX</bpmn2:dataOutputRefs>
       </bpmn2:outputSet>
-      <bpmn2:messageEventDefinition drools:msgref="vah-kundbehovsflode-requests" messageRef="_idTUMOlRED6Fs_kd0VwMLg"/>
+      <bpmn2:messageEventDefinition drools:msgref="vah-kundbehovsflode-requests" messageRef="_Voc8wPLVED6FZ6OddSWqqQ"/>
     </bpmn2:startEvent>
   </bpmn2:process>
   <bpmndi:BPMNDiagram>
@@ -299,16 +343,19 @@
         <dc:Bounds height="102" width="154" x="308" y="402"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__9BF4B5C5-6395-4DAF-A523-56CABCE7908E" bpmnElement="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E">
-        <dc:Bounds height="102" width="154" x="1770" y="403"/>
+        <dc:Bounds height="102" width="154" x="1965" y="404"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__48636A54-33E2-46E4-8736-787AB637276C" bpmnElement="_48636A54-33E2-46E4-8736-787AB637276C">
         <dc:Bounds height="56" width="56" x="1280" y="425"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__6D6EDF56-89D6-4DBB-9237-365C2737DD47" bpmnElement="_6D6EDF56-89D6-4DBB-9237-365C2737DD47">
-        <dc:Bounds height="56" width="56" x="1997" y="425"/>
+        <dc:Bounds height="56" width="56" x="2249" y="428"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2" bpmnElement="_297C75F8-77DE-4FD5-8F2A-39601A7621D2">
-        <dc:Bounds height="101" width="153" x="1476.5" y="404"/>
+        <dc:Bounds height="101" width="153" x="1694.5" y="405"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__C19EDA18-5C30-4DE3-92CD-1C9842B91B4B" bpmnElement="_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B">
+        <dc:Bounds height="101" width="153" x="1419" y="402"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="edge_shape__7C020ABA-9324-4EE3-857B-401B3C43FD84_to_shape__945A597D-60CC-4E7A-A1BB-63AD945B1EAF" bpmnElement="_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F">
         <di:waypoint x="179" y="453"/>
@@ -322,14 +369,14 @@
         <di:waypoint x="639.5" y="454"/>
         <di:waypoint x="790" y="453"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__302D0FF4-43EA-4431-B4E5-8D5AD6310711_to_shape__48636A54-33E2-46E4-8736-787AB637276C" bpmnElement="_331439CA-81B3-42E6-B26F-D74D6C3529B1">
-        <di:waypoint x="818" y="453"/>
-        <di:waypoint x="1280" y="453"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__302D0FF4-43EA-4431-B4E5-8D5AD6310711_to_shape__C29B7634-3A7A-4606-9B1C-4A3424F29D34" bpmnElement="_4BDD402F-000B-4D37-9C25-AE7A12A25E88">
         <di:waypoint x="818" y="453"/>
         <di:waypoint x="818.0001008461936" y="273.5"/>
         <di:waypoint x="927.5" y="273.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__302D0FF4-43EA-4431-B4E5-8D5AD6310711_to_shape__48636A54-33E2-46E4-8736-787AB637276C" bpmnElement="_331439CA-81B3-42E6-B26F-D74D6C3529B1">
+        <di:waypoint x="818" y="453"/>
+        <di:waypoint x="1280" y="453"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__C29B7634-3A7A-4606-9B1C-4A3424F29D34_to_shape__48636A54-33E2-46E4-8736-787AB637276C" bpmnElement="_F3A50196-2E2B-4E0E-8061-CCF4441B4FF2">
         <di:waypoint x="1004" y="273.5"/>
@@ -337,16 +384,24 @@
         <di:waypoint x="1308" y="425"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2_to_shape__9BF4B5C5-6395-4DAF-A523-56CABCE7908E" bpmnElement="_7B96966C-4DA2-42DC-9C1E-73D13351AD7E">
-        <di:waypoint x="1553" y="454.5"/>
-        <di:waypoint x="1770" y="454"/>
+        <di:waypoint x="1771" y="455.5"/>
+        <di:waypoint x="1965" y="455"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_to_shape__6D6EDF56-89D6-4DBB-9237-365C2737DD47" bpmnElement="_152B7D50-C575-4C6E-AB02-90BA1261CAA0">
-        <di:waypoint x="1847" y="454"/>
-        <di:waypoint x="2025" y="453"/>
+        <di:waypoint x="2042" y="455"/>
+        <di:waypoint x="2277" y="456"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__48636A54-33E2-46E4-8736-787AB637276C_to_shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2" bpmnElement="_BC111E98-FFF4-4E08-965C-93F4D250AFB2">
+      <bpmndi:BPMNEdge id="edge_shape__48636A54-33E2-46E4-8736-787AB637276C_to_shape__C19EDA18-5C30-4DE3-92CD-1C9842B91B4B" bpmnElement="_D5157A05-A43C-450D-9DAA-18ACD57CFD02">
         <di:waypoint x="1308" y="453"/>
-        <di:waypoint x="1476.5" y="454.5"/>
+        <di:waypoint x="1419" y="452.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_to_shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2" bpmnElement="_03819F1D-CEB6-4D9C-8992-C5C75731FFBE">
+        <di:waypoint x="1495.5" y="452.5"/>
+        <di:waypoint x="1694.5" y="455.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__C19EDA18-5C30-4DE3-92CD-1C9842B91B4B_to_shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2" bpmnElement="_4F2189BE-A11D-4838-8310-BCC6D9E90206">
+        <di:waypoint x="1495.5" y="452.5"/>
+        <di:waypoint x="1694.5" y="455.5"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
@@ -455,10 +510,30 @@
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
+          <bpsim:ElementParameters elementRef="_C19EDA18-5C30-4DE3-92CD-1C9842B91B4B">
+            <bpsim:TimeParameters>
+              <bpsim:ProcessingTime>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters>
+              <bpsim:Availability>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters>
+              <bpsim:UnitCost>
+                <bpsim:FloatingParameter value="0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_idStIOlRED6Fs_kd0VwMLg</bpmn2:source>
-    <bpmn2:target>_idStIOlRED6Fs_kd0VwMLg</bpmn2:target>
+    <bpmn2:source>_VobuoPLVED6FZ6OddSWqqQ</bpmn2:source>
+    <bpmn2:target>_VobuoPLVED6FZ6OddSWqqQ</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>

@@ -58,8 +58,8 @@ public class VahContainerSmokeIT
    private static final int vahPort = TestConfig.getInt("vah.port");
    private static final String vahKundbehovsflodeRequestTopic = TestConfig.get("vah.kundbehovsflode.requests.topic");
    private static final String vahKundbehovsflodeResponseTopic = TestConfig.get("vah.kundbehovsflode.responses.topic");
-   private static final String rtfMaskinellRequestTopic = TestConfig.get("rtf.maskinell.requests.topic");
-   private static final String rtfMaskinellResponseTopic = TestConfig.get("rtf.maskinell.responses.topic");
+   private static final String beraknaersattningRequestTopic = TestConfig.get("rtf.maskinell.requests.topic");
+   private static final String beraknaersattningResponseTopic = TestConfig.get("rtf.maskinell.responses.topic");
    private static final String rtfManuellRequestTopic = TestConfig.get("rtf.manuell.requests.topic");
    private static final String rtfManuellResponseTopic = TestConfig.get("rtf.manuell.responses.topic");
    private static final String bekraftaBeslutRequestTopic = TestConfig.get("bekraftabeslut.requests.topic");
@@ -82,8 +82,8 @@ public class VahContainerSmokeIT
       {
          createTopic(vahKundbehovsflodeRequestTopic, 1, (short) 1);
          createTopic(vahKundbehovsflodeResponseTopic, 1, (short) 1);
-         createTopic(rtfMaskinellRequestTopic, 1, (short) 1);
-         createTopic(rtfMaskinellResponseTopic, 1, (short) 1);
+         createTopic(beraknaersattningRequestTopic, 1, (short) 1);
+         createTopic(beraknaersattningResponseTopic, 1, (short) 1);
          createTopic(rtfManuellRequestTopic, 1, (short) 1);
          createTopic(rtfManuellResponseTopic, 1, (short) 1);
       }
@@ -277,7 +277,7 @@ public class VahContainerSmokeIT
       var kundbehovsflodeId = UUID.randomUUID().toString();
       System.out.println("Starting TestVahSmoke");
       // Start background Kafka responders
-      CompletableFuture<Void> responderRtfMaskinell = startKafkaResponder(rtfMaskinellRequestTopic, rtfMaskinellResponseTopic,
+      CompletableFuture<Void> responderberaknaersattning = startKafkaResponder(beraknaersattningRequestTopic, beraknaersattningResponseTopic,
             Utfall.UTREDNING);
       CompletableFuture<Void> responderRtfManuell = startKafkaResponder(rtfManuellRequestTopic, rtfManuellResponseTopic,
             Utfall.JA);
@@ -286,13 +286,13 @@ public class VahContainerSmokeIT
       // Send Kundbehovsflöde request to start workflow
       sendVahKundbehovsflodeRequest(kundbehovsflodeId, "A1");
       // Verify rtf maskinell message produced by VAH
-      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic);
-      System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
-      RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
+      String beraknaersattningRequest = readKafkaRequestMessage(beraknaersattningRequestTopic);
+      System.out.println("Received beraknaersattningRequest: " + beraknaersattningRequest);
+      RegelRequestMessagePayload beraknaersattningRequestMessagePayload = mapper.readValue(beraknaersattningRequest,
             RegelRequestMessagePayload.class);
-      assertEquals(kundbehovsflodeId, rtfMaskinellRequestMessagePayload.getData().getKundbehovsflodeId());
+      assertEquals(kundbehovsflodeId, beraknaersattningRequestMessagePayload.getData().getKundbehovsflodeId());
       // Wait for kafka responder to complete
-      responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
+      responderberaknaersattning.get(topicTimeout, TimeUnit.SECONDS);
       // Verify rtf manuell message produced by VAH
       String rtfManuellRequest = readKafkaRequestMessage(rtfManuellRequestTopic);
       System.out.println("Received rtfManuellRequest: " + rtfManuellRequest);
