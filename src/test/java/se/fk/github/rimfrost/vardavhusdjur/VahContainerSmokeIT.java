@@ -277,7 +277,8 @@ public class VahContainerSmokeIT
       var kundbehovsflodeId = UUID.randomUUID().toString();
       System.out.println("Starting TestVahSmoke");
       // Start background Kafka responders
-      CompletableFuture<Void> responderberaknaersattning = startKafkaResponder(beraknaersattningRequestTopic, beraknaersattningResponseTopic,
+      CompletableFuture<Void> responderberaknaersattning = startKafkaResponder(beraknaersattningRequestTopic,
+            beraknaersattningResponseTopic,
             Utfall.UTREDNING);
       CompletableFuture<Void> responderRtfManuell = startKafkaResponder(rtfManuellRequestTopic, rtfManuellResponseTopic,
             Utfall.JA);
