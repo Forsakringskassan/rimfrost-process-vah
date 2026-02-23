@@ -39,7 +39,7 @@
   <bpmn2:collaboration id="_12E634DF-7C64-44B2-A939-18D108D36F48" name="Default Collaboration">
     <bpmn2:participant id="_1C001384-2469-4FD9-BDA2-85C0868DAED9" name="Pool Participant" processRef="beraknaersattning"/>
   </bpmn2:collaboration>
-  <bpmn2:process id="beraknaersattning" drools:packageName="vah" drools:version="1.0" drools:adHoc="false" name="rtf" isExecutable="true" processType="Public">
+  <bpmn2:process id="rtfMaskinell" drools:packageName="vah" drools:version="1.0" drools:adHoc="false" name="rtf" isExecutable="true" processType="Public">
     <bpmn2:property id="request" itemSubjectRef="_requestItem" name="request"/>
     <bpmn2:property id="result" itemSubjectRef="_resultItem" name="result"/>
     <bpmn2:property id="kundbehovsflodeId" itemSubjectRef="_kundbehovsflodeIdItem" name="kundbehovsflodeId"/>
