@@ -13,11 +13,11 @@
   <bpmn2:itemDefinition id="__EB1970E1-7AA3-44EC-98B2-981698344C2A_responseInputXItem" structureRef="se.fk.rimfrost.framework.regel.RegelResponseMessagePayloadData"/>
   <bpmn2:itemDefinition id="__EB1970E1-7AA3-44EC-98B2-981698344C2A_resultOutputXItem" structureRef="se.fk.rimfrost.framework.regel.Utfall"/>
   <bpmn2:itemDefinition id="__65DE9E0A-5F30-4DDB-A696-C2B92307795C_eventOutputXItem" structureRef="se.fk.rimfrost.framework.regel.RegelResponseMessagePayloadData"/>
-  <bpmn2:itemDefinition id="beraknaersattning-responsesType" structureRef="se.fk.rimfrost.framework.regel.RegelResponseMessagePayloadData"/>
+  <bpmn2:itemDefinition id="rtf-maskinell-responsesType" structureRef="se.fk.rimfrost.framework.regel.RegelResponseMessagePayloadData"/>
   <bpmn2:itemDefinition id="_9561CDBA-B409-4230-AD38-0252619BAF5C" structureRef=""/>
   <bpmn2:itemDefinition id="_1868C7F3-BB35-478C-9240-9568F1647964" structureRef=""/>
   <bpmn2:itemDefinition id="__E496A906-CCA2-4DAD-8E76-D5F0E5FDB341_requestInputXItem" structureRef="se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData"/>
-  <bpmn2:itemDefinition id="beraknaersattning-requestsType" structureRef="se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData"/>
+  <bpmn2:itemDefinition id="rtf-maskinell-requestsType" structureRef="se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData"/>
   <bpmn2:message id="_428739B8-C962-4EBE-A16B-6E2B5133D50B_InMessage" itemRef="_428739B8-C962-4EBE-A16B-6E2B5133D50B_InMessageType"/>
   <bpmn2:message id="_428739B8-C962-4EBE-A16B-6E2B5133D50B_OutMessage" itemRef="_428739B8-C962-4EBE-A16B-6E2B5133D50B_OutMessageType"/>
   <bpmn2:interface id="_428739B8-C962-4EBE-A16B-6E2B5133D50B_ServiceInterface" name="se.fk.github.rimfrost.vardavhusdjur.common.RegelService" implementationRef="se.fk.github.rimfrost.vardavhusdjur.common.RegelService">
@@ -34,10 +34,10 @@
       <bpmn2:outMessageRef>_EB1970E1-7AA3-44EC-98B2-981698344C2A_OutMessage</bpmn2:outMessageRef>
     </bpmn2:operation>
   </bpmn2:interface>
-  <bpmn2:message id="_qwtgsOfkED6wKL4B-r9zIw" itemRef="beraknaersattning-responsesType" name="beraknaersattning-responses"/>
-  <bpmn2:message id="_qwtgsefkED6wKL4B-r9zIw" itemRef="beraknaersattning-requestsType" name="beraknaersattning-requests"/>
+  <bpmn2:message id="_qwtgsOfkED6wKL4B-r9zIw" itemRef="rtf-maskinell-responsesType" name="rtf-maskinell-responses"/>
+  <bpmn2:message id="_qwtgsefkED6wKL4B-r9zIw" itemRef="rtf-maskinell-requestsType" name="rtf-maskinell-requests"/>
   <bpmn2:collaboration id="_12E634DF-7C64-44B2-A939-18D108D36F48" name="Default Collaboration">
-    <bpmn2:participant id="_1C001384-2469-4FD9-BDA2-85C0868DAED9" name="Pool Participant" processRef="beraknaersattning"/>
+    <bpmn2:participant id="_1C001384-2469-4FD9-BDA2-85C0868DAED9" name="Pool Participant" processRef="rtfMaskinell"/>
   </bpmn2:collaboration>
   <bpmn2:process id="rtfMaskinell" drools:packageName="vah" drools:version="1.0" drools:adHoc="false" name="rtf" isExecutable="true" processType="Public">
     <bpmn2:property id="request" itemSubjectRef="_requestItem" name="request"/>
@@ -60,7 +60,7 @@
       <bpmn2:inputSet>
         <bpmn2:dataInputRefs>_E496A906-CCA2-4DAD-8E76-D5F0E5FDB341_requestInputX</bpmn2:dataInputRefs>
       </bpmn2:inputSet>
-      <bpmn2:messageEventDefinition drools:msgref="beraknaersattning-requests" messageRef="_qwtgsefkED6wKL4B-r9zIw"/>
+      <bpmn2:messageEventDefinition drools:msgref="rtf-maskinell-requests" messageRef="_qwtgsefkED6wKL4B-r9zIw"/>
     </bpmn2:intermediateThrowEvent>
     <bpmn2:intermediateCatchEvent id="_65DE9E0A-5F30-4DDB-A696-C2B92307795C">
       <bpmn2:incoming>_85DA7746-3E8E-4748-8241-725D0252E4A4</bpmn2:incoming>
@@ -73,7 +73,7 @@
       <bpmn2:outputSet>
         <bpmn2:dataOutputRefs>_65DE9E0A-5F30-4DDB-A696-C2B92307795C_eventOutputX</bpmn2:dataOutputRefs>
       </bpmn2:outputSet>
-      <bpmn2:messageEventDefinition drools:msgref="beraknaersattning-responses" messageRef="_qwtgsOfkED6wKL4B-r9zIw"/>
+      <bpmn2:messageEventDefinition drools:msgref="rtf-maskinell-responses" messageRef="_qwtgsOfkED6wKL4B-r9zIw"/>
     </bpmn2:intermediateCatchEvent>
     <bpmn2:serviceTask id="_EB1970E1-7AA3-44EC-98B2-981698344C2A" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.github.rimfrost.vardavhusdjur.common.RegelService" drools:serviceoperation="onRegelResponse" name="Received RTF Response" implementation="Java" operationRef="_EB1970E1-7AA3-44EC-98B2-981698344C2A_ServiceOperation">
       <bpmn2:extensionElements>
@@ -142,7 +142,7 @@
     </bpmn2:startEvent>
   </bpmn2:process>
   <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane bpmnElement="beraknaersattning">
+    <bpmndi:BPMNPlane bpmnElement="rtfMaskinell">
       <bpmndi:BPMNShape id="shape__39F10672-EEFA-4AED-9E31-2F408D704404" bpmnElement="_39F10672-EEFA-4AED-9E31-2F408D704404">
         <dc:Bounds height="56" width="56" x="171" y="203"/>
       </bpmndi:BPMNShape>
