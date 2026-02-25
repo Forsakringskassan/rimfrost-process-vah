@@ -2,6 +2,24 @@
 
 Changelog of rimfrost-process-vah.
 
+## 0.1.0 (2026-02-22)
+
+### Features
+
+-  Add bekraftabeslut as subprocess to vah process ([eaf4a](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/eaf4a5661bc5939) Lars Persson)  
+
+### Bug Fixes
+
+-  update to use framework package instead of common (#25) ([2ac44](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/2ac446377905150) NilsElveros)  
+-  Update vah process to support common consumer and producer ([15fb2](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/15fb2f0b395a41c) Lars Persson)  
+
+### Dependency updates
+
+- update dependency org.apache.maven.plugins:maven-failsafe-plugin to v3.5.5 ([c8575](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/c857534fe3e4311) renovate[bot])  
+- update testcontainers-java monorepo to v1.21.4 (#20) ([c0f7a](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/c0f7affa57a1bde) renovate[bot])  
+### Other changes
+
+
 ## 0.0.1 (2026-01-14)
 
 ### Features
