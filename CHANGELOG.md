@@ -2,6 +2,12 @@
 
 Changelog of rimfrost-process-vah.
 
+## 0.1.1 (2026-03-03)
+
+### Bug Fixes
+
+-  Bump to trigger release flow ([143d0](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/143d095628237b0) Lars Persson)  
+
 ## 0.1.0 (2026-02-22)
 
 ### Features
