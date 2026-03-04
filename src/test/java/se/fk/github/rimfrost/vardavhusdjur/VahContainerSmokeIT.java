@@ -23,9 +23,9 @@ import org.testcontainers.containers.Network;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import se.fk.rimfrost.SpecVersion;
-import se.fk.rimfrost.VahKundbehovsflodeRequestMessageData;
-import se.fk.rimfrost.VahKundbehovsflodeRequestMessagePayload;
-import se.fk.rimfrost.VahKundbehovsflodeResponseMessagePayload;
+import se.fk.rimfrost.VahHandlaggningRequestMessageData;
+import se.fk.rimfrost.VahHandlaggningRequestMessagePayload;
+import se.fk.rimfrost.VahHandlaggningResponseMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData;
 import se.fk.rimfrost.framework.regel.RegelResponseMessagePayload;
@@ -56,8 +56,8 @@ public class VahContainerSmokeIT
    private static final String kafkaImage = TestConfig.get("kafka.image");
    private static final String vahImage = TestConfig.get("vah.image");
    private static final int vahPort = TestConfig.getInt("vah.port");
-   private static final String vahKundbehovsflodeRequestTopic = TestConfig.get("vah.kundbehovsflode.requests.topic");
-   private static final String vahKundbehovsflodeResponseTopic = TestConfig.get("vah.kundbehovsflode.responses.topic");
+   private static final String vahHandlaggningRequestTopic = TestConfig.get("vah.handlaggning.requests.topic");
+   private static final String vahHandlaggningResponseTopic = TestConfig.get("vah.handlaggning.responses.topic");
    private static final String rtfMaskinellRequestTopic = TestConfig.get("rtf.maskinell.requests.topic");
    private static final String rtfMaskinellResponseTopic = TestConfig.get("rtf.maskinell.responses.topic");
    private static final String rtfManuellRequestTopic = TestConfig.get("rtf.manuell.requests.topic");
@@ -80,8 +80,8 @@ public class VahContainerSmokeIT
       kafka.start();
       try
       {
-         createTopic(vahKundbehovsflodeRequestTopic, 1, (short) 1);
-         createTopic(vahKundbehovsflodeResponseTopic, 1, (short) 1);
+         createTopic(vahHandlaggningRequestTopic, 1, (short) 1);
+         createTopic(vahHandlaggningResponseTopic, 1, (short) 1);
          createTopic(rtfMaskinellRequestTopic, 1, (short) 1);
          createTopic(rtfMaskinellResponseTopic, 1, (short) 1);
          createTopic(rtfManuellRequestTopic, 1, (short) 1);
@@ -172,14 +172,14 @@ public class VahContainerSmokeIT
             {
                throw new IllegalStateException("Missing data field in Kafka message: " + message);
             }
-            String kundbehovsflodeId = requestData.getKundbehovsflodeId();
+            String handlaggningId = requestData.getHandlaggningId();
             // Create typed response data object
             RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
-            responseData.setKundbehovsflodeId(kundbehovsflodeId);
+            responseData.setHandlaggningId(handlaggningId);
             responseData.setUtfall(utfall);
 
             sendRegelResponse(request, responseTopic, responseData);
-            System.out.printf("Sent mock Kafka response for kundbehovsflodeId=%s%n on topic %s", kundbehovsflodeId,
+            System.out.printf("Sent mock Kafka response for handlaggningId=%s%n on topic %s", handlaggningId,
                   responseTopic);
          }
          catch (Exception e)
@@ -189,15 +189,15 @@ public class VahContainerSmokeIT
       }, Executors.newSingleThreadExecutor());
    }
 
-   private void sendVahKundbehovsflodeRequest(String kundbehovsflodeId, String messageKey) throws Exception
+   private void sendVahHandlaggningRequest(String handlaggningId, String messageKey) throws Exception
    {
-      VahKundbehovsflodeRequestMessagePayload payload = new VahKundbehovsflodeRequestMessagePayload();
-      VahKundbehovsflodeRequestMessageData data = new VahKundbehovsflodeRequestMessageData();
-      data.setKundbehovsflodeId(kundbehovsflodeId);
+      VahHandlaggningRequestMessagePayload payload = new VahHandlaggningRequestMessagePayload();
+      VahHandlaggningRequestMessageData data = new VahHandlaggningRequestMessageData();
+      data.setHandlaggningId(handlaggningId);
       payload.setSpecversion(SpecVersion.NUMBER_1_DOT_0);
       payload.setId("TestId-001");
       payload.setSource("TestSource-001");
-      payload.setType(vahKundbehovsflodeRequestTopic);
+      payload.setType(vahHandlaggningRequestTopic);
       payload.setData(data);
       // Serialize entire payload to JSON
       String eventJson = mapper.writeValueAsString(payload);
@@ -210,10 +210,10 @@ public class VahContainerSmokeIT
       try (KafkaProducer<String, String> producer = new KafkaProducer<>(props))
       {
          ProducerRecord<String, String> record = new ProducerRecord<>(
-               vahKundbehovsflodeRequestTopic,
+               vahHandlaggningRequestTopic,
                messageKey,
                eventJson);
-         System.out.printf("Kafka sending to topic : %s, json: %s%n", vahKundbehovsflodeRequestTopic, eventJson);
+         System.out.printf("Kafka sending to topic : %s, json: %s%n", vahHandlaggningRequestTopic, eventJson);
          producer.send(record).get();
       }
    }
@@ -274,7 +274,7 @@ public class VahContainerSmokeIT
    @Test
    void TestVahSmoke() throws Exception
    {
-      var kundbehovsflodeId = UUID.randomUUID().toString();
+      var handlaggningId = UUID.randomUUID().toString();
       System.out.println("Starting TestVahSmoke");
       // Start background Kafka responders
       CompletableFuture<Void> responderRtfMaskinell = startKafkaResponder(rtfMaskinellRequestTopic, rtfMaskinellResponseTopic,
@@ -283,14 +283,14 @@ public class VahContainerSmokeIT
             Utfall.JA);
       CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
             bekraftaBeslutResponseTopic, Utfall.JA);
-      // Send Kundbehovsflöde request to start workflow
-      sendVahKundbehovsflodeRequest(kundbehovsflodeId, "A1");
+      // Send Handlaggning request to start workflow
+      sendVahHandlaggningRequest(handlaggningId, "A1");
       // Verify rtf maskinell message produced by VAH
       String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic);
       System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
       RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
             RegelRequestMessagePayload.class);
-      assertEquals(kundbehovsflodeId, rtfMaskinellRequestMessagePayload.getData().getKundbehovsflodeId());
+      assertEquals(handlaggningId, rtfMaskinellRequestMessagePayload.getData().getHandlaggningId());
       // Wait for kafka responder to complete
       responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
       // Verify rtf manuell message produced by VAH
@@ -298,7 +298,7 @@ public class VahContainerSmokeIT
       System.out.println("Received rtfManuellRequest: " + rtfManuellRequest);
       RegelRequestMessagePayload rtfManuellRequestMessagePayload = mapper.readValue(rtfManuellRequest,
             RegelRequestMessagePayload.class);
-      assertEquals(kundbehovsflodeId, rtfManuellRequestMessagePayload.getData().getKundbehovsflodeId());
+      assertEquals(handlaggningId, rtfManuellRequestMessagePayload.getData().getHandlaggningId());
 
       // Wait for kafka responder to complete
       responderRtfManuell.get(topicTimeout, TimeUnit.SECONDS);
@@ -308,17 +308,17 @@ public class VahContainerSmokeIT
       System.out.println("Received bekraftaBeslutRequest: " + bekraftaBeslutRequest);
       RegelRequestMessagePayload bekraftaBeslutRequestMessagePayload = mapper.readValue(bekraftaBeslutRequest,
             RegelRequestMessagePayload.class);
-      assertEquals(kundbehovsflodeId, bekraftaBeslutRequestMessagePayload.getData().getKundbehovsflodeId());
+      assertEquals(handlaggningId, bekraftaBeslutRequestMessagePayload.getData().getHandlaggningId());
 
       // Wait for kafka responder to complete
       responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
 
       // Wait for response from VAH
-      String vahKundbehovsflodeResponse = readKafkaRequestMessage(vahKundbehovsflodeResponseTopic);
-      System.out.println("Received vahKundbehovsflodeResponse: " + vahKundbehovsflodeResponse);
-      VahKundbehovsflodeResponseMessagePayload vahKundbehovsflodeRequestMessagePayload = mapper
-            .readValue(vahKundbehovsflodeResponse, VahKundbehovsflodeResponseMessagePayload.class);
-      assertEquals(kundbehovsflodeId, vahKundbehovsflodeRequestMessagePayload.getData().getKundbehovsflodeId());
-      assertEquals("GODKÄND", vahKundbehovsflodeRequestMessagePayload.getData().getResultat());
+      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic);
+      System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
+      VahHandlaggningResponseMessagePayload vahHandlaggningRequestMessagePayload = mapper
+            .readValue(vahHandlaggningResponse, VahHandlaggningResponseMessagePayload.class);
+      assertEquals(handlaggningId, vahHandlaggningRequestMessagePayload.getData().getHandlaggningId());
+      assertEquals("GODKÄND", vahHandlaggningRequestMessagePayload.getData().getResultat());
    }
 }
