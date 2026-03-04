@@ -2,6 +2,12 @@
 
 Changelog of rimfrost-process-vah.
 
+## 0.1.2 (2026-03-04)
+
+### Bug Fixes
+
+-  renaming handlaggning ([1dd85](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/1dd85f8d94d66cd) Ulf Slunga)  
+
 ## 0.1.1 (2026-03-03)
 
 ### Bug Fixes
