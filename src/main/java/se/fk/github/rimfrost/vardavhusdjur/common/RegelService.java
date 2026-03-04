@@ -13,16 +13,16 @@ public class RegelService
    {
       System.out.printf("onRegelResponse. received response: %s", response.toString());
       System.out.printf("Received RegelResponse for processId: %s with utfall: %s%n",
-            response.getKundbehovsflodeId(),
+            response.getHandlaggningId(),
             response.getUtfall().toString());
       return response.getUtfall();
    }
 
-   public RegelRequestMessagePayloadData createRegelRequest(String kundbehovsflodeId)
+   public RegelRequestMessagePayloadData createRegelRequest(String handlaggningId)
    {
-      System.out.printf("Created RegelRequest with kundbehovsflodeId: %s%n", kundbehovsflodeId);
+      System.out.printf("Created RegelRequest with handlaggningId: %s%n", handlaggningId);
       RegelRequestMessagePayloadData requestMessageData = new RegelRequestMessagePayloadData();
-      requestMessageData.setKundbehovsflodeId(kundbehovsflodeId);
+      requestMessageData.setHandlaggningId(handlaggningId);
       return requestMessageData;
    }
 

@@ -1,7 +1,7 @@
 package se.fk.github.rimfrost.vardavhusdjur;
 
-import se.fk.rimfrost.VahKundbehovsflodeRequestMessageData;
-import se.fk.rimfrost.VahKundbehovsflodeResponseMessageData;
+import se.fk.rimfrost.VahHandlaggningRequestMessageData;
+import se.fk.rimfrost.VahHandlaggningResponseMessageData;
 import se.fk.rimfrost.framework.regel.Utfall;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -9,22 +9,22 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class VahService
 {
 
-   public String startProcess(VahKundbehovsflodeRequestMessageData kundbehovsflodeRequest)
+   public String startProcess(VahHandlaggningRequestMessageData handlaggningRequest)
    {
       System.out.print("VahService.startProcess\n");
-      System.out.printf("triggered by VahKundbehovsflodeRequestMessageData: %s%n", kundbehovsflodeRequest.toString());
-      var kundbehovsflodeId = kundbehovsflodeRequest.getKundbehovsflodeId();
-      System.out.printf("Started vård av husdjur process for kundbehovsflode %s%n", kundbehovsflodeId);
-      return kundbehovsflodeId;
+      System.out.printf("triggered by VahHandlaggningRequestMessageData: %s%n", handlaggningRequest.toString());
+      var handlaggningId = handlaggningRequest.getHandlaggningId();
+      System.out.printf("Started vård av husdjur process for handlaggning %s%n", handlaggningId);
+      return handlaggningId;
    }
 
-   public VahKundbehovsflodeResponseMessageData informAboutDecision(String kundbehovsflodeId, Utfall utfall)
+   public VahHandlaggningResponseMessageData informAboutDecision(String handlaggningId, Utfall utfall)
    {
-      System.out.printf("VAH application for kundbehovsflodeId %s finished with result %s !%n", kundbehovsflodeId, utfall);
-      VahKundbehovsflodeResponseMessageData vahKundbehovsflodeResponseMessageData = new VahKundbehovsflodeResponseMessageData();
-      vahKundbehovsflodeResponseMessageData.setKundbehovsflodeId(kundbehovsflodeId);
-      vahKundbehovsflodeResponseMessageData.setResultat(utfall == Utfall.JA ? "GODKÄND" : "EJ GODKÄND");
-      return vahKundbehovsflodeResponseMessageData;
+      System.out.printf("VAH application for handlaggningId %s finished with result %s !%n", handlaggningId, utfall);
+      VahHandlaggningResponseMessageData vahHandlaggningResponseMessageData = new VahHandlaggningResponseMessageData();
+      vahHandlaggningResponseMessageData.setHandlaggningId(handlaggningId);
+      vahHandlaggningResponseMessageData.setResultat(utfall == Utfall.JA ? "GODKÄND" : "EJ GODKÄND");
+      return vahHandlaggningResponseMessageData;
    }
 
 }
