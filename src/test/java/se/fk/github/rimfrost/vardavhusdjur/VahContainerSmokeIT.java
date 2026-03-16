@@ -18,7 +18,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.kafka.ConfluentKafkaContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
@@ -44,14 +44,13 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SuppressWarnings("deprecation")
 @Testcontainers
 public class VahContainerSmokeIT
 {
 
    private static final ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule())
          .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-   private static KafkaContainer kafka;
+   private static ConfluentKafkaContainer kafka;
    private static GenericContainer<?> vah;
    private static final String kafkaImage = TestConfig.get("kafka.image");
    private static final String vahImage = TestConfig.get("vah.image");
@@ -66,14 +65,14 @@ public class VahContainerSmokeIT
    private static final String bekraftaBeslutResponseTopic = TestConfig.get("bekraftabeslut.responses.topic");
    private static final int topicTimeout = TestConfig.getInt("topic.timeout");
    private static final String networkAlias = TestConfig.get("network.alias");
-   private static final String smallryeKafkaBootstrapServers = networkAlias + ":9092";
+   private static final String smallryeKafkaBootstrapServers = networkAlias + ":9093";
    private static Network network = Network.newNetwork();
 
    @BeforeAll
    static void setupKafka()
    {
 
-      kafka = new KafkaContainer(DockerImageName.parse(kafkaImage)
+      kafka = new ConfluentKafkaContainer(DockerImageName.parse(kafkaImage)
             .asCompatibleSubstituteFor("apache/kafka"))
             .withNetwork(network)
             .withNetworkAliases(networkAlias);
@@ -276,6 +275,7 @@ public class VahContainerSmokeIT
    {
       var handlaggningId = UUID.randomUUID().toString();
       System.out.println("Starting TestVahSmoke");
+
       // Start background Kafka responders
       CompletableFuture<Void> responderRtfMaskinell = startKafkaResponder(rtfMaskinellRequestTopic, rtfMaskinellResponseTopic,
             Utfall.UTREDNING);
@@ -283,22 +283,28 @@ public class VahContainerSmokeIT
             Utfall.JA);
       CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
             bekraftaBeslutResponseTopic, Utfall.JA);
+
       // Send Handlaggning request to start workflow
       sendVahHandlaggningRequest(handlaggningId, "A1");
+
       // Verify rtf maskinell message produced by VAH
       String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic);
       System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
       RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
             RegelRequestMessagePayload.class);
       assertEquals(handlaggningId, rtfMaskinellRequestMessagePayload.getData().getHandlaggningId());
+      assertEquals("d4ab4820-68d9-41e0-abe1-cd8f9865d275", rtfMaskinellRequestMessagePayload.getData().getAktivitetId());
+
       // Wait for kafka responder to complete
       responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
+
       // Verify rtf manuell message produced by VAH
       String rtfManuellRequest = readKafkaRequestMessage(rtfManuellRequestTopic);
       System.out.println("Received rtfManuellRequest: " + rtfManuellRequest);
       RegelRequestMessagePayload rtfManuellRequestMessagePayload = mapper.readValue(rtfManuellRequest,
             RegelRequestMessagePayload.class);
       assertEquals(handlaggningId, rtfManuellRequestMessagePayload.getData().getHandlaggningId());
+      assertEquals("c58dd666-b3c1-4a30-91b8-76c3495668c6", rtfManuellRequestMessagePayload.getData().getAktivitetId());
 
       // Wait for kafka responder to complete
       responderRtfManuell.get(topicTimeout, TimeUnit.SECONDS);
@@ -309,6 +315,7 @@ public class VahContainerSmokeIT
       RegelRequestMessagePayload bekraftaBeslutRequestMessagePayload = mapper.readValue(bekraftaBeslutRequest,
             RegelRequestMessagePayload.class);
       assertEquals(handlaggningId, bekraftaBeslutRequestMessagePayload.getData().getHandlaggningId());
+      assertEquals("8cde2355-aea5-4951-916f-08319b2f1e99", bekraftaBeslutRequestMessagePayload.getData().getAktivitetId());
 
       // Wait for kafka responder to complete
       responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
