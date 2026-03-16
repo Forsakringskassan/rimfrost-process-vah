@@ -18,11 +18,12 @@ public class RegelService
       return response.getUtfall();
    }
 
-   public RegelRequestMessagePayloadData createRegelRequest(String handlaggningId)
+   public RegelRequestMessagePayloadData createRegelRequest(String handlaggningId, String aktivitetId)
    {
       System.out.printf("Created RegelRequest with handlaggningId: %s%n", handlaggningId);
       RegelRequestMessagePayloadData requestMessageData = new RegelRequestMessagePayloadData();
       requestMessageData.setHandlaggningId(handlaggningId);
+      requestMessageData.setAktivitetId(aktivitetId);
       return requestMessageData;
    }
 
