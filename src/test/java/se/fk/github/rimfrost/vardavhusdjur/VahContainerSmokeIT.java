@@ -23,9 +23,9 @@ import org.testcontainers.containers.Network;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import se.fk.rimfrost.SpecVersion;
-import se.fk.rimfrost.VahHandlaggningRequestMessageData;
-import se.fk.rimfrost.VahHandlaggningRequestMessagePayload;
-import se.fk.rimfrost.VahHandlaggningResponseMessagePayload;
+import se.fk.rimfrost.HandlaggningRequestMessageData;
+import se.fk.rimfrost.HandlaggningRequestMessagePayload;
+import se.fk.rimfrost.HandlaggningResponseMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData;
 import se.fk.rimfrost.framework.regel.RegelResponseMessagePayload;
@@ -190,8 +190,8 @@ public class VahContainerSmokeIT
 
    private void sendVahHandlaggningRequest(String handlaggningId, String messageKey) throws Exception
    {
-      VahHandlaggningRequestMessagePayload payload = new VahHandlaggningRequestMessagePayload();
-      VahHandlaggningRequestMessageData data = new VahHandlaggningRequestMessageData();
+      HandlaggningRequestMessagePayload payload = new HandlaggningRequestMessagePayload();
+      HandlaggningRequestMessageData data = new HandlaggningRequestMessageData();
       data.setHandlaggningId(handlaggningId);
       payload.setSpecversion(SpecVersion.NUMBER_1_DOT_0);
       payload.setId("TestId-001");
@@ -323,9 +323,9 @@ public class VahContainerSmokeIT
       // Wait for response from VAH
       String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic);
       System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
-      VahHandlaggningResponseMessagePayload vahHandlaggningRequestMessagePayload = mapper
-            .readValue(vahHandlaggningResponse, VahHandlaggningResponseMessagePayload.class);
-      assertEquals(handlaggningId, vahHandlaggningRequestMessagePayload.getData().getHandlaggningId());
-      assertEquals("GODKÄND", vahHandlaggningRequestMessagePayload.getData().getResultat());
+      HandlaggningResponseMessagePayload handlaggningRequestMessagePayload = mapper
+            .readValue(vahHandlaggningResponse, HandlaggningResponseMessagePayload.class);
+      assertEquals(handlaggningId, handlaggningRequestMessagePayload.getData().getHandlaggningId());
+      assertEquals("GODKÄND", handlaggningRequestMessagePayload.getData().getResultat());
    }
 }
