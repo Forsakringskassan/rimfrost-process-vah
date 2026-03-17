@@ -1,7 +1,7 @@
 package se.fk.github.rimfrost.vardavhusdjur;
 
-import se.fk.rimfrost.VahHandlaggningRequestMessageData;
-import se.fk.rimfrost.VahHandlaggningResponseMessageData;
+import se.fk.rimfrost.HandlaggningRequestMessageData;
+import se.fk.rimfrost.HandlaggningResponseMessageData;
 import se.fk.rimfrost.framework.regel.Utfall;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -9,7 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class VahService
 {
 
-   public String startProcess(VahHandlaggningRequestMessageData handlaggningRequest)
+   public String startProcess(HandlaggningRequestMessageData handlaggningRequest)
    {
       System.out.print("VahService.startProcess\n");
       System.out.printf("triggered by VahHandlaggningRequestMessageData: %s%n", handlaggningRequest.toString());
@@ -18,10 +18,10 @@ public class VahService
       return handlaggningId;
    }
 
-   public VahHandlaggningResponseMessageData informAboutDecision(String handlaggningId, Utfall utfall)
+   public HandlaggningResponseMessageData informAboutDecision(String handlaggningId, Utfall utfall)
    {
       System.out.printf("VAH application for handlaggningId %s finished with result %s !%n", handlaggningId, utfall);
-      VahHandlaggningResponseMessageData vahHandlaggningResponseMessageData = new VahHandlaggningResponseMessageData();
+      HandlaggningResponseMessageData vahHandlaggningResponseMessageData = new HandlaggningResponseMessageData();
       vahHandlaggningResponseMessageData.setHandlaggningId(handlaggningId);
       vahHandlaggningResponseMessageData.setResultat(utfall == Utfall.JA ? "GODKÄND" : "EJ GODKÄND");
       return vahHandlaggningResponseMessageData;
