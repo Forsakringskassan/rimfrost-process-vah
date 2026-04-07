@@ -2,6 +2,16 @@
 
 Changelog of rimfrost-process-vah.
 
+## 0.1.3 (2026-03-17)
+
+### Bug Fixes
+
+-  Bump process asyncapi version to 0.1.4 ([8c14e](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/8c14eea6270346a) Lars Persson)  
+-  Add support for aktivitetId ([0e63c](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/0e63c8abbd8905a) Lars Persson)  
+-  **deps**  update dependency se.fk.maven:fk-maven-quarkus-parent to v1.12.0 ([ce69f](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/ce69f3ee7e432f7) renovate[bot])  
+-  Use handlaggning-responses as return topic ([6cf28](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/6cf2829dfe51e4f) Lars Persson)  
+-  renaming handlaggning ([5586d](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/5586d44c4de803b) Ulf Slunga)  
+
 ## 0.1.2 (2026-03-04)
 
 ### Bug Fixes
