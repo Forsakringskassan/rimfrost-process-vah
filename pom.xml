@@ -89,22 +89,26 @@
       <version>1.21.4</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>se.fk.rimfrost.api.vardavhusdjur</groupId>
-      <artifactId>rimfrost-vard-av-husdjur-api-jaxrs-spec</artifactId>
-      <version>0.1.0</version>
-    </dependency>
 
-    <!-- Generated models from API -->
     <dependency>
-      <groupId>se.fk.rimfrost</groupId>
-      <artifactId>rimfrost-process-asyncapi</artifactId>
-      <version>0.1.4</version>
+      <groupId>se.fk.github.rimfrost.regel.subprocess</groupId>
+      <artifactId>rimfrost-regel-rtf-manuell-subprocess</artifactId>
+      <version>0.0.3</version>
     </dependency>
     <dependency>
-      <groupId>se.fk.rimfrost.framework.regel</groupId>
-      <artifactId>rimfrost-framework-regel-asyncapi</artifactId>
+      <groupId>se.fk.github.rimfrost.regel.subprocess</groupId>
+      <artifactId>rimfrost-regel-rtf-maskinell-subprocess</artifactId>
+      <version>0.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>se.fk.github.rimfrost.regel.subprocess</groupId>
+      <artifactId>rimfrost-regel-bekraftabeslut-subprocess</artifactId>
       <version>0.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>se.fk.rimfrost.framework.process</groupId>
+      <artifactId>rimfrost-framework-process</artifactId>
+      <version>0.0.2</version>
     </dependency>
   </dependencies>
 
@@ -140,7 +144,36 @@
 
   <build>
     <finalName>${project.artifactId}</finalName>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.build.directory}/generated-resources/bpmn</directory>
+      </resource>
+    </resources>
+
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <id>unpack-bpmn</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <includeGroupIds>se.fk.github.rimfrost</includeGroupIds>
+              <includes>**/*.bpmn</includes>
+              <outputDirectory>${project.build.directory}/generated-resources/bpmn</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
