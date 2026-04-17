@@ -85,6 +85,8 @@ public class VahContainerSmokeIT
          createTopic(rtfMaskinellResponseTopic, 1, (short) 1);
          createTopic(rtfManuellRequestTopic, 1, (short) 1);
          createTopic(rtfManuellResponseTopic, 1, (short) 1);
+         createTopic(bekraftaBeslutRequestTopic, 1, (short) 1);
+         createTopic(bekraftaBeslutResponseTopic, 1, (short) 1);
       }
       catch (Exception e)
       {
@@ -131,7 +133,7 @@ public class VahContainerSmokeIT
       String bootstrap = kafka.getBootstrapServers().replace("PLAINTEXT://", "");
       Properties props = new Properties();
       props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrap);
-      props.put(ConsumerConfig.GROUP_ID_CONFIG, "test-consumer-" + System.currentTimeMillis());
+      props.put(ConsumerConfig.GROUP_ID_CONFIG, "test-consumer-" + UUID.randomUUID());
       props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
       props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
       props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
@@ -156,7 +158,7 @@ public class VahContainerSmokeIT
          try (KafkaConsumer<String, String> consumer = createConsumer())
          {
             consumer.subscribe(Collections.singletonList(requesttopic));
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(10));
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(topicTimeout));
             if (records.isEmpty())
             {
                throw new IllegalStateException("No Kafka message received on " + requesttopic);
@@ -263,7 +265,7 @@ public class VahContainerSmokeIT
    {
       Properties props = new Properties();
       props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers());
-      props.put(ConsumerConfig.GROUP_ID_CONFIG, "test-consumer-" + System.currentTimeMillis());
+      props.put(ConsumerConfig.GROUP_ID_CONFIG, "test-consumer-" + UUID.randomUUID());
       props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
       props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
       props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
