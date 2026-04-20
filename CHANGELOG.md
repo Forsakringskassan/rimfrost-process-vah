@@ -2,6 +2,12 @@
 
 Changelog of rimfrost-process-vah.
 
+## 0.1.4 (2026-04-17)
+
+### Bug Fixes
+
+-  use bpmn files from other repos (#34) ([f0ed1](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/f0ed1e1061bb44c) NilsElveros)  
+
 ## 0.1.3 (2026-03-17)
 
 ### Bug Fixes
