@@ -2,6 +2,20 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.0.0 (2026-04-28)
+
+### Breaking changes
+
+-  release 1.0 (#36) ([b9f08](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/b9f086acb3df01c) NilsElveros)  
+
+### Features
+
+-  release 1.0 (#36) ([b9f08](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/b9f086acb3df01c) NilsElveros)  
+
+### Bug Fixes
+
+-  bump rimfrost-framework-version (#35) ([79374](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/7937474b9aee592) NilsElveros)  
+
 ## 0.1.4 (2026-04-17)
 
 ### Bug Fixes
