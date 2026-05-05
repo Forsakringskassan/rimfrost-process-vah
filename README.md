@@ -20,3 +20,14 @@ The test uses DTOs generated from OpenAPI- and AsyncAPI-specifications.
 Run tests with `./mvnw -s settings.xml clean verify`.
 
 See also: [fk-maven](https://github.com/Forsakringskassan/fk-maven).
+
+## Felhantering
+
+Processen hanterar fel från regel-subprocesserna (rtf_maskinell, rtf_manuell och bekraftabeslut). 
+Om en subprocess returnerar utfall `Error` loggas felet och processen skickar ett svar på 
+`handlaggning-responses` med `resultat: "FEL"` samt felkod `REGEL_FEL` och ett felmeddelande.
+
+Felhanteringen är implementerad i tre lager:
+- **rimfrost-process-asyncapi** – `HandlaggningResponseMessageData` innehåller ett `error`-fält med `felkod` och `felmeddelande`
+- **rimfrost-framework-process** – `ProcessService.endProcessWithError()` bygger felsvaret
+- **vah.bpmn** – processgateways dirigerar felflöden till logging och avslut med Kafka-svar
