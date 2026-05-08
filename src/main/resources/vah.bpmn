@@ -400,7 +400,7 @@ log.error(&quot;Regelfel i VAH-process f&#xF6;r handlaggningId: {}&quot;, kconte
           <drools:metaValue>!=Error</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return bekraftabeslutResult != se.fk.rimfrost.framework.regel.Utfall.Error;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return bekraftabeslutResult != se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_FA9BCC02-D6CB-45B5-903E-78A9C89E957B" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_955B8DB1-0580-49E0-B002-0B13F6F33811" name="Error">
       <bpmn2:extensionElements>
@@ -408,21 +408,21 @@ log.error(&quot;Regelfel i VAH-process f&#xF6;r handlaggningId: {}&quot;, kconte
           <drools:metaValue>Error</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return bekraftabeslutResult == se.fk.rimfrost.framework.regel.Utfall.Error;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return bekraftabeslutResult == se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_22F8CEFD-6E99-46E8-91D4-94A231ADF3F9" sourceRef="_FA3C2B1A-9324-4EE3-857B-ABCDEF123456" targetRef="_955B8DB1-0580-49E0-B002-0B13F6F33811" name="Error">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfManuellResult == se.fk.rimfrost.framework.regel.Utfall.Error;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfManuellResult == se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_E8E9950A-9AAB-47E3-9A2E-C815D5C8EA9D" sourceRef="_955B8DB1-0580-49E0-B002-0B13F6F33811" targetRef="_97277A33-A2B5-47CC-BB6E-10FBD0BCDE86" />
     <bpmn2:sequenceFlow id="_9FE420A7-4624-4BC5-B5B2-5AB4EE90A2A8" sourceRef="_E6D8BD11-DA97-4F9C-8FE9-4D1F62B927C4" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" />
     <bpmn2:sequenceFlow id="_7F2C0400-CDF0-4F89-9CAF-6FD936A5E114" sourceRef="_FA3C2B1A-9324-4EE3-857B-ABCDEF123456" targetRef="_E6D8BD11-DA97-4F9C-8FE9-4D1F62B927C4" name="!=Error">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfManuellResult != se.fk.rimfrost.framework.regel.Utfall.Error;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfManuellResult != se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_91437FF9-D190-4E95-AF8C-8ED067851EEB" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_E6D8BD11-DA97-4F9C-8FE9-4D1F62B927C4" name="OK">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfMaskinellResult != se.fk.rimfrost.framework.regel.Utfall.UTREDNING &amp;&amp; rtfMaskinellResult != se.fk.rimfrost.framework.regel.Utfall.Error;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfMaskinellResult != se.fk.rimfrost.framework.regel.Utfall.UTREDNING &amp;&amp; rtfMaskinellResult != se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_8785BBA9-A39E-4FD3-BF99-49C2C7D70FA5" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_955B8DB1-0580-49E0-B002-0B13F6F33811" name="Error">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfMaskinellResult == se.fk.rimfrost.framework.regel.Utfall.Error;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfMaskinellResult == se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="_7C41B1E8-4859-4C83-A3B9-A6E170B61C90">
