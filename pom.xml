@@ -110,11 +110,6 @@
       <artifactId>rimfrost-framework-process</artifactId>
       <version>1.4.1</version>
     </dependency>
-    <dependency>
-      <groupId>se.fk.rimfrost.framework.regel</groupId>
-      <artifactId>rimfrost-framework-regel-asyncapi</artifactId>
-      <version>1.0.0</version>
-    </dependency>
   </dependencies>
 
   <repositories>
