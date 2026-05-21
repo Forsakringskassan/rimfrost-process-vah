@@ -132,41 +132,11 @@
       <bpmn2:outgoing>_ACC3C3B4-3F27-466D-B1F1-5507272B57A7</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:exclusiveGateway id="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" gatewayDirection="Converging">
-      <bpmn2:incoming>_SF_SET_ERROR_MASKINELL_TO_CONV</bpmn2:incoming>
-      <bpmn2:incoming>_SF_SET_ERROR_MANUELL_TO_CONV</bpmn2:incoming>
-      <bpmn2:incoming>_SF_SET_ERROR_BEKRAFTABESLUT_TO_CONV</bpmn2:incoming>
+      <bpmn2:incoming>_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7</bpmn2:incoming>
+      <bpmn2:incoming>_0A50FD08-9A24-40F2-9D7D-352AC2F534C0</bpmn2:incoming>
+      <bpmn2:incoming>_53594BDC-48D1-44A5-B379-B0A181ADBAE8</bpmn2:incoming>
       <bpmn2:outgoing>_7775EF4A-B8B6-4FC8-A48A-AB36C728E476</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:scriptTask id="_SET_ERROR_MASKINELL" name="Sätt error maskinell" scriptFormat="http://www.java.com/java">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue>Sätt error maskinell</drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7</bpmn2:incoming>
-      <bpmn2:outgoing>_SF_SET_ERROR_MASKINELL_TO_CONV</bpmn2:outgoing>
-      <bpmn2:script>kcontext.setVariable(&quot;sharedErrorInfo&quot;, rtfMaskinellResult.getError());</bpmn2:script>
-    </bpmn2:scriptTask>
-    <bpmn2:scriptTask id="_SET_ERROR_MANUELL" name="Sätt error manuell" scriptFormat="http://www.java.com/java">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue>Sätt error manuell</drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>_0A50FD08-9A24-40F2-9D7D-352AC2F534C0</bpmn2:incoming>
-      <bpmn2:outgoing>_SF_SET_ERROR_MANUELL_TO_CONV</bpmn2:outgoing>
-      <bpmn2:script>kcontext.setVariable(&quot;sharedErrorInfo&quot;, rtfManuellResult.getError());</bpmn2:script>
-    </bpmn2:scriptTask>
-    <bpmn2:scriptTask id="_SET_ERROR_BEKRAFTABESLUT" name="Sätt error bekräfta beslut" scriptFormat="http://www.java.com/java">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue>Sätt error bekräfta beslut</drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>_53594BDC-48D1-44A5-B379-B0A181ADBAE8</bpmn2:incoming>
-      <bpmn2:outgoing>_SF_SET_ERROR_BEKRAFTABESLUT_TO_CONV</bpmn2:outgoing>
-      <bpmn2:script>kcontext.setVariable(&quot;sharedErrorInfo&quot;, bekraftabeslutResult.getError());</bpmn2:script>
-    </bpmn2:scriptTask>
     <bpmn2:serviceTask id="_SVC_END_ERROR" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.rimfrost.framework.process.ProcessService" drools:serviceoperation="endProcessWithError" name="Avsluta process med error" implementation="Java" operationRef="_SVC_END_ERROR_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
@@ -260,86 +230,11 @@
         <bpmn2:targetRef>handlaggningId</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
-    <bpmn2:callActivity id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" drools:independent="false" drools:waitForCompletion="true" name="Bekräfta beslut" calledElement="bekraftabeslut">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue>Bekräfta beslut</drools:metaValue>
-        </drools:metaData>
-        <drools:metaData name="customAbortParent">
-          <drools:metaValue>false</drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>_BC111E98-FFF4-4E08-965C-93F4D250AFB2</bpmn2:incoming>
-      <bpmn2:outgoing>_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4</bpmn2:outgoing>
-      <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputXItem" name="handlaggningId" />
-        <bpmn2:dataInput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX" drools:dtype="String" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputXItem" name="aktivitetId" />
-        <bpmn2:dataOutput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputXItem" name="result" />
-        <bpmn2:inputSet>
-          <bpmn2:dataInputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX</bpmn2:dataInputRefs>
-        </bpmn2:inputSet>
-        <bpmn2:outputSet>
-          <bpmn2:dataOutputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX</bpmn2:dataOutputRefs>
-        </bpmn2:outputSet>
-      </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation>
-        <bpmn2:sourceRef>handlaggningId</bpmn2:sourceRef>
-        <bpmn2:targetRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation>
-        <bpmn2:targetRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX</bpmn2:targetRef>
-        <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression">8cde2355-aea5-4951-916f-08319b2f1e99</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation>
-        <bpmn2:sourceRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX</bpmn2:sourceRef>
-        <bpmn2:targetRef>bekraftabeslutResult</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
-    </bpmn2:callActivity>
-    <bpmn2:callActivity id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" drools:independent="false" drools:waitForCompletion="true" name="Rätt till försäkring manuell kontroll" calledElement="rtf_manuell">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue>Rätt till försäkring manuell kontroll</drools:metaValue>
-        </drools:metaData>
-        <drools:metaData name="customAbortParent">
-          <drools:metaValue>false</drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>_4BDD402F-000B-4D37-9C25-AE7A12A25E88</bpmn2:incoming>
-      <bpmn2:outgoing>_5977AE4A-6A59-4D54-9419-A2E17995904D</bpmn2:outgoing>
-      <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputXItem" name="handlaggningId" />
-        <bpmn2:dataInput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX" drools:dtype="String" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputXItem" name="aktivitetId" />
-        <bpmn2:dataOutput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputXItem" name="result" />
-        <bpmn2:inputSet>
-          <bpmn2:dataInputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX</bpmn2:dataInputRefs>
-        </bpmn2:inputSet>
-        <bpmn2:outputSet>
-          <bpmn2:dataOutputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX</bpmn2:dataOutputRefs>
-        </bpmn2:outputSet>
-      </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation>
-        <bpmn2:sourceRef>handlaggningId</bpmn2:sourceRef>
-        <bpmn2:targetRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation>
-        <bpmn2:targetRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX</bpmn2:targetRef>
-        <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression">c58dd666-b3c1-4a30-91b8-76c3495668c6</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation>
-        <bpmn2:sourceRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX</bpmn2:sourceRef>
-        <bpmn2:targetRef>rtfManuellResult</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
-    </bpmn2:callActivity>
     <bpmn2:callActivity id="_5DAB8314-5034-4D58-B2AA-8CF62303409F" drools:independent="false" drools:waitForCompletion="true" name="Rätt till försäkring maskinell kontroll" calledElement="rtf_maskinell">
       <bpmn2:extensionElements>
+        <drools:onExit-script scriptFormat="http://www.java.com/java">
+          <drools:script>if (rtfMaskinellResult != null &amp;&amp; rtfMaskinellResult.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, rtfMaskinellResult.getError()); }</drools:script>
+        </drools:onExit-script>
         <drools:metaData name="elementname">
           <drools:metaValue>Rätt till försäkring maskinell kontroll</drools:metaValue>
         </drools:metaData>
@@ -377,10 +272,94 @@
         <bpmn2:targetRef>rtfMaskinellResult</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:callActivity>
+    <bpmn2:callActivity id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" drools:independent="false" drools:waitForCompletion="true" name="Rätt till försäkring manuell kontroll" calledElement="rtf_manuell">
+      <bpmn2:extensionElements>
+        <drools:onExit-script scriptFormat="http://www.java.com/java">
+          <drools:script>if (rtfManuellResult != null &amp;&amp; rtfManuellResult.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, rtfManuellResult.getError()); }</drools:script>
+        </drools:onExit-script>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Rätt till försäkring manuell kontroll</drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="customAbortParent">
+          <drools:metaValue>false</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_4BDD402F-000B-4D37-9C25-AE7A12A25E88</bpmn2:incoming>
+      <bpmn2:outgoing>_5977AE4A-6A59-4D54-9419-A2E17995904D</bpmn2:outgoing>
+      <bpmn2:ioSpecification>
+        <bpmn2:dataInput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputXItem" name="handlaggningId" />
+        <bpmn2:dataInput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX" drools:dtype="String" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputXItem" name="aktivitetId" />
+        <bpmn2:dataOutput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputXItem" name="result" />
+        <bpmn2:inputSet>
+          <bpmn2:dataInputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet>
+          <bpmn2:dataOutputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:sourceRef>handlaggningId</bpmn2:sourceRef>
+        <bpmn2:targetRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:targetRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX</bpmn2:targetRef>
+        <bpmn2:assignment>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">c58dd666-b3c1-4a30-91b8-76c3495668c6</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>rtfManuellResult</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:callActivity>
+    <bpmn2:callActivity id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" drools:independent="false" drools:waitForCompletion="true" name="Bekräfta beslut" calledElement="bekraftabeslut">
+      <bpmn2:extensionElements>
+        <drools:onExit-script scriptFormat="http://www.java.com/java">
+          <drools:script>if (bekraftabeslutResult != null &amp;&amp; bekraftabeslutResult.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, bekraftabeslutResult.getError()); }</drools:script>
+        </drools:onExit-script>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Bekräfta beslut</drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="customAbortParent">
+          <drools:metaValue>false</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_BC111E98-FFF4-4E08-965C-93F4D250AFB2</bpmn2:incoming>
+      <bpmn2:outgoing>_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4</bpmn2:outgoing>
+      <bpmn2:ioSpecification>
+        <bpmn2:dataInput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputXItem" name="handlaggningId" />
+        <bpmn2:dataInput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX" drools:dtype="String" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputXItem" name="aktivitetId" />
+        <bpmn2:dataOutput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputXItem" name="result" />
+        <bpmn2:inputSet>
+          <bpmn2:dataInputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet>
+          <bpmn2:dataOutputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:sourceRef>handlaggningId</bpmn2:sourceRef>
+        <bpmn2:targetRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation>
+        <bpmn2:targetRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX</bpmn2:targetRef>
+        <bpmn2:assignment>
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression">8cde2355-aea5-4951-916f-08319b2f1e99</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression">_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>bekraftabeslutResult</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F" sourceRef="_7C020ABA-9324-4EE3-857B-401B3C43FD84" targetRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF" />
     <bpmn2:sequenceFlow id="_CAC39F18-D56B-417C-951C-0B1457304806" sourceRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF" targetRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" />
     <bpmn2:sequenceFlow id="_1BE34C21-17A0-4EBF-8ABA-31114FB5ACD5" sourceRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" targetRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" />
-    <bpmn2:sequenceFlow id="_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7" name="Error" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_SET_ERROR_MASKINELL">
+    <bpmn2:sequenceFlow id="_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7" name="Error" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
           <drools:metaValue>Error</drools:metaValue>
@@ -407,15 +386,20 @@
     <bpmn2:sequenceFlow id="_E2277266-EAFA-4779-9B35-A9C3D31B114B" sourceRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" targetRef="_48636A54-33E2-46E4-8736-787AB637276C" />
     <bpmn2:sequenceFlow id="_BC111E98-FFF4-4E08-965C-93F4D250AFB2" sourceRef="_48636A54-33E2-46E4-8736-787AB637276C" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" />
     <bpmn2:sequenceFlow id="_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4" sourceRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" targetRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" />
-    <bpmn2:sequenceFlow id="_152B7D50-C575-4C6E-AB02-90BA1261CAA0" sourceRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" targetRef="_6D6EDF56-89D6-4DBB-9237-365C2737DD47" />
-    <bpmn2:sequenceFlow id="_SF_SET_ERROR_MASKINELL_TO_CONV" sourceRef="_SET_ERROR_MASKINELL" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" />
-    <bpmn2:sequenceFlow id="_SF_SET_ERROR_MANUELL_TO_CONV" sourceRef="_SET_ERROR_MANUELL" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" />
+    <bpmn2:sequenceFlow id="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" name="!=Error" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue>!=Error</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_7775EF4A-B8B6-4FC8-A48A-AB36C728E476" sourceRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" targetRef="_SVC_END_ERROR" />
     <bpmn2:sequenceFlow id="_SF_ERROR_TO_END" sourceRef="_SVC_END_ERROR" targetRef="_0D725828-1220-4A54-AD64-88EF2A26F66C" />
-    <bpmn2:sequenceFlow id="_SF_SET_ERROR_BEKRAFTABESLUT_TO_CONV" sourceRef="_SET_ERROR_BEKRAFTABESLUT" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" />
-    <bpmn2:sequenceFlow id="_53594BDC-48D1-44A5-B379-B0A181ADBAE8" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_SET_ERROR_BEKRAFTABESLUT" name="Error"><bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return bekraftabeslutResult.getError() != null;</bpmn2:conditionExpression></bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" sourceRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" targetRef="_SET_ERROR_MANUELL" name="Error"><bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfManuellResult.getError() != null;</bpmn2:conditionExpression></bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" name="!=Error" />
+    <bpmn2:sequenceFlow id="_152B7D50-C575-4C6E-AB02-90BA1261CAA0" sourceRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" targetRef="_6D6EDF56-89D6-4DBB-9237-365C2737DD47" />
+    <bpmn2:sequenceFlow id="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" sourceRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" name="Error"><bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfManuellResult.getError() != null;</bpmn2:conditionExpression></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_53594BDC-48D1-44A5-B379-B0A181ADBAE8" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" name="Error">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return bekraftabeslutResult.getError() != null;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="_7C41B1E8-4859-4C83-A3B9-A6E170B61C90">
     <bpmndi:BPMNPlane bpmnElement="vah" id="_4AADC7DF-1AC9-4490-8436-939BAC487133">
@@ -431,17 +415,11 @@
       <bpmndi:BPMNShape id="shape__302D0FF4" bpmnElement="_302D0FF4-43EA-4431-B4E5-8D5AD6310711">
         <dc:Bounds height="56" width="56" x="680" y="425" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="shape__SET_ERROR_MASKINELL" bpmnElement="_SET_ERROR_MASKINELL">
-        <dc:Bounds height="100" width="140" x="1180" y="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__C29B7634" bpmnElement="_C29B7634-3A7A-4606-9B1C-4A3424F29D34">
         <dc:Bounds height="101" width="153" x="800" y="220" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__BF911926" bpmnElement="_BF911926-5ADB-4B04-A41E-645CED3F8054">
         <dc:Bounds height="56" width="56" x="1040" y="240" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="shape__SET_ERROR_MANUELL" bpmnElement="_SET_ERROR_MANUELL">
-        <dc:Bounds height="80" width="140" x="1180" y="220" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__48636A54" bpmnElement="_48636A54-33E2-46E4-8736-787AB637276C">
         <dc:Bounds height="56" width="56" x="860" y="420" />
@@ -450,25 +428,22 @@
         <dc:Bounds height="100" width="140" x="820" y="580" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__E12DBEC7" bpmnElement="_E12DBEC7-A835-4217-A8B8-2017638A505E">
-        <dc:Bounds height="56" width="56" x="1120" y="600" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="shape__SET_ERROR_BEKRAFTABESLUT" bpmnElement="_SET_ERROR_BEKRAFTABESLUT">
-        <dc:Bounds height="80" width="140" x="1340" y="580" />
+        <dc:Bounds height="56" width="56" x="1160" y="600" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__9D646AA4" bpmnElement="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722">
-        <dc:Bounds height="56" width="56" x="1380" y="240" />
+        <dc:Bounds height="56" width="56" x="1160" y="425" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__SVC_END_ERROR" bpmnElement="_SVC_END_ERROR">
-        <dc:Bounds height="100" width="160" x="1500" y="220" />
+        <dc:Bounds height="100" width="160" x="1280" y="400" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__0D725828" bpmnElement="_0D725828-1220-4A54-AD64-88EF2A26F66C">
-        <dc:Bounds height="56" width="56" x="1720" y="240" />
+        <dc:Bounds height="56" width="56" x="1500" y="423" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__9BF4B5C5" bpmnElement="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E">
-        <dc:Bounds height="100" width="160" x="1500" y="720" />
+        <dc:Bounds height="102" width="154" x="1280" y="680" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__6D6EDF56" bpmnElement="_6D6EDF56-89D6-4DBB-9237-365C2737DD47">
-        <dc:Bounds height="56" width="56" x="1720" y="740" />
+        <dc:Bounds height="56" width="56" x="1500" y="700" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="edge_BD63EDE1" bpmnElement="_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F">
         <di:waypoint x="128" y="448" />
@@ -484,8 +459,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_AC69AC27" bpmnElement="_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7">
         <di:waypoint x="708" y="425" />
-        <di:waypoint x="710" y="130" />
-        <di:waypoint x="1180" y="130" />
+        <di:waypoint x="708" y="130" />
+        <di:waypoint x="1188" y="130" />
+        <di:waypoint x="1188" y="425" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_4BDD402F" bpmnElement="_4BDD402F-000B-4D37-9C25-AE7A12A25E88">
         <di:waypoint x="708" y="425" />
@@ -511,45 +487,34 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_A464FE0F" bpmnElement="_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4">
         <di:waypoint x="889.5" y="630.5" />
-        <di:waypoint x="1120" y="628" />
+        <di:waypoint x="1160" y="628" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_ACC3C3B4" bpmnElement="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7">
+        <di:waypoint x="1188" y="656" />
+        <di:waypoint x="1190" y="730" />
+        <di:waypoint x="1280" y="731" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_152B7D50" bpmnElement="_152B7D50-C575-4C6E-AB02-90BA1261CAA0">
-        <di:waypoint x="1660" y="770" />
-        <di:waypoint x="1720" y="768" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_SF_SET_ERROR_MASKINELL_TO_CONV" bpmnElement="_SF_SET_ERROR_MASKINELL_TO_CONV">
-        <di:waypoint x="1320" y="130" />
-        <di:waypoint x="1410" y="130" />
-        <di:waypoint x="1408" y="240" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_SF_SET_ERROR_MANUELL_TO_CONV" bpmnElement="_SF_SET_ERROR_MANUELL_TO_CONV">
-        <di:waypoint x="1320" y="260" />
-        <di:waypoint x="1408" y="268" />
+        <di:waypoint x="1434" y="731" />
+        <di:waypoint x="1500" y="728" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_7775EF4A" bpmnElement="_7775EF4A-B8B6-4FC8-A48A-AB36C728E476">
-        <di:waypoint x="1436" y="268" />
-        <di:waypoint x="1500" y="270" />
+        <di:waypoint x="1216" y="453" />
+        <di:waypoint x="1280" y="450" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_SF_ERROR_TO_END" bpmnElement="_SF_ERROR_TO_END">
-        <di:waypoint x="1660" y="270" />
-        <di:waypoint x="1720" y="268" />
+        <di:waypoint x="1440" y="450" />
+        <di:waypoint x="1500" y="451" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_SF_SET_ERROR_BEKRAFTABESLUT_TO_CONV" bpmnElement="_SF_SET_ERROR_BEKRAFTABESLUT_TO_CONV" sourceElement="shape__SET_ERROR_BEKRAFTABESLUT" targetElement="shape__9D646AA4">
-        <di:waypoint x="1410" y="580" />
-        <di:waypoint x="1408" y="296" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_53594BDC" bpmnElement="_53594BDC-48D1-44A5-B379-B0A181ADBAE8" sourceElement="shape__E12DBEC7" targetElement="shape__SET_ERROR_BEKRAFTABESLUT">
-        <di:waypoint x="1176" y="628" />
-        <di:waypoint x="1340" y="620" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_0A50FD08" bpmnElement="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" sourceElement="shape__BF911926" targetElement="shape__SET_ERROR_MANUELL">
+      <bpmndi:BPMNEdge id="edge_0A50FD08" bpmnElement="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" sourceElement="shape__BF911926" targetElement="shape__9D646AA4">
         <di:waypoint x="1096" y="268" />
-        <di:waypoint x="1180" y="260" />
+        <di:waypoint x="1190" y="270" />
+        <di:waypoint x="1188" y="425" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_ACC3C3B4" bpmnElement="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" sourceElement="shape__E12DBEC7" targetElement="shape__9BF4B5C5">
-        <di:waypoint x="1148" y="656" />
-        <di:waypoint x="1150" y="770" />
-        <di:waypoint x="1500" y="770" />
+      <bpmndi:BPMNEdge id="edge_53594BDC" bpmnElement="_53594BDC-48D1-44A5-B379-B0A181ADBAE8" sourceElement="shape__E12DBEC7" targetElement="shape__9D646AA4">
+        <di:waypoint x="1188" y="600" />
+        <di:waypoint x="1190" y="560" />
+        <di:waypoint x="1188" y="481" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
