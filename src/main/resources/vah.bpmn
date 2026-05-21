@@ -155,16 +155,21 @@
       <bpmn2:incoming>_5977AE4A-6A59-4D54-9419-A2E17995904D</bpmn2:incoming>
       <bpmn2:outgoing>_0A50FD08-9A24-40F2-9D7D-352AC2F534C0</bpmn2:outgoing>
       <bpmn2:outgoing>_E2277266-EAFA-4779-9B35-A9C3D31B114B</bpmn2:outgoing>
+      <bpmn2:outgoing>_7639D0D0-D7ED-4858-83DA-389868D01ECB</bpmn2:outgoing>
+      <bpmn2:outgoing>_22377F9D-CD2A-42EE-A9E8-51F919081EBB</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:exclusiveGateway id="_E12DBEC7-A835-4217-A8B8-2017638A505E" drools:dg="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" gatewayDirection="Diverging" default="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7">
       <bpmn2:incoming>_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4</bpmn2:incoming>
       <bpmn2:outgoing>_53594BDC-48D1-44A5-B379-B0A181ADBAE8</bpmn2:outgoing>
       <bpmn2:outgoing>_ACC3C3B4-3F27-466D-B1F1-5507272B57A7</bpmn2:outgoing>
+      <bpmn2:outgoing>_4D3326DB-594D-407F-91A3-5E97B86BD1CB</bpmn2:outgoing>
+      <bpmn2:outgoing>_CFAFA424-5A1E-46C5-A493-D4652FCE8AF8</bpmn2:outgoing>
+      <bpmn2:outgoing>_D4A9607C-8FD8-4E3D-8A72-5ECF9BBABCC1</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:serviceTask id="_SVC_END_ERROR_MASKINELL" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.rimfrost.framework.process.ProcessService" drools:serviceoperation="endProcessWithError" name="Avsluta process med error maskinell" implementation="Java" operationRef="_SVC_END_ERROR_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>Avsluta process med error maskinell</drools:metaValue>
+          <drools:metaValue>Avsluta process med error (maskinell)</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7</bpmn2:incoming>
@@ -197,10 +202,12 @@
     <bpmn2:serviceTask id="_SVC_END_ERROR_MANUELL" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.rimfrost.framework.process.ProcessService" drools:serviceoperation="endProcessWithError" name="Avsluta process med error manuell" implementation="Java" operationRef="_SVC_END_ERROR_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>Avsluta process med error manuell</drools:metaValue>
+          <drools:metaValue>Avsluta process med error (manuell)</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_0A50FD08-9A24-40F2-9D7D-352AC2F534C0</bpmn2:incoming>
+      <bpmn2:incoming>_7639D0D0-D7ED-4858-83DA-389868D01ECB</bpmn2:incoming>
+      <bpmn2:incoming>_22377F9D-CD2A-42EE-A9E8-51F919081EBB</bpmn2:incoming>
       <bpmn2:outgoing>_SF_ERROR_MANUELL_TO_END</bpmn2:outgoing>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_SVC_END_ERROR_MANUELL_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_MANUELL_handlaggningIdInputXItem" name="handlaggningId" />
@@ -227,10 +234,10 @@
         <bpmn2:targetRef>vahHandlaggningResponseMessageData</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
-    <bpmn2:serviceTask id="_SVC_END_ERROR_BEKRAFTABESLUT" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.rimfrost.framework.process.ProcessService" drools:serviceoperation="endProcessWithError" name="Avsluta process med error bekraftabeslut" implementation="Java" operationRef="_SVC_END_ERROR_ServiceOperation">
+    <bpmn2:serviceTask id="_SVC_END_ERROR_BEKRAFTABESLUT" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.rimfrost.framework.process.ProcessService" drools:serviceoperation="endProcessWithError" name="Avsluta process med error bekräfta beslut" implementation="Java" operationRef="_SVC_END_ERROR_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue>Avsluta process med error bekraftabeslut</drools:metaValue>
+          <drools:metaValue>Avsluta process med error (bekräfta beslut)</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_53594BDC-48D1-44A5-B379-B0A181ADBAE8</bpmn2:incoming>
@@ -267,6 +274,9 @@
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_ACC3C3B4-3F27-466D-B1F1-5507272B57A7</bpmn2:incoming>
+      <bpmn2:incoming>_4D3326DB-594D-407F-91A3-5E97B86BD1CB</bpmn2:incoming>
+      <bpmn2:incoming>_CFAFA424-5A1E-46C5-A493-D4652FCE8AF8</bpmn2:incoming>
+      <bpmn2:incoming>_D4A9607C-8FD8-4E3D-8A72-5ECF9BBABCC1</bpmn2:incoming>
       <bpmn2:outgoing>_152B7D50-C575-4C6E-AB02-90BA1261CAA0</bpmn2:outgoing>
       <bpmn2:ioSpecification>
         <bpmn2:dataInput id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputXItem" name="handlaggningId" />
@@ -466,20 +476,14 @@
     <bpmn2:sequenceFlow id="_5977AE4A-6A59-4D54-9419-A2E17995904D" sourceRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" targetRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" />
     <bpmn2:sequenceFlow id="_E2277266-EAFA-4779-9B35-A9C3D31B114B" sourceRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" targetRef="_48636A54-33E2-46E4-8736-787AB637276C" />
     <bpmn2:sequenceFlow id="_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4" sourceRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" targetRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" />
-    <bpmn2:sequenceFlow id="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" name="!=Error" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue>!=Error</drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-    </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_152B7D50-C575-4C6E-AB02-90BA1261CAA0" sourceRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" targetRef="_6D6EDF56-89D6-4DBB-9237-365C2737DD47" />
     <bpmn2:sequenceFlow id="_SF_ERROR_MASKINELL_TO_END" sourceRef="_SVC_END_ERROR_MASKINELL" targetRef="_END_ERROR_MASKINELL" />
     <bpmn2:sequenceFlow id="_SF_ERROR_MANUELL_TO_END" sourceRef="_SVC_END_ERROR_MANUELL" targetRef="_END_ERROR_MANUELL" />
     <bpmn2:sequenceFlow id="_SF_ERROR_BEKRAFTABESLUT_TO_END" sourceRef="_SVC_END_ERROR_BEKRAFTABESLUT" targetRef="_END_ERROR_BEKRAFTABESLUT" />
     <bpmn2:sequenceFlow id="_BC111E98-FFF4-4E08-965C-93F4D250AFB2" sourceRef="_48636A54-33E2-46E4-8736-787AB637276C" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" />
-    <bpmn2:sequenceFlow id="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" sourceRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" targetRef="_SVC_END_ERROR_MANUELL" name="Error"><bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfManuellResult.getError() != null;</bpmn2:conditionExpression></bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_53594BDC-48D1-44A5-B379-B0A181ADBAE8" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_SVC_END_ERROR_BEKRAFTABESLUT" name="Error"><bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return bekraftabeslutResult.getError() != null;</bpmn2:conditionExpression></bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" name="!=Error" />
+    <bpmn2:sequenceFlow id="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" sourceRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" targetRef="_SVC_END_ERROR_MANUELL" name="Error"><bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfManuellResult.getError() != null;</bpmn2:conditionExpression></bpmn2:sequenceFlow>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="_7C41B1E8-4859-4C83-A3B9-A6E170B61C90">
     <bpmndi:BPMNPlane bpmnElement="vah" id="_4AADC7DF-1AC9-4490-8436-939BAC487133">
@@ -496,40 +500,40 @@
         <dc:Bounds height="56" width="56" x="680" y="425" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__SVC_END_ERROR_MASKINELL" bpmnElement="_SVC_END_ERROR_MASKINELL">
-        <dc:Bounds height="100" width="160" x="1300" y="80" />
+        <dc:Bounds height="100" width="180" x="1300" y="100" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__END_ERROR_MASKINELL" bpmnElement="_END_ERROR_MASKINELL">
-        <dc:Bounds height="56" width="56" x="1560" y="100" />
+        <dc:Bounds height="56" width="56" x="1560" y="120" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__C29B7634" bpmnElement="_C29B7634-3A7A-4606-9B1C-4A3424F29D34">
-        <dc:Bounds height="101" width="153" x="800" y="220" />
+        <dc:Bounds height="100" width="160" x="820" y="220" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__BF911926" bpmnElement="_BF911926-5ADB-4B04-A41E-645CED3F8054">
-        <dc:Bounds height="56" width="56" x="1020" y="243" />
+        <dc:Bounds height="56" width="56" x="1080" y="240" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__SVC_END_ERROR_MANUELL" bpmnElement="_SVC_END_ERROR_MANUELL">
-        <dc:Bounds height="100" width="160" x="1300" y="220" />
+        <dc:Bounds height="100" width="180" x="1300" y="220" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__END_ERROR_MANUELL" bpmnElement="_END_ERROR_MANUELL">
         <dc:Bounds height="56" width="56" x="1560" y="240" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__48636A54" bpmnElement="_48636A54-33E2-46E4-8736-787AB637276C">
-        <dc:Bounds height="56" width="56" x="840" y="420" />
+        <dc:Bounds height="56" width="56" x="860" y="420" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__297C75F8" bpmnElement="_297C75F8-77DE-4FD5-8F2A-39601A7621D2">
-        <dc:Bounds height="101" width="153" x="780" y="580" />
+        <dc:Bounds height="100" width="140" x="820" y="580" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__E12DBEC7" bpmnElement="_E12DBEC7-A835-4217-A8B8-2017638A505E">
-        <dc:Bounds height="56" width="56" x="1160" y="600" />
+        <dc:Bounds height="56" width="56" x="1080" y="600" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__SVC_END_ERROR_BEKRAFTABESLUT" bpmnElement="_SVC_END_ERROR_BEKRAFTABESLUT">
-        <dc:Bounds height="100" width="160" x="1300" y="400" />
+        <dc:Bounds height="100" width="180" x="1300" y="420" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__END_ERROR_BEKRAFTABESLUT" bpmnElement="_END_ERROR_BEKRAFTABESLUT">
-        <dc:Bounds height="56" width="56" x="1560" y="420" />
+        <dc:Bounds height="56" width="56" x="1560" y="440" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__9BF4B5C5" bpmnElement="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E">
-        <dc:Bounds height="102" width="154" x="1300" y="580" />
+        <dc:Bounds height="100" width="180" x="1300" y="580" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__6D6EDF56" bpmnElement="_6D6EDF56-89D6-4DBB-9237-365C2737DD47">
         <dc:Bounds height="56" width="56" x="1560" y="600" />
@@ -548,65 +552,64 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_AC69AC27" bpmnElement="_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7">
         <di:waypoint x="708" y="425" />
-        <di:waypoint x="708" y="130" />
-        <di:waypoint x="1300" y="130" />
+        <di:waypoint x="710" y="150" />
+        <di:waypoint x="1300" y="150" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_SF_ERROR_MASKINELL_TO_END" bpmnElement="_SF_ERROR_MASKINELL_TO_END">
-        <di:waypoint x="1460" y="130" />
-        <di:waypoint x="1560" y="128" />
+        <di:waypoint x="1480" y="150" />
+        <di:waypoint x="1560" y="148" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_4BDD402F" bpmnElement="_4BDD402F-000B-4D37-9C25-AE7A12A25E88">
         <di:waypoint x="708" y="425" />
         <di:waypoint x="708" y="271" />
-        <di:waypoint x="800" y="271" />
+        <di:waypoint x="820" y="270.5" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_331439CA" bpmnElement="_331439CA-81B3-42E6-B26F-D74D6C3529B1">
         <di:waypoint x="736" y="453" />
-        <di:waypoint x="840" y="448" />
+        <di:waypoint x="860" y="448" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_5977AE4A" bpmnElement="_5977AE4A-6A59-4D54-9419-A2E17995904D">
-        <di:waypoint x="876" y="271" />
-        <di:waypoint x="1020" y="271" />
+        <di:waypoint x="899.5" y="270.5" />
+        <di:waypoint x="1080" y="268" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_SF_ERROR_MANUELL_TO_END" bpmnElement="_SF_ERROR_MANUELL_TO_END">
-        <di:waypoint x="1460" y="270" />
+        <di:waypoint x="1480" y="270" />
         <di:waypoint x="1560" y="268" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_E2277266" bpmnElement="_E2277266-EAFA-4779-9B35-A9C3D31B114B">
-        <di:waypoint x="1048" y="299" />
-        <di:waypoint x="1048" y="453" />
-        <di:waypoint x="840" y="448" />
+        <di:waypoint x="1108" y="296" />
+        <di:waypoint x="1110" y="450" />
+        <di:waypoint x="860" y="448" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_A464FE0F" bpmnElement="_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4">
-        <di:waypoint x="856" y="631" />
-        <di:waypoint x="1160" y="628" />
+        <di:waypoint x="889.5" y="630.5" />
+        <di:waypoint x="1080" y="628" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_SF_ERROR_BEKRAFTABESLUT_TO_END" bpmnElement="_SF_ERROR_BEKRAFTABESLUT_TO_END">
-        <di:waypoint x="1460" y="450" />
-        <di:waypoint x="1560" y="448" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_ACC3C3B4" bpmnElement="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7">
-        <di:waypoint x="1188" y="628" />
-        <di:waypoint x="1188" y="631" />
-        <di:waypoint x="1240" y="630" />
-        <di:waypoint x="1300" y="631" />
+        <di:waypoint x="1480" y="470" />
+        <di:waypoint x="1560" y="468" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_152B7D50" bpmnElement="_152B7D50-C575-4C6E-AB02-90BA1261CAA0">
-        <di:waypoint x="1454" y="631" />
+        <di:waypoint x="1480" y="630" />
         <di:waypoint x="1560" y="628" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_BC111E98" bpmnElement="_BC111E98-FFF4-4E08-965C-93F4D250AFB2" sourceElement="shape__48636A54" targetElement="shape__297C75F8">
-        <di:waypoint x="868" y="476" />
-        <di:waypoint x="856.5" y="580" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_0A50FD08" bpmnElement="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" sourceElement="shape__BF911926" targetElement="shape__SVC_END_ERROR_MANUELL">
-        <di:waypoint x="1076" y="271" />
-        <di:waypoint x="1300" y="270" />
+        <di:waypoint x="888" y="476" />
+        <di:waypoint x="890" y="580" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_53594BDC" bpmnElement="_53594BDC-48D1-44A5-B379-B0A181ADBAE8" sourceElement="shape__E12DBEC7" targetElement="shape__SVC_END_ERROR_BEKRAFTABESLUT">
-        <di:waypoint x="1188" y="600" />
-        <di:waypoint x="1190" y="450" />
-        <di:waypoint x="1300" y="450" />
+        <di:waypoint x="1108" y="600" />
+        <di:waypoint x="1110" y="470" />
+        <di:waypoint x="1300" y="470" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_ACC3C3B4" bpmnElement="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" sourceElement="shape__E12DBEC7" targetElement="shape__9BF4B5C5">
+        <di:waypoint x="1108" y="628" />
+        <di:waypoint x="1300" y="630" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_0A50FD08" bpmnElement="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" sourceElement="shape__BF911926" targetElement="shape__SVC_END_ERROR_MANUELL">
+        <di:waypoint x="1136" y="268" />
+        <di:waypoint x="1150" y="270" />
+        <di:waypoint x="1300" y="270" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
