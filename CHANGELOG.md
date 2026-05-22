@@ -2,6 +2,62 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.1.0 (2026-05-22)
+
+### Features
+
+-  **FKPOC-635**  add error handling gateways to vah process ([ec88a](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/ec88a7dbf0da78c) Jorgen Lindstrom)  
+
+### Bug Fixes
+
+-  **deps**  update dependency se.fk.rimfrost.framework.process:rimfrost-framework-process to v1.1.0 ([54ce8](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/54ce8eb20fa5a82) renovate[bot])  
+
+### Dependency updates
+
+- update dependency org.apache.maven.plugins:maven-dependency-plugin to v3.10.0 ([c95eb](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/c95eb3d61787b61) renovate[bot])  
+### Other changes
+
+**refactor/FKPOC-774: replace error script tasks with onExit scripts on call activities**
+
+
+[e7215](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/e7215e685cd8c9c) Jorgen Lindstrom *2026-05-21 13:50:16*
+
+**feat/FKPOC-774: refactor VAH process error handling to use RegelErrorInformation via sharedErrorInfo variable**
+
+
+[6b3b7](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/6b3b7e889fb1aed) Jorgen Lindstrom *2026-05-21 11:30:32*
+
+**fix/FKPOC-774: Clean up diagram layout in visual editor**
+
+
+[69311](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/69311c3dfab63c2) Jorgen Lindstrom *2026-05-21 08:07:21*
+
+**chore/FKPOC-774: remove unused rimfrost-framework-regel-asyncapi dependency**
+
+
+[c66aa](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/c66aad9ec04e90d) Jorgen Lindstrom *2026-05-20 08:56:07*
+
+**feat/FKPOC-774: update vah.bpmn to use RegelProcessResult and call endProcessWithError directly per subprocess**
+
+
+[4db39](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/4db39442e0d90ae) Jorgen Lindstrom *2026-05-20 08:28:05*
+
+**feat/FKPOC-774: update endProcess input type to RegelProcessResult in vah.bpmn**
+
+
+[f7817](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/f78174da7ea85ab) Jorgen Lindstrom *2026-05-19 09:18:08*
+
+**Merge branch 'main' of https://github.com/Forsakringskassan/rimfrost-process-vah**
+
+
+[a6a07](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/a6a075d304e3e7a) Jorgen Lindstrom *2026-05-18 07:57:42*
+
+**add extra gateway**
+
+
+[32005](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/32005a469ea126e) Jorgen Lindstrom *2026-04-28 11:28:20*
+
+
 ## 1.0.0 (2026-04-28)
 
 ### Breaking changes
