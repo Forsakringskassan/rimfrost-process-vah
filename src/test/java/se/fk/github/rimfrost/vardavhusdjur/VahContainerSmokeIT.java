@@ -26,6 +26,7 @@ import se.fk.rimfrost.SpecVersion;
 import se.fk.rimfrost.HandlaggningRequestMessageData;
 import se.fk.rimfrost.HandlaggningRequestMessagePayload;
 import se.fk.rimfrost.HandlaggningResponseMessagePayload;
+import se.fk.rimfrost.framework.regel.RegelErrorInformation;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData;
 import se.fk.rimfrost.framework.regel.RegelResponseMessagePayload;
@@ -43,6 +44,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Testcontainers
 public class VahContainerSmokeIT
@@ -128,7 +130,12 @@ public class VahContainerSmokeIT
          kafka.stop();
    }
 
-   private String readKafkaRequestMessage(String topic)
+   /**
+    * Reads the first message from {@code topic} whose {@code data.handlaggningId} matches the given value. Skips
+    * messages left over from other test runs sharing the same topics. Polls repeatedly until a match is found or the
+    * 120-second deadline expires.
+    */
+   private String readKafkaRequestMessage(String topic, String expectedHandlaggningId)
    {
       String bootstrap = kafka.getBootstrapServers().replace("PLAINTEXT://", "");
       Properties props = new Properties();
@@ -138,50 +145,62 @@ public class VahContainerSmokeIT
       props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
       props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
+      long deadline = System.currentTimeMillis() + Duration.ofSeconds(120).toMillis();
       try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props))
       {
          System.out.printf("New kafka consumer subscribing to topic: %s%n", topic);
          consumer.subscribe(Collections.singletonList(topic));
-         ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(120));
-
-         if (records.isEmpty())
+         while (System.currentTimeMillis() < deadline)
          {
-            throw new IllegalStateException("No Kafka message received on topic " + topic);
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(5));
+            for (var record : records)
+            {
+               if (record.value().contains(expectedHandlaggningId))
+               {
+                  return record.value();
+               }
+            }
          }
-         return records.iterator().next().value();
+         throw new IllegalStateException(
+               "No Kafka message for handlaggningId " + expectedHandlaggningId + " received on topic " + topic);
       }
    }
 
-   private CompletableFuture<Void> startKafkaResponder(String requesttopic, String responseTopic, Utfall utfall)
+   private CompletableFuture<Void> startKafkaResponder(String requesttopic, String responseTopic, Utfall utfall,
+         String expectedHandlaggningId)
    {
       return CompletableFuture.runAsync(() -> {
+         long deadline = System.currentTimeMillis() + Duration.ofSeconds(topicTimeout).toMillis();
          try (KafkaConsumer<String, String> consumer = createConsumer())
          {
             consumer.subscribe(Collections.singletonList(requesttopic));
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(topicTimeout));
-            if (records.isEmpty())
+            while (System.currentTimeMillis() < deadline)
             {
-               throw new IllegalStateException("No Kafka message received on " + requesttopic);
+               ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(5));
+               for (var record : records)
+               {
+                  if (!record.value().contains(expectedHandlaggningId))
+                  {
+                     continue;
+                  }
+                  RegelRequestMessagePayload request = mapper.readValue(record.value(),
+                        RegelRequestMessagePayload.class);
+                  RegelRequestMessagePayloadData requestData = request.getData();
+                  if (requestData == null)
+                  {
+                     throw new IllegalStateException("Missing data field in Kafka message: " + record.value());
+                  }
+                  RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
+                  responseData.setHandlaggningId(requestData.getHandlaggningId());
+                  responseData.setUtfall(utfall);
+                  sendRegelResponse(request, responseTopic, responseData);
+                  System.out.printf("Sent mock Kafka response for handlaggningId=%s on topic %s%n",
+                        requestData.getHandlaggningId(), responseTopic);
+                  return;
+               }
             }
-
-            // Deserialize request message into typed payload
-            String message = records.iterator().next().value();
-            RegelRequestMessagePayload request = mapper.readValue(message, RegelRequestMessagePayload.class);
-            // Extract data safely
-            RegelRequestMessagePayloadData requestData = request.getData();
-            if (requestData == null)
-            {
-               throw new IllegalStateException("Missing data field in Kafka message: " + message);
-            }
-            String handlaggningId = requestData.getHandlaggningId();
-            // Create typed response data object
-            RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
-            responseData.setHandlaggningId(handlaggningId);
-            responseData.setUtfall(utfall);
-
-            sendRegelResponse(request, responseTopic, responseData);
-            System.out.printf("Sent mock Kafka response for handlaggningId=%s%n on topic %s", handlaggningId,
-                  responseTopic);
+            throw new IllegalStateException(
+                  "No Kafka message for handlaggningId " + expectedHandlaggningId + " received on " + requesttopic);
          }
          catch (Exception e)
          {
@@ -261,6 +280,61 @@ public class VahContainerSmokeIT
       }
    }
 
+   /**
+    * Starts a background responder that listens on {@code requestTopic} and replies with an error response on
+    * {@code responseTopic}. Runs on a separate thread so the main test thread can concurrently send requests and read
+    * results without deadlocking. Exceptions thrown inside are re-raised when the returned future is joined with
+    * {@code .get()}.
+    */
+   private CompletableFuture<Void> startKafkaResponderWithError(String requestTopic, String responseTopic,
+         String felkod, String felmeddelande, String expectedHandlaggningId)
+   {
+      return CompletableFuture.runAsync(() -> {
+         long deadline = System.currentTimeMillis() + Duration.ofSeconds(topicTimeout).toMillis();
+         try (KafkaConsumer<String, String> consumer = createConsumer())
+         {
+            consumer.subscribe(Collections.singletonList(requestTopic));
+            while (System.currentTimeMillis() < deadline)
+            {
+               ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(5));
+               for (var record : records)
+               {
+                  if (!record.value().contains(expectedHandlaggningId))
+                  {
+                     continue;
+                  }
+                  RegelRequestMessagePayload request = mapper.readValue(record.value(),
+                        RegelRequestMessagePayload.class);
+                  RegelRequestMessagePayloadData requestData = request.getData();
+                  if (requestData == null)
+                  {
+                     throw new IllegalStateException("Missing data field in Kafka message: " + record.value());
+                  }
+
+                  RegelErrorInformation error = new RegelErrorInformation();
+                  error.setFelkod(felkod);
+                  error.setFelmeddelande(felmeddelande);
+
+                  RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
+                  responseData.setHandlaggningId(requestData.getHandlaggningId());
+                  responseData.setError(error);
+
+                  sendRegelResponse(request, responseTopic, responseData);
+                  System.out.printf("Sent error Kafka response for handlaggningId=%s on topic %s%n",
+                        requestData.getHandlaggningId(), responseTopic);
+                  return;
+               }
+            }
+            throw new IllegalStateException(
+                  "No Kafka message for handlaggningId " + expectedHandlaggningId + " received on " + requestTopic);
+         }
+         catch (Exception e)
+         {
+            throw new RuntimeException("Kafka responder failed", e);
+         }
+      }, Executors.newSingleThreadExecutor());
+   }
+
    private KafkaConsumer<String, String> createConsumer()
    {
       Properties props = new Properties();
@@ -280,17 +354,17 @@ public class VahContainerSmokeIT
 
       // Start background Kafka responders
       CompletableFuture<Void> responderRtfMaskinell = startKafkaResponder(rtfMaskinellRequestTopic, rtfMaskinellResponseTopic,
-            Utfall.UTREDNING);
+            Utfall.UTREDNING, handlaggningId);
       CompletableFuture<Void> responderRtfManuell = startKafkaResponder(rtfManuellRequestTopic, rtfManuellResponseTopic,
-            Utfall.JA);
+            Utfall.JA, handlaggningId);
       CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
-            bekraftaBeslutResponseTopic, Utfall.JA);
+            bekraftaBeslutResponseTopic, Utfall.JA, handlaggningId);
 
       // Send Handlaggning request to start workflow
       sendVahHandlaggningRequest(handlaggningId, "A1");
 
       // Verify rtf maskinell message produced by VAH
-      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic);
+      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic, handlaggningId);
       System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
       RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
             RegelRequestMessagePayload.class);
@@ -301,7 +375,7 @@ public class VahContainerSmokeIT
       responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
 
       // Verify rtf manuell message produced by VAH
-      String rtfManuellRequest = readKafkaRequestMessage(rtfManuellRequestTopic);
+      String rtfManuellRequest = readKafkaRequestMessage(rtfManuellRequestTopic, handlaggningId);
       System.out.println("Received rtfManuellRequest: " + rtfManuellRequest);
       RegelRequestMessagePayload rtfManuellRequestMessagePayload = mapper.readValue(rtfManuellRequest,
             RegelRequestMessagePayload.class);
@@ -312,7 +386,7 @@ public class VahContainerSmokeIT
       responderRtfManuell.get(topicTimeout, TimeUnit.SECONDS);
 
       // Verify bekraftaBeslut message produced by VAH
-      String bekraftaBeslutRequest = readKafkaRequestMessage(bekraftaBeslutRequestTopic);
+      String bekraftaBeslutRequest = readKafkaRequestMessage(bekraftaBeslutRequestTopic, handlaggningId);
       System.out.println("Received bekraftaBeslutRequest: " + bekraftaBeslutRequest);
       RegelRequestMessagePayload bekraftaBeslutRequestMessagePayload = mapper.readValue(bekraftaBeslutRequest,
             RegelRequestMessagePayload.class);
@@ -323,11 +397,45 @@ public class VahContainerSmokeIT
       responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
 
       // Wait for response from VAH
-      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic);
+      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
       System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
       HandlaggningResponseMessagePayload handlaggningRequestMessagePayload = mapper
             .readValue(vahHandlaggningResponse, HandlaggningResponseMessagePayload.class);
       assertEquals(handlaggningId, handlaggningRequestMessagePayload.getData().getHandlaggningId());
       assertEquals("GODKÄND", handlaggningRequestMessagePayload.getData().getResultat());
+   }
+
+   /**
+    * Verifies the "Avsluta process med error" path when maskinell kontroll returns a technical error. The process must
+    * skip manuell kontroll and bekräfta beslut and instead send a handlaggning response with the error populated.
+    */
+   @Test
+   void TestVahMaskinellError() throws Exception
+   {
+      var handlaggningId = UUID.randomUUID().toString();
+      System.out.println("Starting TestVahMaskinellError");
+
+      CompletableFuture<Void> responderRtfMaskinell = startKafkaResponderWithError(
+            rtfMaskinellRequestTopic, rtfMaskinellResponseTopic, "RTF-001", "Tekniskt fel i rtfMaskinell",
+            handlaggningId);
+
+      sendVahHandlaggningRequest(handlaggningId, "A1");
+
+      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic, handlaggningId);
+      System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
+      RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
+            RegelRequestMessagePayload.class);
+      assertEquals(handlaggningId, rtfMaskinellRequestMessagePayload.getData().getHandlaggningId());
+      assertEquals("d4ab4820-68d9-41e0-abe1-cd8f9865d275", rtfMaskinellRequestMessagePayload.getData().getAktivitetId());
+
+      responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
+
+      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
+      System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
+      HandlaggningResponseMessagePayload response = mapper.readValue(vahHandlaggningResponse,
+            HandlaggningResponseMessagePayload.class);
+      assertEquals(handlaggningId, response.getData().getHandlaggningId());
+      assertEquals("FEL", response.getData().getResultat());
+      assertNotNull(response.getData().getError());
    }
 }
