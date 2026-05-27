@@ -26,6 +26,7 @@ import se.fk.rimfrost.SpecVersion;
 import se.fk.rimfrost.HandlaggningRequestMessageData;
 import se.fk.rimfrost.HandlaggningRequestMessagePayload;
 import se.fk.rimfrost.HandlaggningResponseMessagePayload;
+import se.fk.rimfrost.framework.regel.RegelErrorInformation;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData;
 import se.fk.rimfrost.framework.regel.RegelResponseMessagePayload;
@@ -43,6 +44,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Testcontainers
 public class VahContainerSmokeIT
@@ -261,6 +263,51 @@ public class VahContainerSmokeIT
       }
    }
 
+   /**
+    * Starts a background responder that listens on {@code requestTopic} and replies with an error response on
+    * {@code responseTopic}. Runs on a separate thread so the main test thread can concurrently send requests and read
+    * results without deadlocking. Exceptions thrown inside are re-raised when the returned future is joined with
+    * {@code .get()}.
+    */
+   private CompletableFuture<Void> startKafkaResponderWithError(String requestTopic, String responseTopic,
+         String felkod, String felmeddelande)
+   {
+      return CompletableFuture.runAsync(() -> {
+         try (KafkaConsumer<String, String> consumer = createConsumer())
+         {
+            consumer.subscribe(Collections.singletonList(requestTopic));
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(topicTimeout));
+            if (records.isEmpty())
+            {
+               throw new IllegalStateException("No Kafka message received on " + requestTopic);
+            }
+            String message = records.iterator().next().value();
+            RegelRequestMessagePayload request = mapper.readValue(message, RegelRequestMessagePayload.class);
+            RegelRequestMessagePayloadData requestData = request.getData();
+            if (requestData == null)
+            {
+               throw new IllegalStateException("Missing data field in Kafka message: " + message);
+            }
+
+            RegelErrorInformation error = new RegelErrorInformation();
+            error.setFelkod(felkod);
+            error.setFelmeddelande(felmeddelande);
+
+            RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
+            responseData.setHandlaggningId(requestData.getHandlaggningId());
+            responseData.setError(error);
+
+            sendRegelResponse(request, responseTopic, responseData);
+            System.out.printf("Sent error Kafka response for handlaggningId=%s on topic %s%n",
+                  requestData.getHandlaggningId(), responseTopic);
+         }
+         catch (Exception e)
+         {
+            throw new RuntimeException("Kafka responder failed", e);
+         }
+      }, Executors.newSingleThreadExecutor());
+   }
+
    private KafkaConsumer<String, String> createConsumer()
    {
       Properties props = new Properties();
@@ -329,5 +376,38 @@ public class VahContainerSmokeIT
             .readValue(vahHandlaggningResponse, HandlaggningResponseMessagePayload.class);
       assertEquals(handlaggningId, handlaggningRequestMessagePayload.getData().getHandlaggningId());
       assertEquals("GODKÄND", handlaggningRequestMessagePayload.getData().getResultat());
+   }
+
+   /**
+    * Verifies the "Avsluta process med error" path when maskinell kontroll returns a technical error. The process must
+    * skip manuell kontroll and bekräfta beslut and instead send a handlaggning response with the error populated.
+    */
+   @Test
+   void TestVahMaskinellError() throws Exception
+   {
+      var handlaggningId = UUID.randomUUID().toString();
+      System.out.println("Starting TestVahMaskinellError");
+
+      CompletableFuture<Void> responderRtfMaskinell = startKafkaResponderWithError(
+            rtfMaskinellRequestTopic, rtfMaskinellResponseTopic, "RTF-001", "Tekniskt fel i rtfMaskinell");
+
+      sendVahHandlaggningRequest(handlaggningId, "A1");
+
+      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic);
+      System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
+      RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
+            RegelRequestMessagePayload.class);
+      assertEquals(handlaggningId, rtfMaskinellRequestMessagePayload.getData().getHandlaggningId());
+      assertEquals("d4ab4820-68d9-41e0-abe1-cd8f9865d275", rtfMaskinellRequestMessagePayload.getData().getAktivitetId());
+
+      responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
+
+      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic);
+      System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
+      HandlaggningResponseMessagePayload response = mapper.readValue(vahHandlaggningResponse,
+            HandlaggningResponseMessagePayload.class);
+      assertEquals(handlaggningId, response.getData().getHandlaggningId());
+      assertEquals("FEL", response.getData().getResultat());
+      assertNotNull(response.getData().getError());
    }
 }
