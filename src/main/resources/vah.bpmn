@@ -373,7 +373,7 @@
           <drools:metaValue>Utredning</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfMaskinellResult.getError() == null &amp;&amp; rtfMaskinellResult.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.UTREDNING;</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfMaskinellResult.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.UTREDNING;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_331439CA-81B3-42E6-B26F-D74D6C3529B1" name="!= Utredning" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_48636A54-33E2-46E4-8736-787AB637276C">
       <bpmn2:extensionElements>
