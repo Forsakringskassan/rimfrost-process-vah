@@ -166,36 +166,41 @@ public class VahContainerSmokeIT
       }
    }
 
-   private CompletableFuture<Void> startKafkaResponder(String requesttopic, String responseTopic, Utfall utfall)
+   private CompletableFuture<Void> startKafkaResponder(String requesttopic, String responseTopic, Utfall utfall,
+         String expectedHandlaggningId)
    {
       return CompletableFuture.runAsync(() -> {
+         long deadline = System.currentTimeMillis() + Duration.ofSeconds(topicTimeout).toMillis();
          try (KafkaConsumer<String, String> consumer = createConsumer())
          {
             consumer.subscribe(Collections.singletonList(requesttopic));
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(topicTimeout));
-            if (records.isEmpty())
+            while (System.currentTimeMillis() < deadline)
             {
-               throw new IllegalStateException("No Kafka message received on " + requesttopic);
+               ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(5));
+               for (var record : records)
+               {
+                  if (!record.value().contains(expectedHandlaggningId))
+                  {
+                     continue;
+                  }
+                  RegelRequestMessagePayload request = mapper.readValue(record.value(),
+                        RegelRequestMessagePayload.class);
+                  RegelRequestMessagePayloadData requestData = request.getData();
+                  if (requestData == null)
+                  {
+                     throw new IllegalStateException("Missing data field in Kafka message: " + record.value());
+                  }
+                  RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
+                  responseData.setHandlaggningId(requestData.getHandlaggningId());
+                  responseData.setUtfall(utfall);
+                  sendRegelResponse(request, responseTopic, responseData);
+                  System.out.printf("Sent mock Kafka response for handlaggningId=%s on topic %s%n",
+                        requestData.getHandlaggningId(), responseTopic);
+                  return;
+               }
             }
-
-            // Deserialize request message into typed payload
-            String message = records.iterator().next().value();
-            RegelRequestMessagePayload request = mapper.readValue(message, RegelRequestMessagePayload.class);
-            // Extract data safely
-            RegelRequestMessagePayloadData requestData = request.getData();
-            if (requestData == null)
-            {
-               throw new IllegalStateException("Missing data field in Kafka message: " + message);
-            }
-            String handlaggningId = requestData.getHandlaggningId();
-            // Create typed response data object
-            RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
-            responseData.setHandlaggningId(handlaggningId);
-            responseData.setUtfall(utfall);
-
-            sendRegelResponse(request, responseTopic, responseData);
-            System.out.printf("Sent mock Kafka response for handlaggningId=%s%n on topic %s", handlaggningId,
-                  responseTopic);
+            throw new IllegalStateException(
+                  "No Kafka message for handlaggningId " + expectedHandlaggningId + " received on " + requesttopic);
          }
          catch (Exception e)
          {
@@ -282,36 +287,46 @@ public class VahContainerSmokeIT
     * {@code .get()}.
     */
    private CompletableFuture<Void> startKafkaResponderWithError(String requestTopic, String responseTopic,
-         String felkod, String felmeddelande)
+         String felkod, String felmeddelande, String expectedHandlaggningId)
    {
       return CompletableFuture.runAsync(() -> {
+         long deadline = System.currentTimeMillis() + Duration.ofSeconds(topicTimeout).toMillis();
          try (KafkaConsumer<String, String> consumer = createConsumer())
          {
             consumer.subscribe(Collections.singletonList(requestTopic));
-            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(topicTimeout));
-            if (records.isEmpty())
+            while (System.currentTimeMillis() < deadline)
             {
-               throw new IllegalStateException("No Kafka message received on " + requestTopic);
+               ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(5));
+               for (var record : records)
+               {
+                  if (!record.value().contains(expectedHandlaggningId))
+                  {
+                     continue;
+                  }
+                  RegelRequestMessagePayload request = mapper.readValue(record.value(),
+                        RegelRequestMessagePayload.class);
+                  RegelRequestMessagePayloadData requestData = request.getData();
+                  if (requestData == null)
+                  {
+                     throw new IllegalStateException("Missing data field in Kafka message: " + record.value());
+                  }
+
+                  RegelErrorInformation error = new RegelErrorInformation();
+                  error.setFelkod(felkod);
+                  error.setFelmeddelande(felmeddelande);
+
+                  RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
+                  responseData.setHandlaggningId(requestData.getHandlaggningId());
+                  responseData.setError(error);
+
+                  sendRegelResponse(request, responseTopic, responseData);
+                  System.out.printf("Sent error Kafka response for handlaggningId=%s on topic %s%n",
+                        requestData.getHandlaggningId(), responseTopic);
+                  return;
+               }
             }
-            String message = records.iterator().next().value();
-            RegelRequestMessagePayload request = mapper.readValue(message, RegelRequestMessagePayload.class);
-            RegelRequestMessagePayloadData requestData = request.getData();
-            if (requestData == null)
-            {
-               throw new IllegalStateException("Missing data field in Kafka message: " + message);
-            }
-
-            RegelErrorInformation error = new RegelErrorInformation();
-            error.setFelkod(felkod);
-            error.setFelmeddelande(felmeddelande);
-
-            RegelResponseMessagePayloadData responseData = new RegelResponseMessagePayloadData();
-            responseData.setHandlaggningId(requestData.getHandlaggningId());
-            responseData.setError(error);
-
-            sendRegelResponse(request, responseTopic, responseData);
-            System.out.printf("Sent error Kafka response for handlaggningId=%s on topic %s%n",
-                  requestData.getHandlaggningId(), responseTopic);
+            throw new IllegalStateException(
+                  "No Kafka message for handlaggningId " + expectedHandlaggningId + " received on " + requestTopic);
          }
          catch (Exception e)
          {
@@ -339,11 +354,11 @@ public class VahContainerSmokeIT
 
       // Start background Kafka responders
       CompletableFuture<Void> responderRtfMaskinell = startKafkaResponder(rtfMaskinellRequestTopic, rtfMaskinellResponseTopic,
-            Utfall.UTREDNING);
+            Utfall.UTREDNING, handlaggningId);
       CompletableFuture<Void> responderRtfManuell = startKafkaResponder(rtfManuellRequestTopic, rtfManuellResponseTopic,
-            Utfall.JA);
+            Utfall.JA, handlaggningId);
       CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
-            bekraftaBeslutResponseTopic, Utfall.JA);
+            bekraftaBeslutResponseTopic, Utfall.JA, handlaggningId);
 
       // Send Handlaggning request to start workflow
       sendVahHandlaggningRequest(handlaggningId, "A1");
@@ -401,7 +416,8 @@ public class VahContainerSmokeIT
       System.out.println("Starting TestVahMaskinellError");
 
       CompletableFuture<Void> responderRtfMaskinell = startKafkaResponderWithError(
-            rtfMaskinellRequestTopic, rtfMaskinellResponseTopic, "RTF-001", "Tekniskt fel i rtfMaskinell");
+            rtfMaskinellRequestTopic, rtfMaskinellResponseTopic, "RTF-001", "Tekniskt fel i rtfMaskinell",
+            handlaggningId);
 
       sendVahHandlaggningRequest(handlaggningId, "A1");
 
