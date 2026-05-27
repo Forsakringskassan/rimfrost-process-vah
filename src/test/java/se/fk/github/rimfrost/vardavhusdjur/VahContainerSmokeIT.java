@@ -130,7 +130,12 @@ public class VahContainerSmokeIT
          kafka.stop();
    }
 
-   private String readKafkaRequestMessage(String topic)
+   /**
+    * Reads the first message from {@code topic} whose {@code data.handlaggningId} matches the given value. Skips
+    * messages left over from other test runs sharing the same topics. Polls repeatedly until a match is found or the
+    * 120-second deadline expires.
+    */
+   private String readKafkaRequestMessage(String topic, String expectedHandlaggningId)
    {
       String bootstrap = kafka.getBootstrapServers().replace("PLAINTEXT://", "");
       Properties props = new Properties();
@@ -140,17 +145,24 @@ public class VahContainerSmokeIT
       props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
       props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
+      long deadline = System.currentTimeMillis() + Duration.ofSeconds(120).toMillis();
       try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props))
       {
          System.out.printf("New kafka consumer subscribing to topic: %s%n", topic);
          consumer.subscribe(Collections.singletonList(topic));
-         ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(120));
-
-         if (records.isEmpty())
+         while (System.currentTimeMillis() < deadline)
          {
-            throw new IllegalStateException("No Kafka message received on topic " + topic);
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(5));
+            for (var record : records)
+            {
+               if (record.value().contains(expectedHandlaggningId))
+               {
+                  return record.value();
+               }
+            }
          }
-         return records.iterator().next().value();
+         throw new IllegalStateException(
+               "No Kafka message for handlaggningId " + expectedHandlaggningId + " received on topic " + topic);
       }
    }
 
@@ -337,7 +349,7 @@ public class VahContainerSmokeIT
       sendVahHandlaggningRequest(handlaggningId, "A1");
 
       // Verify rtf maskinell message produced by VAH
-      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic);
+      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic, handlaggningId);
       System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
       RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
             RegelRequestMessagePayload.class);
@@ -348,7 +360,7 @@ public class VahContainerSmokeIT
       responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
 
       // Verify rtf manuell message produced by VAH
-      String rtfManuellRequest = readKafkaRequestMessage(rtfManuellRequestTopic);
+      String rtfManuellRequest = readKafkaRequestMessage(rtfManuellRequestTopic, handlaggningId);
       System.out.println("Received rtfManuellRequest: " + rtfManuellRequest);
       RegelRequestMessagePayload rtfManuellRequestMessagePayload = mapper.readValue(rtfManuellRequest,
             RegelRequestMessagePayload.class);
@@ -359,7 +371,7 @@ public class VahContainerSmokeIT
       responderRtfManuell.get(topicTimeout, TimeUnit.SECONDS);
 
       // Verify bekraftaBeslut message produced by VAH
-      String bekraftaBeslutRequest = readKafkaRequestMessage(bekraftaBeslutRequestTopic);
+      String bekraftaBeslutRequest = readKafkaRequestMessage(bekraftaBeslutRequestTopic, handlaggningId);
       System.out.println("Received bekraftaBeslutRequest: " + bekraftaBeslutRequest);
       RegelRequestMessagePayload bekraftaBeslutRequestMessagePayload = mapper.readValue(bekraftaBeslutRequest,
             RegelRequestMessagePayload.class);
@@ -370,7 +382,7 @@ public class VahContainerSmokeIT
       responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
 
       // Wait for response from VAH
-      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic);
+      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
       System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
       HandlaggningResponseMessagePayload handlaggningRequestMessagePayload = mapper
             .readValue(vahHandlaggningResponse, HandlaggningResponseMessagePayload.class);
@@ -393,7 +405,7 @@ public class VahContainerSmokeIT
 
       sendVahHandlaggningRequest(handlaggningId, "A1");
 
-      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic);
+      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic, handlaggningId);
       System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
       RegelRequestMessagePayload rtfMaskinellRequestMessagePayload = mapper.readValue(rtfMaskinellRequest,
             RegelRequestMessagePayload.class);
@@ -402,7 +414,7 @@ public class VahContainerSmokeIT
 
       responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
 
-      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic);
+      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
       System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
       HandlaggningResponseMessagePayload response = mapper.readValue(vahHandlaggningResponse,
             HandlaggningResponseMessagePayload.class);
