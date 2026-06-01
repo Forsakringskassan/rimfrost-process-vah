@@ -70,14 +70,14 @@ abstract class VahContainerBase
       kafka.start();
       try
       {
-         createTopic(vahHandlaggningRequestTopic, 1, (short) 1);
-         createTopic(vahHandlaggningResponseTopic, 1, (short) 1);
-         createTopic(rtfMaskinellRequestTopic, 1, (short) 1);
-         createTopic(rtfMaskinellResponseTopic, 1, (short) 1);
-         createTopic(rtfManuellRequestTopic, 1, (short) 1);
-         createTopic(rtfManuellResponseTopic, 1, (short) 1);
-         createTopic(bekraftaBeslutRequestTopic, 1, (short) 1);
-         createTopic(bekraftaBeslutResponseTopic, 1, (short) 1);
+         createTopic(vahHandlaggningRequestTopic);
+         createTopic(vahHandlaggningResponseTopic);
+         createTopic(rtfMaskinellRequestTopic);
+         createTopic(rtfMaskinellResponseTopic);
+         createTopic(rtfManuellRequestTopic);
+         createTopic(rtfManuellResponseTopic);
+         createTopic(bekraftaBeslutRequestTopic);
+         createTopic(bekraftaBeslutResponseTopic);
       }
       catch (Exception e)
       {
@@ -95,7 +95,7 @@ abstract class VahContainerBase
       vah.start();
    }
 
-   static void createTopic(String topicName, int numPartitions, short replicationFactor) throws Exception
+   static void createTopic(String topicName) throws Exception
    {
       String bootstrap = kafka.getBootstrapServers().replace("PLAINTEXT://", "");
       Properties props = new Properties();
@@ -103,7 +103,7 @@ abstract class VahContainerBase
 
       try (AdminClient admin = AdminClient.create(props))
       {
-         NewTopic topic = new NewTopic(topicName, numPartitions, replicationFactor);
+         NewTopic topic = new NewTopic(topicName, 1, (short) 1);
          admin.createTopics(List.of(topic)).all().get();
          System.out.printf("Created topic: %S%n", topicName);
       }
