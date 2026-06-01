@@ -1,29 +1,66 @@
 package se.fk.github.rimfrost.vardavhusdjur;
 
+import io.quarkus.test.junit.QuarkusTest;
+import org.jboss.logmanager.ExtHandler;
+import org.jboss.logmanager.ExtLogRecord;
+import org.jboss.logmanager.Logger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.junit.jupiter.Testcontainers;
 import se.fk.rimfrost.HandlaggningResponseMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayload;
-import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Testcontainers
-public class VahContainerErrorIT extends VahContainerBase
+@QuarkusTest
+class VahErrorTest extends VahTestBase
 {
+   private final List<String> capturedLogs = new CopyOnWriteArrayList<>();
+
+   @BeforeAll
+   void setupLogCapture()
+   {
+      Logger.getLogger("").addHandler(new ExtHandler()
+      {
+         @Override
+         protected void doPublish(ExtLogRecord record)
+         {
+            capturedLogs.add(record.getLevel().getName() + " " + record.getFormattedMessage());
+         }
+
+         @Override
+         public void flush()
+         {
+         }
+
+         @Override
+         public void close() throws SecurityException
+         {
+         }
+      });
+   }
+
+   @AfterEach
+   void clearLogs()
+   {
+      capturedLogs.clear();
+   }
+
    /**
     * Verifies the "Avsluta process med error" path when maskinell kontroll returns a technical error. The process must
     * skip manuell kontroll and bekräfta beslut and instead send a handlaggning response with the error populated.
     */
    @Test
-   void TestVahMaskinellError() throws Exception
+   void testVahMaskinellError() throws Exception
    {
       var handlaggningId = UUID.randomUUID().toString();
-      System.out.println("Starting TestVahMaskinellError");
+      System.out.println("Starting testVahMaskinellError");
 
       CompletableFuture<Void> responderRtfMaskinell = startKafkaResponderWithError(
             rtfMaskinellRequestTopic, rtfMaskinellResponseTopic, "RTF-001", "Tekniskt fel i rtfMaskinell",
@@ -48,7 +85,7 @@ public class VahContainerErrorIT extends VahContainerBase
       assertEquals("FEL", response.getData().getResultat());
       assertNotNull(response.getData().getError());
 
-      boolean errorLogged = Arrays.stream(vah.getLogs().split("\n"))
+      boolean errorLogged = capturedLogs.stream()
             .filter(line -> line.contains(handlaggningId))
             .anyMatch(line -> line.contains("ERROR") && line.contains("RTF-001"));
       assertTrue(errorLogged, "Expected ERROR log containing handlaggningId and felkod RTF-001");
