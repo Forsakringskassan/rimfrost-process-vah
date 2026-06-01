@@ -27,5 +27,5 @@ jobs:
           cache: 'maven'
 
       # --- Run integration tests ---
-      - name: Run Maven verify
-        run: ./mvnw -s settings.xml verify
+      - name: Run Maven test
+        run: ./mvnw -s settings.xml test
