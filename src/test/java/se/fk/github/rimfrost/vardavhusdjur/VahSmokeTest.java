@@ -62,4 +62,44 @@ class VahSmokeTest extends VahTestBase
       assertEquals(handlaggningId, handlaggningResponseMessagePayload.getData().getHandlaggningId());
       assertEquals("GODKÄND", handlaggningResponseMessagePayload.getData().getResultat());
    }
+
+   @Test
+   void testVahMaskinellJa() throws Exception
+   {
+      var handlaggningId = UUID.randomUUID().toString();
+      System.out.println("Starting testVahMaskinellJa");
+
+      CompletableFuture<Void> responderRtfMaskinell = startKafkaResponder(rtfMaskinellRequestTopic,
+            rtfMaskinellResponseTopic, Utfall.JA, handlaggningId);
+      CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
+            bekraftaBeslutResponseTopic, Utfall.JA, handlaggningId);
+
+      sendVahHandlaggningRequest(handlaggningId, "A1");
+
+      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic, handlaggningId);
+      System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
+      RegelRequestMessagePayload maskinellPayload = mapper.readValue(rtfMaskinellRequest,
+            RegelRequestMessagePayload.class);
+      assertEquals(handlaggningId, maskinellPayload.getData().getHandlaggningId());
+      assertEquals("d4ab4820-68d9-41e0-abe1-cd8f9865d275", maskinellPayload.getData().getAktivitetId());
+
+      responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
+
+      // Manuell is skipped — process goes directly to bekraftaBeslut
+      String bekraftaBeslutRequest = readKafkaRequestMessage(bekraftaBeslutRequestTopic, handlaggningId);
+      System.out.println("Received bekraftaBeslutRequest: " + bekraftaBeslutRequest);
+      RegelRequestMessagePayload bekraftaPayload = mapper.readValue(bekraftaBeslutRequest,
+            RegelRequestMessagePayload.class);
+      assertEquals(handlaggningId, bekraftaPayload.getData().getHandlaggningId());
+      assertEquals("8cde2355-aea5-4951-916f-08319b2f1e99", bekraftaPayload.getData().getAktivitetId());
+
+      responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
+
+      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
+      System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
+      HandlaggningResponseMessagePayload response = mapper.readValue(vahHandlaggningResponse,
+            HandlaggningResponseMessagePayload.class);
+      assertEquals(handlaggningId, response.getData().getHandlaggningId());
+      assertEquals("GODKÄND", response.getData().getResultat());
+   }
 }
