@@ -13,14 +13,6 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.kafka.ConfluentKafkaContainer;
-import org.testcontainers.containers.Network;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 import se.fk.rimfrost.HandlaggningRequestMessageData;
 import se.fk.rimfrost.HandlaggningRequestMessagePayload;
 import se.fk.rimfrost.SpecVersion;
@@ -29,7 +21,6 @@ import se.fk.rimfrost.framework.regel.RegelRequestMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayloadData;
 import se.fk.rimfrost.framework.regel.RegelResponseMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelResponseMessagePayloadData;
-import se.fk.rimfrost.framework.regel.SpecVersion;
 import se.fk.rimfrost.framework.regel.Utfall;
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -137,77 +128,6 @@ abstract class VahTestBase
       }, Executors.newSingleThreadExecutor());
    }
 
-   private void sendVahHandlaggningRequest(String handlaggningId, String messageKey) throws Exception
-   {
-      HandlaggningRequestMessagePayload payload = new HandlaggningRequestMessagePayload();
-      HandlaggningRequestMessageData data = new HandlaggningRequestMessageData();
-      data.setHandlaggningId(handlaggningId);
-      payload.setSpecversion(SpecVersion.V1);
-      payload.setId("TestId-001");
-      payload.setSource("TestSource-001");
-      payload.setType(vahHandlaggningRequestTopic);
-      payload.setData(data);
-      // Serialize entire payload to JSON
-      String eventJson = mapper.writeValueAsString(payload);
-
-      Properties props = new Properties();
-      props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers());
-      props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-      props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-
-      try (KafkaProducer<String, String> producer = new KafkaProducer<>(props))
-      {
-         ProducerRecord<String, String> record = new ProducerRecord<>(
-               vahHandlaggningRequestTopic,
-               messageKey,
-               eventJson);
-         System.out.printf("Kafka sending to topic : %s, json: %s%n", vahHandlaggningRequestTopic, eventJson);
-         producer.send(record).get();
-      }
-   }
-
-   private void sendRegelResponse(RegelRequestMessagePayload request,
-         String topic,
-         RegelResponseMessagePayloadData messageData) throws Exception
-   {
-
-      RegelResponseMessagePayload payload = new RegelResponseMessagePayload();
-      payload.setSpecversion(request.getSpecversion());
-      payload.setId(request.getId());
-      payload.setSource(request.getSource());
-      payload.setType(topic);
-      payload.setTime(OffsetDateTime.now());
-      payload.setKogitoparentprociid(request.getKogitoparentprociid());
-      payload.setKogitorootprocid(request.getKogitorootprocid());
-      payload.setKogitoproctype(request.getKogitoproctype());
-      payload.setKogitoprocinstanceid(request.getKogitoprocinstanceid());
-      payload.setKogitoprocist(request.getKogitoprocist());
-      payload.setKogitoprocversion(request.getKogitoprocversion());
-      payload.setKogitorootprociid(request.getKogitorootprociid());
-      payload.setKogitoprocid(request.getKogitoprocid());
-      payload.setKogitoprocrefid(request.getKogitoprocinstanceid());
-
-      payload.setData(messageData);
-
-      // Serialize entire payload to JSON
-      String eventJson = mapper.writeValueAsString(payload);
-
-      Properties props = new Properties();
-      props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBootstrapServers());
-      props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-      props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-
-      try (KafkaProducer<String, String> producer = new KafkaProducer<>(props))
-      {
-         ProducerRecord<String, String> record = new ProducerRecord<>(
-               topic,
-               request.getId(), // message key
-               eventJson);
-         System.out.printf("Kafka mock sending: %s\n", eventJson);
-         producer.send(record).get();
-      }
-   }
-
    /**
     * Starts a background responder that listens on {@code requestTopic} and replies with an error response on
     * {@code responseTopic}. Runs on a separate thread so the main test thread can concurrently send requests and read
@@ -268,7 +188,7 @@ abstract class VahTestBase
       HandlaggningRequestMessagePayload payload = new HandlaggningRequestMessagePayload();
       HandlaggningRequestMessageData data = new HandlaggningRequestMessageData();
       data.setHandlaggningId(handlaggningId);
-      payload.setSpecversion(SpecVersion.NUMBER_1_DOT_0);
+      payload.setSpecversion(SpecVersion.V1);
       payload.setId("TestId-001");
       payload.setSource("TestSource-001");
       payload.setType(vahHandlaggningRequestTopic);
