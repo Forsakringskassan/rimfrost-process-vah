@@ -2,6 +2,39 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.1.2 (2026-06-03)
+
+### Bug Fixes
+
+-  add test for maskinell JA path that skips manuell kontroll ([4ffdf](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/4ffdff2301d6d23) Ulf Slunga)  
+-  migrate integration tests from Docker containers to @QuarkusTest ([6541c](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/6541c0d1cadbb28) Ulf Slunga)  
+-  simplify createTopic by removing redundant parameters ([b7df9](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/b7df912189f80f9) Ulf Slunga)  
+-  extract container base class and add error log assertion for regel errors ([bd10c](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/bd10c82e45a8490) Ulf Slunga)  
+-  filter Kafka responders by handlaggningId to prevent test cross-contamination ([09548](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/09548e8ff739c53) Ulf Slunga)  
+-  filter Kafka reads by handlaggningId to prevent test cross-contamination ([4ab38](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/4ab3863f425c994) Ulf Slunga)  
+-  add smoke test for maskinell error path ending in Avsluta process med error ([0b668](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/0b668d191de00e5) Ulf Slunga)  
+-  split maskinell gateway into separate error and utfall checks ([e281d](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/e281dad6016d7b4) Ulf Slunga)  
+-  remove redundant getError() == null guard on Utredning gateway condition ([d74b1](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/d74b1c0d893b1c8) Ulf Slunga)  
+
+### Other changes
+
+**Fix/add postgre (#43)**
+
+* fix: added postgre support 
+* fix: bump subprocess and procesframework versions 
+* fix: cleanup application.properties 
+* fix: bump versions and fix tests 
+* fix: removed testcontainer stuff 
+* fix: simplifed datasource properties 
+
+[90621](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/90621cb1ed0e5d7) NilsElveros *2026-06-03 09:33:24*
+
+**test instead of verify**
+
+
+[b80e6](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/b80e64d16b11455) Ulf Slunga *2026-06-01 11:07:55*
+
+
 ## 1.1.1 (2026-05-25)
 
 ### Bug Fixes
