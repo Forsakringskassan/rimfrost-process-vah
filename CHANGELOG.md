@@ -2,6 +2,15 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.1.3 (2026-06-16)
+
+### Bug Fixes
+
+-  add process_id (#46) ([35e47](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/35e4717d385283a) NilsElveros)  
+-  Replace quarkus-smallrye-reactive-messaging-kafka with quarkus-messaging-kafka ([a620c](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/a620c8800283e6f) Lars Persson)  
+
+## rimfrost-1.1 (2026-06-03)
+
 ## 1.1.2 (2026-06-03)
 
 ### Bug Fixes
