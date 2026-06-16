@@ -40,11 +40,11 @@ abstract class VahTestBase
    protected static final String vahHandlaggningRequestTopic = "vah-handlaggning-requests";
    protected static final String vahHandlaggningResponseTopic = "handlaggning-responses";
    protected static final String rtfMaskinellRequestTopic = "rtf-maskinell-requests";
-   protected static final String rtfMaskinellResponseTopic = "rtf-maskinell-responses";
+   protected static final String rtfMaskinellResponseTopic = "vah-rtf-maskinell-responses";
    protected static final String rtfManuellRequestTopic = "rtf-manuell-requests";
-   protected static final String rtfManuellResponseTopic = "rtf-manuell-responses";
+   protected static final String rtfManuellResponseTopic = "vah-rtf-manuell-responses";
    protected static final String bekraftaBeslutRequestTopic = "bekraftabeslut-requests";
-   protected static final String bekraftaBeslutResponseTopic = "bekraftabeslut-responses";
+   protected static final String bekraftaBeslutResponseTopic = "vah-bekraftabeslut-responses";
    protected static final int topicTimeout = 20;
 
    @ConfigProperty(name = "kafka.bootstrap.servers")
@@ -219,7 +219,7 @@ abstract class VahTestBase
       payload.setSpecversion(request.getSpecversion());
       payload.setId(request.getId());
       payload.setSource(request.getSource());
-      payload.setType(topic);
+      payload.setType(topic.startsWith("vah-") ? topic.substring("vah-".length()) : topic);
       payload.setTime(OffsetDateTime.now());
       payload.setKogitoparentprociid(request.getKogitoparentprociid());
       payload.setKogitorootprocid(request.getKogitorootprocid());
