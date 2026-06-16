@@ -219,7 +219,7 @@ abstract class VahTestBase
       payload.setSpecversion(request.getSpecversion());
       payload.setId(request.getId());
       payload.setSource(request.getSource());
-      payload.setType(topic);
+      payload.setType(topic.startsWith("vah-") ? topic.substring("vah-".length()) : topic);
       payload.setTime(OffsetDateTime.now());
       payload.setKogitoparentprociid(request.getKogitoparentprociid());
       payload.setKogitorootprocid(request.getKogitorootprocid());
