@@ -1,129 +1,86 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_eWiG0DvJED-o87cRCWHP-Q" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
-  <bpmn2:itemDefinition id="_rtfManuellResultItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult"/>
-  <bpmn2:itemDefinition id="_handlaggningIdItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_rtfMaskinellResultItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult"/>
-  <bpmn2:itemDefinition id="_sharedErrorInfoItem" structureRef="se.fk.rimfrost.framework.regel.RegelErrorInformation"/>
-  <bpmn2:itemDefinition id="_vahHandlaggningResponseMessageDataItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData"/>
-  <bpmn2:itemDefinition id="_vahHandlaggningRequestMessageDataItem" structureRef="se.fk.rimfrost.HandlaggningRequestMessageData"/>
-  <bpmn2:itemDefinition id="_bekraftabeslutResultItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult"/>
-  <bpmn2:itemDefinition id="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputXItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult"/>
-  <bpmn2:itemDefinition id="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputXItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult"/>
-  <bpmn2:itemDefinition id="__5DAB8314-5034-4D58-B2AA-8CF62303409F_handlaggningIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__5DAB8314-5034-4D58-B2AA-8CF62303409F_aktivitetIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__5DAB8314-5034-4D58-B2AA-8CF62303409F_resultOutputXItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult"/>
-  <bpmn2:itemDefinition id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessageType"/>
-  <bpmn2:itemDefinition id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessageType"/>
-  <bpmn2:itemDefinition id="__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_vahHandlaggningRequestMessageDataInputXItem" structureRef="se.fk.rimfrost.HandlaggningRequestMessageData"/>
-  <bpmn2:itemDefinition id="__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_handlaggningIdOutputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_InMessageType"/>
-  <bpmn2:itemDefinition id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_OutMessageType"/>
-  <bpmn2:itemDefinition id="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputXItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult"/>
-  <bpmn2:itemDefinition id="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_vahHandlaggningResponseMessageDataOutputXItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData"/>
-  <bpmn2:itemDefinition id="_SVC_END_ERROR_InMessageType"/>
-  <bpmn2:itemDefinition id="_SVC_END_ERROR_OutMessageType"/>
-  <bpmn2:itemDefinition id="__SVC_END_ERROR_handlaggningIdInputXItem" structureRef="String"/>
-  <bpmn2:itemDefinition id="__SVC_END_ERROR_regelErrorInformationInputXItem" structureRef="se.fk.rimfrost.framework.regel.RegelErrorInformation"/>
-  <bpmn2:itemDefinition id="__SVC_END_ERROR_vahHandlaggningResponseMessageDataOutputXItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData"/>
-  <bpmn2:itemDefinition id="__0D725828-1220-4A54-AD64-88EF2A26F66C_vahHandlaggningResponseMessageDataInputXItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData"/>
-  <bpmn2:itemDefinition id="handlaggning-responsesType" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData"/>
-  <bpmn2:itemDefinition id="__6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahHandlaggningResponseMessageDataInputXItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData"/>
-  <bpmn2:itemDefinition id="handlaggning-responsesType" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData"/>
-  <bpmn2:itemDefinition id="__7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputXItem" structureRef="se.fk.rimfrost.HandlaggningRequestMessageData"/>
-  <bpmn2:itemDefinition id="vah-handlaggning-requestsType" structureRef="se.fk.rimfrost.HandlaggningRequestMessageData"/>
-  <bpmn2:itemDefinition id="_4F6B46FB-FC46-4491-9523-3962750E7DC7" structureRef=""/>
-  <bpmn2:itemDefinition id="_20036ED9-D052-402C-8B14-7746DF6390EA" structureRef=""/>
-  <bpmn2:message id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessage" itemRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessageType"/>
-  <bpmn2:message id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessage" itemRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessageType"/>
+  <bpmn2:itemDefinition id="_rtfManuellResultItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult" />
+  <bpmn2:itemDefinition id="_handlaggningIdItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_rtfMaskinellResultItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult" />
+  <bpmn2:itemDefinition id="_sharedErrorInfoItem" structureRef="se.fk.rimfrost.framework.regel.RegelErrorInformation" />
+  <bpmn2:itemDefinition id="_vahHandlaggningResponseMessageDataItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData" />
+  <bpmn2:itemDefinition id="_vahHandlaggningRequestMessageDataItem" structureRef="se.fk.rimfrost.HandlaggningRequestMessageData" />
+  <bpmn2:itemDefinition id="_bekraftabeslutResultItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult" />
+  <bpmn2:itemDefinition id="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputXItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult" />
+  <bpmn2:itemDefinition id="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputXItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult" />
+  <bpmn2:itemDefinition id="__5DAB8314-5034-4D58-B2AA-8CF62303409F_handlaggningIdInputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="__5DAB8314-5034-4D58-B2AA-8CF62303409F_aktivitetIdInputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="__5DAB8314-5034-4D58-B2AA-8CF62303409F_resultOutputXItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult" />
+  <bpmn2:itemDefinition id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessageType" />
+  <bpmn2:itemDefinition id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessageType" />
+  <bpmn2:itemDefinition id="__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_vahHandlaggningRequestMessageDataInputXItem" structureRef="se.fk.rimfrost.HandlaggningRequestMessageData" />
+  <bpmn2:itemDefinition id="__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_handlaggningIdOutputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_InMessageType" />
+  <bpmn2:itemDefinition id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_OutMessageType" />
+  <bpmn2:itemDefinition id="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputXItem" structureRef="se.fk.rimfrost.framework.process.RegelProcessResult" />
+  <bpmn2:itemDefinition id="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_vahHandlaggningResponseMessageDataOutputXItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData" />
+  <bpmn2:itemDefinition id="_SVC_END_ERROR_InMessageType" />
+  <bpmn2:itemDefinition id="_SVC_END_ERROR_OutMessageType" />
+  <bpmn2:itemDefinition id="__SVC_END_ERROR_handlaggningIdInputXItem" structureRef="String" />
+  <bpmn2:itemDefinition id="__SVC_END_ERROR_regelErrorInformationInputXItem" structureRef="se.fk.rimfrost.framework.regel.RegelErrorInformation" />
+  <bpmn2:itemDefinition id="__SVC_END_ERROR_vahHandlaggningResponseMessageDataOutputXItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData" />
+  <bpmn2:itemDefinition id="__0D725828-1220-4A54-AD64-88EF2A26F66C_vahHandlaggningResponseMessageDataInputXItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData" />
+  <bpmn2:itemDefinition id="handlaggning-responsesType" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData" />
+  <bpmn2:itemDefinition id="__6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahHandlaggningResponseMessageDataInputXItem" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData" />
+  <bpmn2:itemDefinition id="handlaggning-responsesType" structureRef="se.fk.rimfrost.HandlaggningResponseMessageData" />
+  <bpmn2:itemDefinition id="__7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputXItem" structureRef="se.fk.rimfrost.HandlaggningRequestMessageData" />
+  <bpmn2:itemDefinition id="vah-handlaggning-requestsType" structureRef="se.fk.rimfrost.HandlaggningRequestMessageData" />
+  <bpmn2:itemDefinition id="_4F6B46FB-FC46-4491-9523-3962750E7DC7" structureRef="" />
+  <bpmn2:itemDefinition id="_20036ED9-D052-402C-8B14-7746DF6390EA" structureRef="" />
+  <bpmn2:itemDefinition id="_21CC29F0-AB12-431C-9B8B-DC05FAB70FAD" structureRef="Integer" />
+  <bpmn2:message id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessage" itemRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessageType" />
+  <bpmn2:message id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessage" itemRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessageType" />
+  <bpmn2:message id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_InMessage" itemRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_InMessageType" />
+  <bpmn2:message id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_OutMessage" itemRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_OutMessageType" />
+  <bpmn2:message id="_SVC_END_ERROR_InMessage" itemRef="_SVC_END_ERROR_InMessageType" />
+  <bpmn2:message id="_SVC_END_ERROR_OutMessage" itemRef="_SVC_END_ERROR_OutMessageType" />
+  <bpmn2:message id="_eWo0gDvJED-o87cRCWHP-Q" itemRef="handlaggning-responsesType" name="handlaggning-responses" />
+  <bpmn2:message id="_eWo0gTvJED-o87cRCWHP-Q" itemRef="handlaggning-responsesType" name="handlaggning-responses" />
+  <bpmn2:message id="_eWo0gjvJED-o87cRCWHP-Q" itemRef="vah-handlaggning-requestsType" name="vah-handlaggning-requests" />
   <bpmn2:interface id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_ServiceInterface" name="se.fk.rimfrost.framework.process.ProcessService" implementationRef="se.fk.rimfrost.framework.process.ProcessService">
     <bpmn2:operation id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_ServiceOperation" name="startProcess" implementationRef="startProcess">
       <bpmn2:inMessageRef>_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_InMessage</bpmn2:inMessageRef>
       <bpmn2:outMessageRef>_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_OutMessage</bpmn2:outMessageRef>
     </bpmn2:operation>
   </bpmn2:interface>
-  <bpmn2:message id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_InMessage" itemRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_InMessageType"/>
-  <bpmn2:message id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_OutMessage" itemRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_OutMessageType"/>
   <bpmn2:interface id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_ServiceInterface" name="se.fk.rimfrost.framework.process.ProcessService" implementationRef="se.fk.rimfrost.framework.process.ProcessService">
     <bpmn2:operation id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_ServiceOperation" name="endProcess" implementationRef="endProcess">
       <bpmn2:inMessageRef>_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_InMessage</bpmn2:inMessageRef>
       <bpmn2:outMessageRef>_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_OutMessage</bpmn2:outMessageRef>
     </bpmn2:operation>
   </bpmn2:interface>
-  <bpmn2:message id="_SVC_END_ERROR_InMessage" itemRef="_SVC_END_ERROR_InMessageType"/>
-  <bpmn2:message id="_SVC_END_ERROR_OutMessage" itemRef="_SVC_END_ERROR_OutMessageType"/>
   <bpmn2:interface id="_SVC_END_ERROR_ServiceInterface" name="se.fk.rimfrost.framework.process.ProcessService" implementationRef="se.fk.rimfrost.framework.process.ProcessService">
     <bpmn2:operation id="_SVC_END_ERROR_ServiceOperation" name="endProcessWithError" implementationRef="endProcessWithError">
       <bpmn2:inMessageRef>_SVC_END_ERROR_InMessage</bpmn2:inMessageRef>
       <bpmn2:outMessageRef>_SVC_END_ERROR_OutMessage</bpmn2:outMessageRef>
     </bpmn2:operation>
   </bpmn2:interface>
-  <bpmn2:message id="_eWo0gDvJED-o87cRCWHP-Q" itemRef="handlaggning-responsesType" name="handlaggning-responses"/>
-  <bpmn2:message id="_eWo0gTvJED-o87cRCWHP-Q" itemRef="handlaggning-responsesType" name="handlaggning-responses"/>
-  <bpmn2:message id="_eWo0gjvJED-o87cRCWHP-Q" itemRef="vah-handlaggning-requestsType" name="vah-handlaggning-requests"/>
+  <bpmn2:error id="_REGEL_ERROR_VAH" structureRef="se.fk.rimfrost.framework.regel.RegelErrorInformation" name="REGEL_ERROR" errorCode="REGEL_ERROR" />
   <bpmn2:collaboration id="_703189A3-C5DF-4B64-BDCF-524A881EC81F" name="Default Collaboration">
-    <bpmn2:participant id="_D3E5423D-0196-4EF0-8149-DB028EBE6CDB" name="Pool Participant" processRef="vah"/>
+    <bpmn2:participant id="_D3E5423D-0196-4EF0-8149-DB028EBE6CDB" name="Pool Participant" processRef="vah" />
   </bpmn2:collaboration>
   <bpmn2:process id="vah" drools:packageName="rimfrost" drools:version="1.0" drools:adHoc="false" name="vah" isExecutable="true" processType="Public">
-    <bpmn2:property id="rtfManuellResult" itemSubjectRef="_rtfManuellResultItem" name="rtfManuellResult"/>
-    <bpmn2:property id="handlaggningId" itemSubjectRef="_handlaggningIdItem" name="handlaggningId"/>
-    <bpmn2:property id="rtfMaskinellResult" itemSubjectRef="_rtfMaskinellResultItem" name="rtfMaskinellResult"/>
-    <bpmn2:property id="sharedErrorInfo" itemSubjectRef="_sharedErrorInfoItem" name="sharedErrorInfo"/>
-    <bpmn2:property id="vahHandlaggningResponseMessageData" itemSubjectRef="_vahHandlaggningResponseMessageDataItem" name="vahHandlaggningResponseMessageData"/>
-    <bpmn2:property id="vahHandlaggningRequestMessageData" itemSubjectRef="_vahHandlaggningRequestMessageDataItem" name="vahHandlaggningRequestMessageData"/>
-    <bpmn2:property id="bekraftabeslutResult" itemSubjectRef="_bekraftabeslutResultItem" name="bekraftabeslutResult"/>
-    <bpmn2:sequenceFlow id="_SF_MASKINELL_NO_ERROR" sourceRef="_GW_MASKINELL_ERROR" targetRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711"/>
-    <bpmn2:sequenceFlow id="_331439CA-81B3-42E6-B26F-D74D6C3529B1" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_48636A54-33E2-46E4-8736-787AB637276C"/>
-    <bpmn2:sequenceFlow id="_E2277266-EAFA-4779-9B35-A9C3D31B114B" sourceRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" targetRef="_48636A54-33E2-46E4-8736-787AB637276C"/>
-    <bpmn2:sequenceFlow id="_53594BDC-48D1-44A5-B379-B0A181ADBAE8" name="Error" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Error]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return bekraftabeslutResult.getError() != null;]]></bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0" name="Error" sourceRef="_BF911926-5ADB-4B04-A41E-645CED3F8054" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Error]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return rtfManuellResult.getError() != null;]]></bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7" name="Error" sourceRef="_GW_MASKINELL_ERROR" targetRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Error]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return rtfMaskinellResult.getError() != null;]]></bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_SF_ERROR_TO_END" sourceRef="_SVC_END_ERROR" targetRef="_0D725828-1220-4A54-AD64-88EF2A26F66C"/>
-    <bpmn2:sequenceFlow id="_7775EF4A-B8B6-4FC8-A48A-AB36C728E476" sourceRef="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" targetRef="_SVC_END_ERROR"/>
-    <bpmn2:sequenceFlow id="_152B7D50-C575-4C6E-AB02-90BA1261CAA0" sourceRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" targetRef="_6D6EDF56-89D6-4DBB-9237-365C2737DD47"/>
-    <bpmn2:sequenceFlow id="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" sourceRef="_E12DBEC7-A835-4217-A8B8-2017638A505E" targetRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E"/>
-    <bpmn2:sequenceFlow id="_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F" sourceRef="_7C020ABA-9324-4EE3-857B-401B3C43FD84" targetRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF"/>
-    <bpmn2:sequenceFlow id="_1BE34C21-17A0-4EBF-8ABA-31114FB5ACD5" sourceRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" targetRef="_GW_MASKINELL_ERROR"/>
-    <bpmn2:sequenceFlow id="_CAC39F18-D56B-417C-951C-0B1457304806" sourceRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF" targetRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F"/>
-    <bpmn2:sequenceFlow id="_5977AE4A-6A59-4D54-9419-A2E17995904D" sourceRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" targetRef="_BF911926-5ADB-4B04-A41E-645CED3F8054"/>
-    <bpmn2:sequenceFlow id="_4BDD402F-000B-4D37-9C25-AE7A12A25E88" name="Utredning" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34">
-      <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Utredning]]></drools:metaValue>
-        </drools:metaData>
-      </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java"><![CDATA[return rtfMaskinellResult.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.UTREDNING;]]></bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4" sourceRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" targetRef="_E12DBEC7-A835-4217-A8B8-2017638A505E"/>
-    <bpmn2:sequenceFlow id="_BC111E98-FFF4-4E08-965C-93F4D250AFB2" sourceRef="_48636A54-33E2-46E4-8736-787AB637276C" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2"/>
+    <bpmn2:property id="rtfManuellResult" itemSubjectRef="_rtfManuellResultItem" name="rtfManuellResult" />
+    <bpmn2:property id="handlaggningId" itemSubjectRef="_handlaggningIdItem" name="handlaggningId" />
+    <bpmn2:property id="rtfMaskinellResult" itemSubjectRef="_rtfMaskinellResultItem" name="rtfMaskinellResult" />
+    <bpmn2:property id="sharedErrorInfo" itemSubjectRef="_sharedErrorInfoItem" name="sharedErrorInfo" />
+    <bpmn2:property id="vahHandlaggningResponseMessageData" itemSubjectRef="_vahHandlaggningResponseMessageDataItem" name="vahHandlaggningResponseMessageData" />
+    <bpmn2:property id="vahHandlaggningRequestMessageData" itemSubjectRef="_vahHandlaggningRequestMessageDataItem" name="vahHandlaggningRequestMessageData" />
+    <bpmn2:property id="bekraftabeslutResult" itemSubjectRef="_bekraftabeslutResultItem" name="bekraftabeslutResult" />
     <bpmn2:startEvent id="_7C020ABA-9324-4EE3-857B-401B3C43FD84">
       <bpmn2:outgoing>_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F</bpmn2:outgoing>
-      <bpmn2:dataOutput id="_7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputX" drools:dtype="se.fk.rimfrost.HandlaggningRequestMessageData" itemSubjectRef="__7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputXItem" name="event"/>
+      <bpmn2:dataOutput id="_7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputX" drools:dtype="se.fk.rimfrost.HandlaggningRequestMessageData" itemSubjectRef="__7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputXItem" name="event" />
       <bpmn2:dataOutputAssociation>
         <bpmn2:sourceRef>_7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>vahHandlaggningRequestMessageData</bpmn2:targetRef>
@@ -131,11 +88,11 @@
       <bpmn2:outputSet>
         <bpmn2:dataOutputRefs>_7C020ABA-9324-4EE3-857B-401B3C43FD84_eventOutputX</bpmn2:dataOutputRefs>
       </bpmn2:outputSet>
-      <bpmn2:messageEventDefinition drools:msgref="vah-handlaggning-requests" messageRef="_eWo0gjvJED-o87cRCWHP-Q"/>
+      <bpmn2:messageEventDefinition drools:msgref="vah-handlaggning-requests" messageRef="_eWo0gjvJED-o87cRCWHP-Q" />
     </bpmn2:startEvent>
     <bpmn2:endEvent id="_6D6EDF56-89D6-4DBB-9237-365C2737DD47">
       <bpmn2:incoming>_152B7D50-C575-4C6E-AB02-90BA1261CAA0</bpmn2:incoming>
-      <bpmn2:dataInput id="_6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahHandlaggningResponseMessageDataInputX" drools:dtype="se.fk.rimfrost.HandlaggningResponseMessageData" itemSubjectRef="__6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahHandlaggningResponseMessageDataInputXItem" name="vahHandlaggningResponseMessageData"/>
+      <bpmn2:dataInput id="_6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahHandlaggningResponseMessageDataInputX" drools:dtype="se.fk.rimfrost.HandlaggningResponseMessageData" itemSubjectRef="__6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahHandlaggningResponseMessageDataInputXItem" name="vahHandlaggningResponseMessageData" />
       <bpmn2:dataInputAssociation>
         <bpmn2:sourceRef>vahHandlaggningResponseMessageData</bpmn2:sourceRef>
         <bpmn2:targetRef>_6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahHandlaggningResponseMessageDataInputX</bpmn2:targetRef>
@@ -143,11 +100,11 @@
       <bpmn2:inputSet>
         <bpmn2:dataInputRefs>_6D6EDF56-89D6-4DBB-9237-365C2737DD47_vahHandlaggningResponseMessageDataInputX</bpmn2:dataInputRefs>
       </bpmn2:inputSet>
-      <bpmn2:messageEventDefinition drools:msgref="handlaggning-responses" messageRef="_eWo0gTvJED-o87cRCWHP-Q"/>
+      <bpmn2:messageEventDefinition drools:msgref="handlaggning-responses" messageRef="_eWo0gTvJED-o87cRCWHP-Q" />
     </bpmn2:endEvent>
     <bpmn2:endEvent id="_0D725828-1220-4A54-AD64-88EF2A26F66C">
       <bpmn2:incoming>_SF_ERROR_TO_END</bpmn2:incoming>
-      <bpmn2:dataInput id="_0D725828-1220-4A54-AD64-88EF2A26F66C_vahHandlaggningResponseMessageDataInputX" drools:dtype="se.fk.rimfrost.HandlaggningResponseMessageData" itemSubjectRef="__0D725828-1220-4A54-AD64-88EF2A26F66C_vahHandlaggningResponseMessageDataInputXItem" name="vahHandlaggningResponseMessageData"/>
+      <bpmn2:dataInput id="_0D725828-1220-4A54-AD64-88EF2A26F66C_vahHandlaggningResponseMessageDataInputX" drools:dtype="se.fk.rimfrost.HandlaggningResponseMessageData" itemSubjectRef="__0D725828-1220-4A54-AD64-88EF2A26F66C_vahHandlaggningResponseMessageDataInputXItem" name="vahHandlaggningResponseMessageData" />
       <bpmn2:dataInputAssociation>
         <bpmn2:sourceRef>vahHandlaggningResponseMessageData</bpmn2:sourceRef>
         <bpmn2:targetRef>_0D725828-1220-4A54-AD64-88EF2A26F66C_vahHandlaggningResponseMessageDataInputX</bpmn2:targetRef>
@@ -155,51 +112,37 @@
       <bpmn2:inputSet>
         <bpmn2:dataInputRefs>_0D725828-1220-4A54-AD64-88EF2A26F66C_vahHandlaggningResponseMessageDataInputX</bpmn2:dataInputRefs>
       </bpmn2:inputSet>
-      <bpmn2:messageEventDefinition drools:msgref="handlaggning-responses" messageRef="_eWo0gDvJED-o87cRCWHP-Q"/>
+      <bpmn2:messageEventDefinition drools:msgref="handlaggning-responses" messageRef="_eWo0gDvJED-o87cRCWHP-Q" />
     </bpmn2:endEvent>
-    <bpmn2:exclusiveGateway id="_GW_MASKINELL_ERROR" drools:dg="_SF_MASKINELL_NO_ERROR" gatewayDirection="Diverging" default="_SF_MASKINELL_NO_ERROR">
-      <bpmn2:incoming>_1BE34C21-17A0-4EBF-8ABA-31114FB5ACD5</bpmn2:incoming>
-      <bpmn2:outgoing>_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7</bpmn2:outgoing>
-      <bpmn2:outgoing>_SF_MASKINELL_NO_ERROR</bpmn2:outgoing>
-    </bpmn2:exclusiveGateway>
     <bpmn2:exclusiveGateway id="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" drools:dg="_331439CA-81B3-42E6-B26F-D74D6C3529B1" gatewayDirection="Diverging" default="_331439CA-81B3-42E6-B26F-D74D6C3529B1">
-      <bpmn2:incoming>_SF_MASKINELL_NO_ERROR</bpmn2:incoming>
+      <bpmn2:incoming>_D7D3B8CD-5931-4E30-AB23-369DC1548DB5</bpmn2:incoming>
       <bpmn2:outgoing>_4BDD402F-000B-4D37-9C25-AE7A12A25E88</bpmn2:outgoing>
       <bpmn2:outgoing>_331439CA-81B3-42E6-B26F-D74D6C3529B1</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:exclusiveGateway id="_48636A54-33E2-46E4-8736-787AB637276C" gatewayDirection="Converging">
       <bpmn2:incoming>_E2277266-EAFA-4779-9B35-A9C3D31B114B</bpmn2:incoming>
       <bpmn2:incoming>_331439CA-81B3-42E6-B26F-D74D6C3529B1</bpmn2:incoming>
+      <bpmn2:incoming>_DD37EC6A-61E8-48E0-89CC-B347F9061FA4</bpmn2:incoming>
       <bpmn2:outgoing>_BC111E98-FFF4-4E08-965C-93F4D250AFB2</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:exclusiveGateway id="_BF911926-5ADB-4B04-A41E-645CED3F8054" drools:dg="_E2277266-EAFA-4779-9B35-A9C3D31B114B" gatewayDirection="Diverging" default="_E2277266-EAFA-4779-9B35-A9C3D31B114B">
+    <bpmn2:exclusiveGateway id="_GW_ERROR_MERGE" gatewayDirection="Converging">
+      <bpmn2:incoming>_35DF3271-B27E-4918-AC9C-B72A88F17AE6</bpmn2:incoming>
       <bpmn2:incoming>_5977AE4A-6A59-4D54-9419-A2E17995904D</bpmn2:incoming>
-      <bpmn2:outgoing>_0A50FD08-9A24-40F2-9D7D-352AC2F534C0</bpmn2:outgoing>
-      <bpmn2:outgoing>_E2277266-EAFA-4779-9B35-A9C3D31B114B</bpmn2:outgoing>
-    </bpmn2:exclusiveGateway>
-    <bpmn2:exclusiveGateway id="_E12DBEC7-A835-4217-A8B8-2017638A505E" drools:dg="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7" gatewayDirection="Diverging" default="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7">
       <bpmn2:incoming>_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4</bpmn2:incoming>
-      <bpmn2:outgoing>_ACC3C3B4-3F27-466D-B1F1-5507272B57A7</bpmn2:outgoing>
-      <bpmn2:outgoing>_53594BDC-48D1-44A5-B379-B0A181ADBAE8</bpmn2:outgoing>
-    </bpmn2:exclusiveGateway>
-    <bpmn2:exclusiveGateway id="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" gatewayDirection="Converging">
-      <bpmn2:incoming>_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7</bpmn2:incoming>
-      <bpmn2:incoming>_0A50FD08-9A24-40F2-9D7D-352AC2F534C0</bpmn2:incoming>
-      <bpmn2:incoming>_53594BDC-48D1-44A5-B379-B0A181ADBAE8</bpmn2:incoming>
-      <bpmn2:outgoing>_7775EF4A-B8B6-4FC8-A48A-AB36C728E476</bpmn2:outgoing>
+      <bpmn2:outgoing>_SF_GW_TO_SVC_END_ERROR</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:serviceTask id="_SVC_END_ERROR" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.rimfrost.framework.process.ProcessService" drools:serviceoperation="endProcessWithError" name="Avsluta process med error" implementation="Java" operationRef="_SVC_END_ERROR_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Avsluta process med error]]></drools:metaValue>
+          <drools:metaValue>Avsluta process med error</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:incoming>_7775EF4A-B8B6-4FC8-A48A-AB36C728E476</bpmn2:incoming>
+      <bpmn2:incoming>_SF_GW_TO_SVC_END_ERROR</bpmn2:incoming>
       <bpmn2:outgoing>_SF_ERROR_TO_END</bpmn2:outgoing>
       <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_SVC_END_ERROR_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" name="handlaggningId"/>
-        <bpmn2:dataInput id="_SVC_END_ERROR_regelErrorInformationInputX" drools:dtype="se.fk.rimfrost.framework.regel.RegelErrorInformation" itemSubjectRef="__SVC_END_ERROR_regelErrorInformationInputXItem" name="regelErrorInformation"/>
-        <bpmn2:dataOutput id="_SVC_END_ERROR_vahHandlaggningResponseMessageDataOutputX" drools:dtype="se.fk.rimfrost.HandlaggningResponseMessageData" itemSubjectRef="__SVC_END_ERROR_vahHandlaggningResponseMessageDataOutputXItem" name="vahHandlaggningResponseMessageData"/>
+        <bpmn2:dataInput id="_SVC_END_ERROR_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" name="handlaggningId" />
+        <bpmn2:dataInput id="_SVC_END_ERROR_regelErrorInformationInputX" drools:dtype="se.fk.rimfrost.framework.regel.RegelErrorInformation" itemSubjectRef="__SVC_END_ERROR_regelErrorInformationInputXItem" name="regelErrorInformation" />
+        <bpmn2:dataOutput id="_SVC_END_ERROR_vahHandlaggningResponseMessageDataOutputX" drools:dtype="se.fk.rimfrost.HandlaggningResponseMessageData" itemSubjectRef="__SVC_END_ERROR_vahHandlaggningResponseMessageDataOutputXItem" name="vahHandlaggningResponseMessageData" />
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_SVC_END_ERROR_handlaggningIdInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_SVC_END_ERROR_regelErrorInformationInputX</bpmn2:dataInputRefs>
@@ -224,15 +167,16 @@
     <bpmn2:serviceTask id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.rimfrost.framework.process.ProcessService" drools:serviceoperation="endProcess" name="Informera om beslut" implementation="Java" operationRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Informera om beslut]]></drools:metaValue>
+          <drools:metaValue>Informera om beslut</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_ACC3C3B4-3F27-466D-B1F1-5507272B57A7</bpmn2:incoming>
+      <bpmn2:incoming>_7E9E66B3-A229-404C-A53B-4312ACD2590F</bpmn2:incoming>
       <bpmn2:outgoing>_152B7D50-C575-4C6E-AB02-90BA1261CAA0</bpmn2:outgoing>
       <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputXItem" name="handlaggningId"/>
-        <bpmn2:dataInput id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputXItem" name="regelProcessResult"/>
-        <bpmn2:dataOutput id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_vahHandlaggningResponseMessageDataOutputX" drools:dtype="se.fk.rimfrost.HandlaggningResponseMessageData" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_vahHandlaggningResponseMessageDataOutputXItem" name="vahHandlaggningResponseMessageData"/>
+        <bpmn2:dataInput id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputXItem" name="handlaggningId" />
+        <bpmn2:dataInput id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputXItem" name="regelProcessResult" />
+        <bpmn2:dataOutput id="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_vahHandlaggningResponseMessageDataOutputX" drools:dtype="se.fk.rimfrost.HandlaggningResponseMessageData" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_vahHandlaggningResponseMessageDataOutputXItem" name="vahHandlaggningResponseMessageData" />
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_handlaggningIdInputX</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputX</bpmn2:dataInputRefs>
@@ -257,14 +201,14 @@
     <bpmn2:serviceTask id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF" drools:serviceimplementation="Java" drools:serviceinterface="se.fk.rimfrost.framework.process.ProcessService" drools:serviceoperation="startProcess" name="Start vård av husdjur process" implementation="Java" operationRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_ServiceOperation">
       <bpmn2:extensionElements>
         <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Start vård av husdjur process]]></drools:metaValue>
+          <drools:metaValue>Start vård av husdjur process</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F</bpmn2:incoming>
       <bpmn2:outgoing>_CAC39F18-D56B-417C-951C-0B1457304806</bpmn2:outgoing>
       <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_vahHandlaggningRequestMessageDataInputX" drools:dtype="se.fk.rimfrost.HandlaggningRequestMessageData" itemSubjectRef="__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_vahHandlaggningRequestMessageDataInputXItem" name="vahHandlaggningRequestMessageData"/>
-        <bpmn2:dataOutput id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_handlaggningIdOutputX" drools:dtype="String" itemSubjectRef="__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_handlaggningIdOutputXItem" name="handlaggningId"/>
+        <bpmn2:dataInput id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_vahHandlaggningRequestMessageDataInputX" drools:dtype="se.fk.rimfrost.HandlaggningRequestMessageData" itemSubjectRef="__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_vahHandlaggningRequestMessageDataInputXItem" name="vahHandlaggningRequestMessageData" />
+        <bpmn2:dataOutput id="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_handlaggningIdOutputX" drools:dtype="String" itemSubjectRef="__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_handlaggningIdOutputXItem" name="handlaggningId" />
         <bpmn2:inputSet>
           <bpmn2:dataInputRefs>_945A597D-60CC-4E7A-A1BB-63AD945B1EAF_vahHandlaggningRequestMessageDataInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
@@ -281,252 +225,381 @@
         <bpmn2:targetRef>handlaggningId</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
-    <bpmn2:callActivity id="_5DAB8314-5034-4D58-B2AA-8CF62303409F" drools:independent="false" drools:waitForCompletion="true" name="Rätt till försäkring maskinell kontroll" calledElement="rtf_maskinell">
+    <bpmn2:callActivity id="_5DAB8314-5034-4D58-B2AA-8CF62303409F" drools:independent="true" drools:waitForCompletion="true" name="Rätt till försäkring maskinell kontroll" calledElement="rtf_maskinell">
       <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Rätt till försäkring maskinell kontroll]]></drools:metaValue>
-        </drools:metaData>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
-          <drools:script><![CDATA[if (rtfMaskinellResult != null && rtfMaskinellResult.getError() != null) { kcontext.setVariable("sharedErrorInfo", rtfMaskinellResult.getError()); }]]></drools:script>
+          <drools:script>if (rtfMaskinellResult != null &amp;&amp; rtfMaskinellResult.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, rtfMaskinellResult.getError()); }</drools:script>
         </drools:onExit-script>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Rätt till försäkring maskinell kontroll</drools:metaValue>
+        </drools:metaData>
         <drools:metaData name="customAbortParent">
-          <drools:metaValue><![CDATA[false]]></drools:metaValue>
+          <drools:metaValue>false</drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="customAsync">
+          <drools:metaValue>false</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_CAC39F18-D56B-417C-951C-0B1457304806</bpmn2:incoming>
-      <bpmn2:outgoing>_1BE34C21-17A0-4EBF-8ABA-31114FB5ACD5</bpmn2:outgoing>
-      <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_5DAB8314-5034-4D58-B2AA-8CF62303409F_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__5DAB8314-5034-4D58-B2AA-8CF62303409F_handlaggningIdInputXItem" name="handlaggningId"/>
-        <bpmn2:dataInput id="_5DAB8314-5034-4D58-B2AA-8CF62303409F_aktivitetIdInputX" drools:dtype="String" itemSubjectRef="__5DAB8314-5034-4D58-B2AA-8CF62303409F_aktivitetIdInputXItem" name="aktivitetId"/>
-        <bpmn2:dataOutput id="_5DAB8314-5034-4D58-B2AA-8CF62303409F_resultOutputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__5DAB8314-5034-4D58-B2AA-8CF62303409F_resultOutputXItem" name="result"/>
-        <bpmn2:inputSet>
-          <bpmn2:dataInputRefs>_5DAB8314-5034-4D58-B2AA-8CF62303409F_handlaggningIdInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_5DAB8314-5034-4D58-B2AA-8CF62303409F_aktivitetIdInputX</bpmn2:dataInputRefs>
+      <bpmn2:outgoing>_D7D3B8CD-5931-4E30-AB23-369DC1548DB5</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_BC968E6A-6EA1-4AB8-AEBA-EB5BD5B90B30">
+        <bpmn2:dataInput id="_4BFF0ECA-75FC-4DD1-B05A-7637CB1A5542" name="handlaggningId" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_C9965878-5415-415B-816C-58CA623A0E7F" name="aktivitetId" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_D699127C-32A4-44C5-8D78-266B7784AAF5" name="maxAttempts" drools:dtype="Integer" itemSubjectRef="_21CC29F0-AB12-431C-9B8B-DC05FAB70FAD" />
+        <bpmn2:dataInput id="_5DBCF031-F6E8-4CC4-B2DD-F040CD21C2E4" name="responseTimeout" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_1213B525-D5E3-4A3C-9CAB-2DE261E79714" name="retryDelay" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataOutput name="result" id="_54AC0D71-B44A-4077-85C4-A8A3A96B57A0" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputXItem" />
+        <bpmn2:inputSet id="_0891CBD6-783E-4653-A6A2-DD711A2C83A6">
+          <bpmn2:dataInputRefs>_4BFF0ECA-75FC-4DD1-B05A-7637CB1A5542</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_C9965878-5415-415B-816C-58CA623A0E7F</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_D699127C-32A4-44C5-8D78-266B7784AAF5</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_5DBCF031-F6E8-4CC4-B2DD-F040CD21C2E4</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_1213B525-D5E3-4A3C-9CAB-2DE261E79714</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet>
-          <bpmn2:dataOutputRefs>_5DAB8314-5034-4D58-B2AA-8CF62303409F_resultOutputX</bpmn2:dataOutputRefs>
+        <bpmn2:outputSet id="_C3700741-6A52-4BA4-8B46-6BDE0B8C761E">
+          <bpmn2:dataOutputRefs>_54AC0D71-B44A-4077-85C4-A8A3A96B57A0</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_63F33CD6-BB42-4A3B-95E4-446B0DF6DFD0">
         <bpmn2:sourceRef>handlaggningId</bpmn2:sourceRef>
-        <bpmn2:targetRef>_5DAB8314-5034-4D58-B2AA-8CF62303409F_handlaggningIdInputX</bpmn2:targetRef>
+        <bpmn2:targetRef>_4BFF0ECA-75FC-4DD1-B05A-7637CB1A5542</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation>
-        <bpmn2:targetRef>_5DAB8314-5034-4D58-B2AA-8CF62303409F_aktivitetIdInputX</bpmn2:targetRef>
-        <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[d4ab4820-68d9-41e0-abe1-cd8f9865d275]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_5DAB8314-5034-4D58-B2AA-8CF62303409F_aktivitetIdInputX]]></bpmn2:to>
+      <bpmn2:dataInputAssociation id="_213E3645-FAE8-4DAE-A797-2EE653544E11">
+        <bpmn2:targetRef>_C9965878-5415-415B-816C-58CA623A0E7F</bpmn2:targetRef>
+        <bpmn2:assignment id="_D4DF80BB-B141-43E5-94B2-5700D61126AC">
+          <bpmn2:from id="_247C3AEF-C5C8-44E5-B780-55CA030007FB" xsi:type="tFormalExpression">d4ab4820-68d9-41e0-abe1-cd8f9865d275</bpmn2:from>
+          <bpmn2:to id="_C4B1067E-024D-4EEB-B6C4-2BEFC7AD2F7D">_C9965878-5415-415B-816C-58CA623A0E7F</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation>
-        <bpmn2:sourceRef>_5DAB8314-5034-4D58-B2AA-8CF62303409F_resultOutputX</bpmn2:sourceRef>
+      <bpmn2:dataInputAssociation id="_C13F21DB-85F3-4056-96D9-73251084BE73">
+        <bpmn2:targetRef>_D699127C-32A4-44C5-8D78-266B7784AAF5</bpmn2:targetRef>
+        <bpmn2:assignment id="_D17B92E1-D4A9-4023-8F7F-F6E5F8D80FDA">
+          <bpmn2:from id="_0D218716-1885-4B7F-94F9-49816B06063C" xsi:type="tFormalExpression">3</bpmn2:from>
+          <bpmn2:to id="_86281FD1-00A0-41DF-A2DF-5E7AB3195FF6">_D699127C-32A4-44C5-8D78-266B7784AAF5</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_9D52C26A-6271-49B4-BEE1-E20327F944F5">
+        <bpmn2:targetRef>_5DBCF031-F6E8-4CC4-B2DD-F040CD21C2E4</bpmn2:targetRef>
+        <bpmn2:assignment id="_0FEB036B-55DC-4A3E-B74F-CA390C278E96">
+          <bpmn2:from id="_4C40C493-0733-45B0-8B4B-32460A5371A5" xsi:type="tFormalExpression">PT20S</bpmn2:from>
+          <bpmn2:to id="_2F6D13C7-A776-4BD6-B671-BCFD4260E126">_5DBCF031-F6E8-4CC4-B2DD-F040CD21C2E4</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_3B553662-2C57-499A-88A9-F04CA3AA195F">
+        <bpmn2:targetRef>_1213B525-D5E3-4A3C-9CAB-2DE261E79714</bpmn2:targetRef>
+        <bpmn2:assignment id="_8B60A108-3081-483E-B9C6-8D4E9E342D1C">
+          <bpmn2:from id="_E4978DAF-3643-4C1D-BB42-A6DCCC83DB93" xsi:type="tFormalExpression">PT1S</bpmn2:from>
+          <bpmn2:to id="_F0B1403C-94CB-4014-911C-78777101DAAC">_1213B525-D5E3-4A3C-9CAB-2DE261E79714</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="_1FD8422D-52C8-4362-B353-B4085ADE1DF6">
+        <bpmn2:sourceRef>_54AC0D71-B44A-4077-85C4-A8A3A96B57A0</bpmn2:sourceRef>
         <bpmn2:targetRef>rtfMaskinellResult</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:callActivity>
-    <bpmn2:callActivity id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" drools:independent="false" drools:waitForCompletion="true" name="Rätt till försäkring manuell kontroll" calledElement="rtf_manuell">
+    <bpmn2:callActivity id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" drools:independent="true" drools:waitForCompletion="true" name="Rätt till försäkring manuell kontroll" calledElement="rtf_manuell">
       <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Rätt till försäkring manuell kontroll]]></drools:metaValue>
-        </drools:metaData>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
-          <drools:script><![CDATA[if (rtfManuellResult != null && rtfManuellResult.getError() != null) { kcontext.setVariable("sharedErrorInfo", rtfManuellResult.getError()); }]]></drools:script>
+          <drools:script>if (rtfManuellResult != null &amp;&amp; rtfManuellResult.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, rtfManuellResult.getError()); }</drools:script>
         </drools:onExit-script>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Rätt till försäkring manuell kontroll</drools:metaValue>
+        </drools:metaData>
         <drools:metaData name="customAbortParent">
-          <drools:metaValue><![CDATA[false]]></drools:metaValue>
+          <drools:metaValue>false</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_4BDD402F-000B-4D37-9C25-AE7A12A25E88</bpmn2:incoming>
-      <bpmn2:outgoing>_5977AE4A-6A59-4D54-9419-A2E17995904D</bpmn2:outgoing>
-      <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputXItem" name="handlaggningId"/>
-        <bpmn2:dataInput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX" drools:dtype="String" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputXItem" name="aktivitetId"/>
-        <bpmn2:dataOutput id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputXItem" name="result"/>
-        <bpmn2:inputSet>
-          <bpmn2:dataInputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX</bpmn2:dataInputRefs>
+      <bpmn2:outgoing>_DD37EC6A-61E8-48E0-89CC-B347F9061FA4</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_935954E7-DECD-40CB-A80C-3FA5316FF0BC">
+        <bpmn2:dataInput id="_2E00278C-4054-40B9-8C05-0EA2D4BEF2E7" name="handlaggningId" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_89B8DCA9-768F-4733-95A8-9D7AF4F26BFE" name="aktivitetId" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_8BCC8F75-7925-4B87-98E6-CC4F10C29D55" name="maxAttempts" drools:dtype="Integer" itemSubjectRef="_21CC29F0-AB12-431C-9B8B-DC05FAB70FAD" />
+        <bpmn2:dataInput id="_72B863C4-95FF-4A6D-BFD9-E5A612A8F2BA" name="responseTimeout" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_F818458D-84A9-4DC0-8ED7-9BABB65991BB" name="retryDelay" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataOutput name="result" id="_FEADAD92-B624-40A9-ACE0-61B3393FD33B" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputXItem" />
+        <bpmn2:inputSet id="_7BBAB358-A6BB-480B-89E1-F768A88656E1">
+          <bpmn2:dataInputRefs>_2E00278C-4054-40B9-8C05-0EA2D4BEF2E7</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_89B8DCA9-768F-4733-95A8-9D7AF4F26BFE</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_8BCC8F75-7925-4B87-98E6-CC4F10C29D55</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_72B863C4-95FF-4A6D-BFD9-E5A612A8F2BA</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_F818458D-84A9-4DC0-8ED7-9BABB65991BB</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet>
-          <bpmn2:dataOutputRefs>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX</bpmn2:dataOutputRefs>
+        <bpmn2:outputSet id="_8428CE76-21FB-423A-AA8A-8E1EED528590">
+          <bpmn2:dataOutputRefs>_FEADAD92-B624-40A9-ACE0-61B3393FD33B</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_6DE56786-BB68-40AE-A86F-887BBFD87D43">
         <bpmn2:sourceRef>handlaggningId</bpmn2:sourceRef>
-        <bpmn2:targetRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_handlaggningIdInputX</bpmn2:targetRef>
+        <bpmn2:targetRef>_2E00278C-4054-40B9-8C05-0EA2D4BEF2E7</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation>
-        <bpmn2:targetRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX</bpmn2:targetRef>
-        <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[c58dd666-b3c1-4a30-91b8-76c3495668c6]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_C29B7634-3A7A-4606-9B1C-4A3424F29D34_aktivitetIdInputX]]></bpmn2:to>
+      <bpmn2:dataInputAssociation id="_2F52F47B-C257-4D96-8D47-146DB8797580">
+        <bpmn2:targetRef>_89B8DCA9-768F-4733-95A8-9D7AF4F26BFE</bpmn2:targetRef>
+        <bpmn2:assignment id="_754A23B2-A34F-4F48-AF7D-93095333B93E">
+          <bpmn2:from id="_DA7332BE-F533-4BD5-8EE5-774611D61F15" xsi:type="tFormalExpression">c58dd666-b3c1-4a30-91b8-76c3495668c6</bpmn2:from>
+          <bpmn2:to id="_60BBF9B6-794E-4FD8-9DAA-C87F885960AA">_89B8DCA9-768F-4733-95A8-9D7AF4F26BFE</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation>
-        <bpmn2:sourceRef>_C29B7634-3A7A-4606-9B1C-4A3424F29D34_resultOutputX</bpmn2:sourceRef>
+      <bpmn2:dataInputAssociation id="_53634B36-4661-476F-8A4D-D61AB54403EF">
+        <bpmn2:targetRef>_8BCC8F75-7925-4B87-98E6-CC4F10C29D55</bpmn2:targetRef>
+        <bpmn2:assignment id="_D4BCFEE8-C15D-4D1F-8412-A6C08A1CA344">
+          <bpmn2:from id="_424771F8-2602-4553-8291-0928908F43AD" xsi:type="tFormalExpression">3</bpmn2:from>
+          <bpmn2:to id="_3800C0EA-E3FB-44FA-A7C8-A03C6229764E">_8BCC8F75-7925-4B87-98E6-CC4F10C29D55</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_F9892279-B7AF-42C0-AC5B-EFFB9692091C">
+        <bpmn2:targetRef>_72B863C4-95FF-4A6D-BFD9-E5A612A8F2BA</bpmn2:targetRef>
+        <bpmn2:assignment id="_47C9A313-29D4-4E4B-AA44-B640181BE0E4">
+          <bpmn2:from id="_6DE4AC58-07FC-4237-8A40-5EEDC3EDF514" xsi:type="tFormalExpression">PT3M</bpmn2:from>
+          <bpmn2:to id="_A9C915BF-A493-49E3-A9A9-F61CBEB3CD51">_72B863C4-95FF-4A6D-BFD9-E5A612A8F2BA</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_5F3048DE-5919-422D-A274-B4690AC0213F">
+        <bpmn2:targetRef>_F818458D-84A9-4DC0-8ED7-9BABB65991BB</bpmn2:targetRef>
+        <bpmn2:assignment id="_3BD0C836-AF62-4BEE-BD24-9BBD36BB0C3B">
+          <bpmn2:from id="_61DD995E-62AB-415B-A54C-0ADBBC036BFD" xsi:type="tFormalExpression">PT1M</bpmn2:from>
+          <bpmn2:to id="_1F7346A7-5DDF-4932-977B-6F6F4E3831B5">_F818458D-84A9-4DC0-8ED7-9BABB65991BB</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="_FAC1CD2F-C9EB-4988-804A-0ACD47B4E56C">
+        <bpmn2:sourceRef>_FEADAD92-B624-40A9-ACE0-61B3393FD33B</bpmn2:sourceRef>
         <bpmn2:targetRef>rtfManuellResult</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:callActivity>
-    <bpmn2:callActivity id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" drools:independent="false" drools:waitForCompletion="true" name="Bekräfta beslut" calledElement="bekraftabeslut">
+    <bpmn2:callActivity id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" drools:independent="true" drools:waitForCompletion="true" name="Bekräfta beslut" calledElement="bekraftabeslut">
       <bpmn2:extensionElements>
-        <drools:metaData name="elementname">
-          <drools:metaValue><![CDATA[Bekräfta beslut]]></drools:metaValue>
-        </drools:metaData>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
-          <drools:script><![CDATA[if (bekraftabeslutResult != null && bekraftabeslutResult.getError() != null) { kcontext.setVariable("sharedErrorInfo", bekraftabeslutResult.getError()); }]]></drools:script>
+          <drools:script>if (bekraftabeslutResult != null &amp;&amp; bekraftabeslutResult.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, bekraftabeslutResult.getError()); }</drools:script>
         </drools:onExit-script>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Bekräfta beslut</drools:metaValue>
+        </drools:metaData>
         <drools:metaData name="customAbortParent">
-          <drools:metaValue><![CDATA[false]]></drools:metaValue>
+          <drools:metaValue>false</drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>_BC111E98-FFF4-4E08-965C-93F4D250AFB2</bpmn2:incoming>
-      <bpmn2:outgoing>_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4</bpmn2:outgoing>
-      <bpmn2:ioSpecification>
-        <bpmn2:dataInput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX" drools:dtype="String" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputXItem" name="handlaggningId"/>
-        <bpmn2:dataInput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX" drools:dtype="String" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputXItem" name="aktivitetId"/>
-        <bpmn2:dataOutput id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputXItem" name="result"/>
-        <bpmn2:inputSet>
-          <bpmn2:dataInputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX</bpmn2:dataInputRefs>
+      <bpmn2:outgoing>_7E9E66B3-A229-404C-A53B-4312ACD2590F</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_96B85A76-84BB-48E2-A7E9-74884A9A347F">
+        <bpmn2:dataInput id="_2A6A4D39-01D8-462B-9284-A3EB4533AB45" name="handlaggningId" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_4C48A6A0-3DE7-4AA6-9363-6390ABD7F8F9" name="aktivitetId" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_B4AC2772-81FD-4548-90A5-8C4A09C1AAA9" name="maxAttempts" drools:dtype="Integer" itemSubjectRef="_21CC29F0-AB12-431C-9B8B-DC05FAB70FAD" />
+        <bpmn2:dataInput id="_73B03894-7C9E-40A4-8F40-D1970023B158" name="responseTimeout" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataInput id="_74AE6A1B-82A4-49DF-BDC6-9F57A644B269" name="retryDelay" drools:dtype="String" itemSubjectRef="__SVC_END_ERROR_handlaggningIdInputXItem" />
+        <bpmn2:dataOutput name="result" id="_C66F3C8A-D07B-4534-9D52-600566B6B2D5" drools:dtype="se.fk.rimfrost.framework.process.RegelProcessResult" itemSubjectRef="__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_regelProcessResultInputXItem" />
+        <bpmn2:inputSet id="_08F2408D-0B4A-4B21-9657-DF6F7744DF81">
+          <bpmn2:dataInputRefs>_2A6A4D39-01D8-462B-9284-A3EB4533AB45</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_4C48A6A0-3DE7-4AA6-9363-6390ABD7F8F9</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_B4AC2772-81FD-4548-90A5-8C4A09C1AAA9</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_73B03894-7C9E-40A4-8F40-D1970023B158</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_74AE6A1B-82A4-49DF-BDC6-9F57A644B269</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet>
-          <bpmn2:dataOutputRefs>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX</bpmn2:dataOutputRefs>
+        <bpmn2:outputSet id="_60DFD662-BD72-4E54-B16F-AEA3FE0B6C80">
+          <bpmn2:dataOutputRefs>_C66F3C8A-D07B-4534-9D52-600566B6B2D5</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_A4D77DD1-A241-46BA-A96C-C75544DF5016">
         <bpmn2:sourceRef>handlaggningId</bpmn2:sourceRef>
-        <bpmn2:targetRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_handlaggningIdInputX</bpmn2:targetRef>
+        <bpmn2:targetRef>_2A6A4D39-01D8-462B-9284-A3EB4533AB45</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation>
-        <bpmn2:targetRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX</bpmn2:targetRef>
-        <bpmn2:assignment>
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression"><![CDATA[8cde2355-aea5-4951-916f-08319b2f1e99]]></bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression"><![CDATA[_297C75F8-77DE-4FD5-8F2A-39601A7621D2_aktivitetIdInputX]]></bpmn2:to>
+      <bpmn2:dataInputAssociation id="_FA78577F-E901-44A8-A1F3-E1F18AB0FB5C">
+        <bpmn2:targetRef>_4C48A6A0-3DE7-4AA6-9363-6390ABD7F8F9</bpmn2:targetRef>
+        <bpmn2:assignment id="_D3B8541F-CEF4-4F0E-86C5-43C0D177583C">
+          <bpmn2:from id="_5E1E24CE-5BB7-4937-BCF0-0E2663DA90AC" xsi:type="tFormalExpression">8cde2355-aea5-4951-916f-08319b2f1e99</bpmn2:from>
+          <bpmn2:to id="_04FE3FD5-BA4A-4089-A720-81EB6D835821">_4C48A6A0-3DE7-4AA6-9363-6390ABD7F8F9</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation>
-        <bpmn2:sourceRef>_297C75F8-77DE-4FD5-8F2A-39601A7621D2_resultOutputX</bpmn2:sourceRef>
+      <bpmn2:dataInputAssociation id="_C1E17623-D8A9-4D73-8F3D-8D42F17AAB41">
+        <bpmn2:targetRef>_B4AC2772-81FD-4548-90A5-8C4A09C1AAA9</bpmn2:targetRef>
+        <bpmn2:assignment id="_7C77BBCC-9313-4E48-AB66-513C68BC8084">
+          <bpmn2:from id="_C8BB5429-EA0C-4BD4-A8A1-18E730E69FCF" xsi:type="tFormalExpression">3</bpmn2:from>
+          <bpmn2:to id="_001F9308-4FDD-4E66-B09A-053C6E27EA22">_B4AC2772-81FD-4548-90A5-8C4A09C1AAA9</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_7A4D2829-79AB-406D-BB53-50B3A1B3C929">
+        <bpmn2:targetRef>_73B03894-7C9E-40A4-8F40-D1970023B158</bpmn2:targetRef>
+        <bpmn2:assignment id="_837C9AE6-6800-4178-9CD5-28113E5609B9">
+          <bpmn2:from id="_64422408-D383-473F-9A9D-15FE9A6BCAAE" xsi:type="tFormalExpression">PT3M</bpmn2:from>
+          <bpmn2:to id="_C5CC1463-B1F2-4CC8-B764-E226572018AD">_73B03894-7C9E-40A4-8F40-D1970023B158</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="_D34545A7-A1EB-47BD-84BE-026C75EED7DB">
+        <bpmn2:targetRef>_74AE6A1B-82A4-49DF-BDC6-9F57A644B269</bpmn2:targetRef>
+        <bpmn2:assignment id="_EA005DCE-A281-46B4-9EB8-7676787794F2">
+          <bpmn2:from id="_9D558E65-25E3-4751-924E-D62848423D59" xsi:type="tFormalExpression">PT1M</bpmn2:from>
+          <bpmn2:to id="_05759582-0E71-4C7C-82C0-889B7CADECF2">_74AE6A1B-82A4-49DF-BDC6-9F57A644B269</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="_7CD56F6E-48ED-4C5D-8CAD-B62CF7203F55">
+        <bpmn2:sourceRef>_C66F3C8A-D07B-4534-9D52-600566B6B2D5</bpmn2:sourceRef>
         <bpmn2:targetRef>bekraftabeslutResult</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:callActivity>
+    <bpmn2:boundaryEvent id="_BND_MASKINELL_ERROR" attachedToRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" cancelActivity="true">
+      <bpmn2:outgoing>_35DF3271-B27E-4918-AC9C-B72A88F17AE6</bpmn2:outgoing>
+      <bpmn2:dataOutput id="_BND_MASKINELL_ERROR_errorOutputX" drools:dtype="se.fk.rimfrost.framework.regel.RegelErrorInformation" itemSubjectRef="_sharedErrorInfoItem" name="error" />
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_BND_MASKINELL_ERROR_errorOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>sharedErrorInfo</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet>
+        <bpmn2:dataOutputRefs>_BND_MASKINELL_ERROR_errorOutputX</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:errorEventDefinition id="_BND_MASKINELL_ERROR_def" errorRef="_REGEL_ERROR_VAH" drools:erefname="REGEL_ERROR" />
+    </bpmn2:boundaryEvent>
+    <bpmn2:boundaryEvent id="_BND_MANUELL_ERROR" attachedToRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" cancelActivity="true">
+      <bpmn2:outgoing>_5977AE4A-6A59-4D54-9419-A2E17995904D</bpmn2:outgoing>
+      <bpmn2:dataOutput id="_BND_MANUELL_ERROR_errorOutputX" drools:dtype="se.fk.rimfrost.framework.regel.RegelErrorInformation" itemSubjectRef="_sharedErrorInfoItem" name="error" />
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_BND_MANUELL_ERROR_errorOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>sharedErrorInfo</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet>
+        <bpmn2:dataOutputRefs>_BND_MANUELL_ERROR_errorOutputX</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:errorEventDefinition id="_BND_MANUELL_ERROR_def" errorRef="_REGEL_ERROR_VAH" drools:erefname="REGEL_ERROR" />
+    </bpmn2:boundaryEvent>
+    <bpmn2:boundaryEvent id="_BND_BEKRAFTA_ERROR" attachedToRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" cancelActivity="true">
+      <bpmn2:outgoing>_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4</bpmn2:outgoing>
+      <bpmn2:dataOutput id="_BND_BEKRAFTA_ERROR_errorOutputX" drools:dtype="se.fk.rimfrost.framework.regel.RegelErrorInformation" itemSubjectRef="_sharedErrorInfoItem" name="error" />
+      <bpmn2:dataOutputAssociation>
+        <bpmn2:sourceRef>_BND_BEKRAFTA_ERROR_errorOutputX</bpmn2:sourceRef>
+        <bpmn2:targetRef>sharedErrorInfo</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet>
+        <bpmn2:dataOutputRefs>_BND_BEKRAFTA_ERROR_errorOutputX</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:errorEventDefinition id="_BND_BEKRAFTA_ERROR_def" errorRef="_REGEL_ERROR_VAH" drools:erefname="REGEL_ERROR" />
+    </bpmn2:boundaryEvent>
+    <bpmn2:sequenceFlow id="_331439CA-81B3-42E6-B26F-D74D6C3529B1" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_48636A54-33E2-46E4-8736-787AB637276C" />
+    <bpmn2:sequenceFlow id="_SF_ERROR_TO_END" sourceRef="_SVC_END_ERROR" targetRef="_0D725828-1220-4A54-AD64-88EF2A26F66C" />
+    <bpmn2:sequenceFlow id="_152B7D50-C575-4C6E-AB02-90BA1261CAA0" sourceRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" targetRef="_6D6EDF56-89D6-4DBB-9237-365C2737DD47" />
+    <bpmn2:sequenceFlow id="_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F" sourceRef="_7C020ABA-9324-4EE3-857B-401B3C43FD84" targetRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF" />
+    <bpmn2:sequenceFlow id="_CAC39F18-D56B-417C-951C-0B1457304806" sourceRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF" targetRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" />
+    <bpmn2:sequenceFlow id="_4BDD402F-000B-4D37-9C25-AE7A12A25E88" name="Utredning" sourceRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" targetRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue>Utredning</drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" language="http://www.java.com/java">return rtfMaskinellResult.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.UTREDNING;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_BC111E98-FFF4-4E08-965C-93F4D250AFB2" sourceRef="_48636A54-33E2-46E4-8736-787AB637276C" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" />
+    <bpmn2:sequenceFlow id="_D7D3B8CD-5931-4E30-AB23-369DC1548DB5" sourceRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" targetRef="_302D0FF4-43EA-4431-B4E5-8D5AD6310711" />
+    <bpmn2:sequenceFlow id="_35DF3271-B27E-4918-AC9C-B72A88F17AE6" sourceRef="_BND_MASKINELL_ERROR" targetRef="_GW_ERROR_MERGE" />
+    <bpmn2:sequenceFlow id="_5977AE4A-6A59-4D54-9419-A2E17995904D" sourceRef="_BND_MANUELL_ERROR" targetRef="_GW_ERROR_MERGE" />
+    <bpmn2:sequenceFlow id="_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4" sourceRef="_BND_BEKRAFTA_ERROR" targetRef="_GW_ERROR_MERGE" />
+    <bpmn2:sequenceFlow id="_SF_GW_TO_SVC_END_ERROR" sourceRef="_GW_ERROR_MERGE" targetRef="_SVC_END_ERROR" />
+    <bpmn2:sequenceFlow id="_DD37EC6A-61E8-48E0-89CC-B347F9061FA4" sourceRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" targetRef="_48636A54-33E2-46E4-8736-787AB637276C" />
+    <bpmn2:sequenceFlow id="_7E9E66B3-A229-404C-A53B-4312ACD2590F" sourceRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" targetRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" />
   </bpmn2:process>
-  <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane bpmnElement="vah">
+  <bpmndi:BPMNDiagram id="_FD8D3900-F782-47AF-84C3-5E085B9EA3B1">
+    <bpmndi:BPMNPlane bpmnElement="vah" id="_FB79D12C-6B76-4663-AAD4-664F423A9D46">
       <bpmndi:BPMNShape id="shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2" bpmnElement="_297C75F8-77DE-4FD5-8F2A-39601A7621D2">
-        <dc:Bounds height="100" width="140" x="1320" y="250"/>
+        <dc:Bounds height="100" width="140" x="1320" y="250" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__C29B7634-3A7A-4606-9B1C-4A3424F29D34" bpmnElement="_C29B7634-3A7A-4606-9B1C-4A3424F29D34">
-        <dc:Bounds height="101" width="153" x="840" y="249"/>
+        <dc:Bounds height="101" width="153" x="840" y="249" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__5DAB8314-5034-4D58-B2AA-8CF62303409F" bpmnElement="_5DAB8314-5034-4D58-B2AA-8CF62303409F">
-        <dc:Bounds height="101" width="153" x="403" y="249"/>
+        <dc:Bounds height="101" width="153" x="403" y="249" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__BND_MASKINELL_ERROR" bpmnElement="_BND_MASKINELL_ERROR">
+        <dc:Bounds height="56" width="56" x="451" y="322" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__945A597D-60CC-4E7A-A1BB-63AD945B1EAF" bpmnElement="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF">
-        <dc:Bounds height="102" width="154" x="193" y="249"/>
+        <dc:Bounds height="102" width="154" x="193" y="249" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__9BF4B5C5-6395-4DAF-A523-56CABCE7908E" bpmnElement="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E">
-        <dc:Bounds height="102" width="154" x="1660" y="249"/>
+        <dc:Bounds height="102" width="154" x="1660" y="249" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__SVC_END_ERROR" bpmnElement="_SVC_END_ERROR">
-        <dc:Bounds height="100" width="160" x="1840" y="450"/>
+        <dc:Bounds height="100" width="160" x="1840" y="450" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="shape__9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" bpmnElement="_9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722">
-        <dc:Bounds height="56" width="56" x="1720" y="472"/>
+      <bpmndi:BPMNShape id="shape__BND_MANUELL_ERROR" bpmnElement="_BND_MANUELL_ERROR">
+        <dc:Bounds height="56" width="56" x="888" y="322" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="shape__E12DBEC7-A835-4217-A8B8-2017638A505E" bpmnElement="_E12DBEC7-A835-4217-A8B8-2017638A505E">
-        <dc:Bounds height="56" width="56" x="1540" y="272"/>
+      <bpmndi:BPMNShape id="shape__BND_BEKRAFTA_ERROR" bpmnElement="_BND_BEKRAFTA_ERROR">
+        <dc:Bounds height="56" width="56" x="1362" y="322" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="shape__BF911926-5ADB-4B04-A41E-645CED3F8054" bpmnElement="_BF911926-5ADB-4B04-A41E-645CED3F8054">
-        <dc:Bounds height="56" width="56" x="1060" y="272"/>
+      <bpmndi:BPMNShape id="shape__GW_ERROR_MERGE" bpmnElement="_GW_ERROR_MERGE">
+        <dc:Bounds height="56" width="56" x="1700" y="472" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__48636A54-33E2-46E4-8736-787AB637276C" bpmnElement="_48636A54-33E2-46E4-8736-787AB637276C">
-        <dc:Bounds height="56" width="56" x="1190" y="272"/>
+        <dc:Bounds height="56" width="56" x="1190" y="272" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__302D0FF4-43EA-4431-B4E5-8D5AD6310711" bpmnElement="_302D0FF4-43EA-4431-B4E5-8D5AD6310711">
-        <dc:Bounds height="56" width="56" x="700" y="272"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="shape__GW_MASKINELL_ERROR" bpmnElement="_GW_MASKINELL_ERROR">
-        <dc:Bounds height="56" width="56" x="590" y="272"/>
+        <dc:Bounds height="56" width="56" x="700" y="272" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__0D725828-1220-4A54-AD64-88EF2A26F66C" bpmnElement="_0D725828-1220-4A54-AD64-88EF2A26F66C">
-        <dc:Bounds height="56" width="56" x="2080" y="472"/>
+        <dc:Bounds height="56" width="56" x="2080" y="472" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__6D6EDF56-89D6-4DBB-9237-365C2737DD47" bpmnElement="_6D6EDF56-89D6-4DBB-9237-365C2737DD47">
-        <dc:Bounds height="56" width="56" x="1900" y="272"/>
+        <dc:Bounds height="56" width="56" x="1900" y="272" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="shape__7C020ABA-9324-4EE3-857B-401B3C43FD84" bpmnElement="_7C020ABA-9324-4EE3-857B-401B3C43FD84">
-        <dc:Bounds height="56" width="56" x="72" y="272"/>
+        <dc:Bounds height="56" width="56" x="72" y="272" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="edge_shape__48636A54-33E2-46E4-8736-787AB637276C_to_shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2" bpmnElement="_BC111E98-FFF4-4E08-965C-93F4D250AFB2">
-        <di:waypoint x="1246" y="300"/>
-        <di:waypoint x="1320" y="300"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2_to_shape__E12DBEC7-A835-4217-A8B8-2017638A505E" bpmnElement="_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4">
-        <di:waypoint x="1460" y="300"/>
-        <di:waypoint x="1540" y="300"/>
+        <di:waypoint x="1246" y="300" />
+        <di:waypoint x="1320" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__302D0FF4-43EA-4431-B4E5-8D5AD6310711_to_shape__C29B7634-3A7A-4606-9B1C-4A3424F29D34" bpmnElement="_4BDD402F-000B-4D37-9C25-AE7A12A25E88">
-        <di:waypoint x="756" y="300"/>
-        <di:waypoint x="840" y="300"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__C29B7634-3A7A-4606-9B1C-4A3424F29D34_to_shape__BF911926-5ADB-4B04-A41E-645CED3F8054" bpmnElement="_5977AE4A-6A59-4D54-9419-A2E17995904D">
-        <di:waypoint x="993" y="300"/>
-        <di:waypoint x="1060" y="300"/>
+        <di:waypoint x="756" y="300" />
+        <di:waypoint x="840" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__945A597D-60CC-4E7A-A1BB-63AD945B1EAF_to_shape__5DAB8314-5034-4D58-B2AA-8CF62303409F" bpmnElement="_CAC39F18-D56B-417C-951C-0B1457304806">
-        <di:waypoint x="347" y="300"/>
-        <di:waypoint x="403" y="300"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__5DAB8314-5034-4D58-B2AA-8CF62303409F_to_shape__GW_MASKINELL_ERROR" bpmnElement="_1BE34C21-17A0-4EBF-8ABA-31114FB5ACD5">
-        <di:waypoint x="556" y="300"/>
-        <di:waypoint x="590" y="300"/>
+        <di:waypoint x="347" y="300" />
+        <di:waypoint x="403" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__7C020ABA-9324-4EE3-857B-401B3C43FD84_to_shape__945A597D-60CC-4E7A-A1BB-63AD945B1EAF" bpmnElement="_BD63EDE1-96EF-4E71-9D3B-E84C2D5A1F2F">
-        <di:waypoint x="128" y="300"/>
-        <di:waypoint x="193" y="300"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__E12DBEC7-A835-4217-A8B8-2017638A505E_to_shape__9BF4B5C5-6395-4DAF-A523-56CABCE7908E" bpmnElement="_ACC3C3B4-3F27-466D-B1F1-5507272B57A7">
-        <di:waypoint x="1596" y="300"/>
-        <di:waypoint x="1660" y="300"/>
+        <di:waypoint x="128" y="300" />
+        <di:waypoint x="193" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__9BF4B5C5-6395-4DAF-A523-56CABCE7908E_to_shape__6D6EDF56-89D6-4DBB-9237-365C2737DD47" bpmnElement="_152B7D50-C575-4C6E-AB02-90BA1261CAA0">
-        <di:waypoint x="1814" y="300"/>
-        <di:waypoint x="1900" y="300"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722_to_shape__SVC_END_ERROR" bpmnElement="_7775EF4A-B8B6-4FC8-A48A-AB36C728E476">
-        <di:waypoint x="1776" y="500"/>
-        <di:waypoint x="1840" y="500"/>
+        <di:waypoint x="1814" y="300" />
+        <di:waypoint x="1900" y="300" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__SVC_END_ERROR_to_shape__0D725828-1220-4A54-AD64-88EF2A26F66C" bpmnElement="_SF_ERROR_TO_END">
-        <di:waypoint x="2000" y="500"/>
-        <di:waypoint x="2080" y="500"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__GW_MASKINELL_ERROR_to_shape__9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" bpmnElement="_AC69AC27-847B-44D9-9B3E-DA8E27F9F4E7">
-        <di:waypoint x="618" y="328"/>
-        <di:waypoint x="618" y="500"/>
-        <di:waypoint x="1720" y="500"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__BF911926-5ADB-4B04-A41E-645CED3F8054_to_shape__9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" bpmnElement="_0A50FD08-9A24-40F2-9D7D-352AC2F534C0">
-        <di:waypoint x="1088" y="328"/>
-        <di:waypoint x="1088" y="500"/>
-        <di:waypoint x="1720" y="500"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__E12DBEC7-A835-4217-A8B8-2017638A505E_to_shape__9D646AA4-1E1C-4BEB-B9B8-17AA9F83F722" bpmnElement="_53594BDC-48D1-44A5-B379-B0A181ADBAE8">
-        <di:waypoint x="1568" y="328"/>
-        <di:waypoint x="1568" y="500"/>
-        <di:waypoint x="1720" y="500"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__BF911926-5ADB-4B04-A41E-645CED3F8054_to_shape__48636A54-33E2-46E4-8736-787AB637276C" bpmnElement="_E2277266-EAFA-4779-9B35-A9C3D31B114B">
-        <di:waypoint x="1116" y="300"/>
-        <di:waypoint x="1190" y="300"/>
+        <di:waypoint x="2000" y="500" />
+        <di:waypoint x="2080" y="500" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="edge_shape__302D0FF4-43EA-4431-B4E5-8D5AD6310711_to_shape__48636A54-33E2-46E4-8736-787AB637276C" bpmnElement="_331439CA-81B3-42E6-B26F-D74D6C3529B1">
-        <di:waypoint x="728" y="272"/>
-        <di:waypoint x="728" y="140"/>
-        <di:waypoint x="1218" y="140"/>
-        <di:waypoint x="1218" y="272"/>
+        <di:waypoint x="728" y="272" />
+        <di:waypoint x="728" y="140" />
+        <di:waypoint x="1218" y="140" />
+        <di:waypoint x="1218" y="272" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge_shape__GW_MASKINELL_ERROR_to_shape__302D0FF4-43EA-4431-B4E5-8D5AD6310711" bpmnElement="_SF_MASKINELL_NO_ERROR">
-        <di:waypoint x="646" y="300"/>
-        <di:waypoint x="700" y="300"/>
+      <bpmndi:BPMNEdge id="_7A3733C1-A31D-450E-82DD-201E25C61C3D" bpmnElement="_D7D3B8CD-5931-4E30-AB23-369DC1548DB5" sourceElement="shape__5DAB8314-5034-4D58-B2AA-8CF62303409F" targetElement="shape__302D0FF4-43EA-4431-B4E5-8D5AD6310711">
+        <di:waypoint x="479.5" y="299.5" />
+        <di:waypoint x="700" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_F35783C4-C76E-470A-B956-6E6504ADCC65" bpmnElement="_35DF3271-B27E-4918-AC9C-B72A88F17AE6" sourceElement="shape__BND_MASKINELL_ERROR" targetElement="shape__GW_ERROR_MERGE">
+        <di:waypoint x="479" y="378" />
+        <di:waypoint x="479" y="500" />
+        <di:waypoint x="1700" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge__BND_MANUELL_ERROR_to_shape__GW_ERROR_MERGE" bpmnElement="_5977AE4A-6A59-4D54-9419-A2E17995904D" sourceElement="shape__BND_MANUELL_ERROR" targetElement="shape__GW_ERROR_MERGE">
+        <di:waypoint x="916" y="378" />
+        <di:waypoint x="916" y="500" />
+        <di:waypoint x="1700" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge__BND_BEKRAFTA_ERROR_to_shape__GW_ERROR_MERGE" bpmnElement="_A464FE0F-F3A7-4F70-BFF2-F41B9E5327E4" sourceElement="shape__BND_BEKRAFTA_ERROR" targetElement="shape__GW_ERROR_MERGE">
+        <di:waypoint x="1390" y="378" />
+        <di:waypoint x="1390" y="500" />
+        <di:waypoint x="1700" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge__GW_ERROR_MERGE_to_shape__SVC_END_ERROR" bpmnElement="_SF_GW_TO_SVC_END_ERROR" sourceElement="shape__GW_ERROR_MERGE" targetElement="shape__SVC_END_ERROR">
+        <di:waypoint x="1756" y="500" />
+        <di:waypoint x="1840" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_AD020427-5734-4251-A7AC-F73EAC2D0656" bpmnElement="_DD37EC6A-61E8-48E0-89CC-B347F9061FA4" sourceElement="shape__C29B7634-3A7A-4606-9B1C-4A3424F29D34" targetElement="shape__48636A54-33E2-46E4-8736-787AB637276C">
+        <di:waypoint x="916.5" y="299.5" />
+        <di:waypoint x="1190" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="_E7154452-407D-4D64-B2DD-86782845201E" bpmnElement="_7E9E66B3-A229-404C-A53B-4312ACD2590F" sourceElement="shape__297C75F8-77DE-4FD5-8F2A-39601A7621D2" targetElement="shape__9BF4B5C5-6395-4DAF-A523-56CABCE7908E">
+        <di:waypoint x="1390" y="300" />
+        <di:waypoint x="1660" y="300" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
@@ -534,124 +607,124 @@
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario id="default" name="Simulationscenario">
-          <bpsim:ScenarioParameters/>
+          <bpsim:ScenarioParameters />
           <bpsim:ElementParameters elementRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2">
             <bpsim:TimeParameters>
               <bpsim:ProcessingTime>
-                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0" />
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
             <bpsim:ResourceParameters>
               <bpsim:Availability>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Availability>
               <bpsim:Quantity>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Quantity>
             </bpsim:ResourceParameters>
             <bpsim:CostParameters>
               <bpsim:UnitCost>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
           <bpsim:ElementParameters elementRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34">
             <bpsim:TimeParameters>
               <bpsim:ProcessingTime>
-                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0" />
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
             <bpsim:ResourceParameters>
               <bpsim:Availability>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Availability>
               <bpsim:Quantity>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Quantity>
             </bpsim:ResourceParameters>
             <bpsim:CostParameters>
               <bpsim:UnitCost>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
           <bpsim:ElementParameters elementRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F">
             <bpsim:TimeParameters>
               <bpsim:ProcessingTime>
-                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0" />
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
             <bpsim:ResourceParameters>
               <bpsim:Availability>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Availability>
               <bpsim:Quantity>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Quantity>
             </bpsim:ResourceParameters>
             <bpsim:CostParameters>
               <bpsim:UnitCost>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
           <bpsim:ElementParameters elementRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF">
             <bpsim:TimeParameters>
               <bpsim:ProcessingTime>
-                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0" />
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
             <bpsim:ResourceParameters>
               <bpsim:Availability>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Availability>
               <bpsim:Quantity>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Quantity>
             </bpsim:ResourceParameters>
             <bpsim:CostParameters>
               <bpsim:UnitCost>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
           <bpsim:ElementParameters elementRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E">
             <bpsim:TimeParameters>
               <bpsim:ProcessingTime>
-                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0" />
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
             <bpsim:ResourceParameters>
               <bpsim:Availability>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Availability>
               <bpsim:Quantity>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Quantity>
             </bpsim:ResourceParameters>
             <bpsim:CostParameters>
               <bpsim:UnitCost>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
           <bpsim:ElementParameters elementRef="_SVC_END_ERROR">
             <bpsim:TimeParameters>
               <bpsim:ProcessingTime>
-                <bpsim:NormalDistribution mean="0" standardDeviation="0"/>
+                <bpsim:NormalDistribution mean="0" standardDeviation="0" />
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
             <bpsim:ResourceParameters>
               <bpsim:Availability>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Availability>
               <bpsim:Quantity>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:Quantity>
             </bpsim:ResourceParameters>
             <bpsim:CostParameters>
               <bpsim:UnitCost>
-                <bpsim:FloatingParameter value="0"/>
+                <bpsim:FloatingParameter value="0" />
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
