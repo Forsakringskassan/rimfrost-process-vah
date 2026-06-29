@@ -14,10 +14,9 @@
   <name>vard-av-husdjur</name>
   <description>vard-av-husdjur Kogito with Kafka - Quarkus</description>
   <properties>
-    <quarkus-plugin.version>3.20.3</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.20.3</quarkus.platform.version>
+    <quarkus.platform.version>3.27.4.1</quarkus.platform.version>
     <kogito.bom.group-id>org.kie.kogito</kogito.bom.group-id>
     <kogito.bom.artifact-id>kogito-bom</kogito.bom.artifact-id>
     <kogito.bom.version>999-SNAPSHOT</kogito.bom.version>
@@ -160,7 +159,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.10.0</version>
+        <version>3.11.0</version>
         <executions>
           <execution>
             <id>unpack-bpmn</id>
@@ -188,10 +187,6 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Pin the Docker Engine API version Testcontainers/docker-java negotiates with.
-           Without this, docker-java falls back to API 1.32, which newer Docker engines
-           (minimum API 1.40+) reject with HTTP 400, breaking dev-services container startup.
-           1.41 is supported by both newer engines and older Docker still in use on the team. -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
