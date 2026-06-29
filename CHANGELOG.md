@@ -2,6 +2,26 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.1.4 (2026-06-29)
+
+### Bug Fixes
+
+-  Bump pinned quarkus version ([ac125](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/ac1257a13971af6) Lars Persson)  
+
+### Dependency updates
+
+- update dependency org.apache.maven.plugins:maven-dependency-plugin to v3.11.0 ([cafc5](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/cafc5be531b34d8) renovate[bot])  
+### Other changes
+
+**Fix/use subprocess with timeout (#49)**
+
+* fix: use subprocess with timeouts 
+* fix: reuse result and simplify process 
+* fix: fix prop name 
+
+[e9e74](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/e9e749487fe9d33) NilsElveros *2026-06-29 11:23:59*
+
+
 ## 1.1.3 (2026-06-16)
 
 ### Bug Fixes
