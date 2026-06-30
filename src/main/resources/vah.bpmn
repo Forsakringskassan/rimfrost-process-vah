@@ -243,7 +243,7 @@
     <bpmn2:callActivity id="_5DAB8314-5034-4D58-B2AA-8CF62303409F" drools:independent="true" drools:waitForCompletion="true" name="Rätt till försäkring maskinell kontroll" calledElement="rtf_maskinell">
       <bpmn2:extensionElements>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
-          <drools:script>if (result != null &amp;&amp; result.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, result.getError()); }</drools:script>
+          <drools:script></drools:script>
         </drools:onExit-script>
         <drools:metaData name="elementname">
           <drools:metaValue>Rätt till försäkring maskinell kontroll</drools:metaValue>
@@ -315,7 +315,7 @@
     <bpmn2:callActivity id="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" drools:independent="true" drools:waitForCompletion="true" name="Rätt till försäkring manuell kontroll" calledElement="rtf_manuell">
       <bpmn2:extensionElements>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
-          <drools:script>if (result != null &amp;&amp; result.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, result.getError()); }</drools:script>
+          <drools:script></drools:script>
         </drools:onExit-script>
         <drools:metaData name="elementname">
           <drools:metaValue>Rätt till försäkring manuell kontroll</drools:metaValue>
@@ -384,7 +384,7 @@
     <bpmn2:callActivity id="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" drools:independent="true" drools:waitForCompletion="true" name="Bekräfta beslut" calledElement="bekraftabeslut">
       <bpmn2:extensionElements>
         <drools:onExit-script scriptFormat="http://www.java.com/java">
-          <drools:script>if (result != null &amp;&amp; result.getError() != null) { kcontext.setVariable(&quot;sharedErrorInfo&quot;, result.getError()); }</drools:script>
+          <drools:script></drools:script>
         </drools:onExit-script>
         <drools:metaData name="elementname">
           <drools:metaValue>Bekräfta beslut</drools:metaValue>
