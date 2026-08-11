@@ -455,24 +455,24 @@
     <bpmn2:sequenceFlow id="_CAC39F18-D56B-417C-951C-0B1457304806" sourceRef="_945A597D-60CC-4E7A-A1BB-63AD945B1EAF" targetRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" />
     <bpmn2:sequenceFlow id="_5E7CAC24-EE3D-4898-8866-AD0886BC8BCD" sourceRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" targetRef="_0D0F8AB8-BD94-4A75-BD7A-1F6D983BBB05" />
     <bpmn2:sequenceFlow id="_379B416C-C705-4BBA-9209-29F1A583F532" sourceRef="_0D0F8AB8-BD94-4A75-BD7A-1F6D983BBB05" targetRef="_9BF4B5C5-6395-4DAF-A523-56CABCE7908E" />
-    <bpmn2:sequenceFlow id="_B6E1588A-3AAC-478F-95B7-A420E048E3F7" sourceRef="_0D0F8AB8-BD94-4A75-BD7A-1F6D983BBB05" targetRef="_GW_ERROR_MERGE">
+    <bpmn2:sequenceFlow id="_B6E1588A-3AAC-478F-95B7-A420E048E3F7" name="ERROR" sourceRef="_0D0F8AB8-BD94-4A75-BD7A-1F6D983BBB05" targetRef="_GW_ERROR_MERGE">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_29EE1898-92FE-461C-92EC-328EF14355B2" language="http://www.java.com/java">return result.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_9F5533B6-4727-49F9-94B4-650695903970" sourceRef="_GW_ERROR_MERGE" targetRef="_DBB17FB4-86C7-4122-B914-4B5D287EA20F" />
     <bpmn2:sequenceFlow id="_2B3844AE-35B1-4B83-B8ED-94CB05399B04" sourceRef="_DBB17FB4-86C7-4122-B914-4B5D287EA20F" targetRef="_SVC_END_ERROR" />
     <bpmn2:sequenceFlow id="_51F6B570-EB21-4C1A-9602-C8689A269720" sourceRef="_B69EED87-2846-421F-A365-BC1FE425C566" targetRef="_297C75F8-77DE-4FD5-8F2A-39601A7621D2" />
     <bpmn2:sequenceFlow id="_C401D3F7-C434-4A6C-8E88-D2B578DC20FF" sourceRef="_5DAB8314-5034-4D58-B2AA-8CF62303409F" targetRef="_092C3562-95BA-4D56-B897-847DC7A45D45" />
-    <bpmn2:sequenceFlow id="_DA49FEE6-AD6E-4BDC-82C7-6777F3A07BA3" sourceRef="_092C3562-95BA-4D56-B897-847DC7A45D45" targetRef="_GW_ERROR_MERGE">
-      <bpmn2:conditionExpression id="_C42D6C8D-3416-4C9E-8F4B-4798FBCD6735">return result.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
+    <bpmn2:sequenceFlow id="_DA49FEE6-AD6E-4BDC-82C7-6777F3A07BA3" name="ERROR" sourceRef="_092C3562-95BA-4D56-B897-847DC7A45D45" targetRef="_GW_ERROR_MERGE">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_C42D6C8D-3416-4C9E-8F4B-4798FBCD6735" language="http://www.java.com/java">return result.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="_C9C2EC0F-B663-46AD-A671-1EB1E8A8BF94" sourceRef="_092C3562-95BA-4D56-B897-847DC7A45D45" targetRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" name="Utredning">
-      <bpmn2:conditionExpression id="_4534734C-0B90-4AF1-A4C8-B73EC6C5B738">return result.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.UTREDNING;</bpmn2:conditionExpression>
+    <bpmn2:sequenceFlow id="_C9C2EC0F-B663-46AD-A671-1EB1E8A8BF94" sourceRef="_092C3562-95BA-4D56-B897-847DC7A45D45" targetRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" name="UTREDNING">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_4534734C-0B90-4AF1-A4C8-B73EC6C5B738" language="http://www.java.com/java">return result.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.UTREDNING;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="_A737B187-3C5A-44C7-9486-9D2B42DDFA32" sourceRef="_092C3562-95BA-4D56-B897-847DC7A45D45" targetRef="_85C48389-ECA6-4385-8C4E-AA3F6249FEEB" />
     <bpmn2:sequenceFlow id="_9AA171D8-C095-477F-B026-A703FCE4E7F5" sourceRef="_C29B7634-3A7A-4606-9B1C-4A3424F29D34" targetRef="_85C48389-ECA6-4385-8C4E-AA3F6249FEEB" />
     <bpmn2:sequenceFlow id="_134851BD-4F54-4902-B6FD-02DE0024509D" sourceRef="_85C48389-ECA6-4385-8C4E-AA3F6249FEEB" targetRef="_B69EED87-2846-421F-A365-BC1FE425C566" />
-    <bpmn2:sequenceFlow id="_114B31BC-7DFE-452E-B8ED-CCB5698A66FD" sourceRef="_B69EED87-2846-421F-A365-BC1FE425C566" targetRef="_GW_ERROR_MERGE">
-      <bpmn2:conditionExpression id="_114B31BC-COND" language="http://www.java.com/java">return result.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
+    <bpmn2:sequenceFlow id="_114B31BC-7DFE-452E-B8ED-CCB5698A66FD" name="ERROR" sourceRef="_B69EED87-2846-421F-A365-BC1FE425C566" targetRef="_GW_ERROR_MERGE">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_114B31BC-COND" language="http://www.java.com/java">return result.getUtfall() == se.fk.rimfrost.framework.regel.Utfall.ERROR;</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="_FD8D3900-F782-47AF-84C3-5E085B9EA3B1">
