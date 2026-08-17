@@ -2,6 +2,14 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.1.5 (2026-08-12)
+
+### Bug Fixes
+
+-  label sequence flow routes with Utfall enum values and fix conditionExpression types ([75356](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/753561d6dc48ef3) Ulf Slunga)  
+-  repair vah.bpmn to fix "Editor content has not been set" in VS Code ([2f0ea](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/2f0ea9795e7cc70) Ulf Slunga)  
+-  removed onexit script that wasnt used (#50) ([22bb9](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/22bb93b54b4ee60) NilsElveros)  
+
 ## 1.1.4 (2026-06-29)
 
 ### Bug Fixes
