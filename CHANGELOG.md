@@ -2,6 +2,17 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.1.7 (2026-09-23)
+
+### Bug Fixes
+
+-  Bump dependency versions in preparation for 1.2 ([41fab](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/41fab3a2fb71696) Lars Persson)  
+-  **deps**  update dependency se.fk.rimfrost.framework.process:rimfrost-framework-process to v1.6.4 ([2c8d0](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/2c8d029fec4b7f7) renovate[bot])  
+-  **deps**  update dependency se.fk.github.rimfrost.regel.subprocess:rimfrost-regel-bekraftabeslut-subprocess to v1.1.7 ([7af22](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/7af22571eaedd8c) renovate[bot])  
+
+### Dependency updates
+
+- update forsakringskassan/.github digest to bfb01f7 ([871aa](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/871aa7f561916fb) renovate[bot])  
 ## 1.1.6 (2026-09-10)
 
 ### Bug Fixes
