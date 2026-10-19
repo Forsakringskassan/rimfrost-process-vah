@@ -26,6 +26,13 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- Regelunderprocesserna drar in en äldre version utan processvyUrl, som framework-process behöver.
+           Kan tas bort när underprocesserna beror på 1.2.0 eller senare. -->
+      <dependency>
+        <groupId>se.fk.rimfrost.framework.regel</groupId>
+        <artifactId>rimfrost-framework-regel-asyncapi</artifactId>
+        <version>1.2.0</version>
+      </dependency>
       <dependency>
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>${quarkus.platform.artifact-id}</artifactId>
@@ -111,12 +118,6 @@
       <groupId>se.fk.rimfrost.framework.process</groupId>
       <artifactId>rimfrost-framework-process</artifactId>
       <version>${rimfrost-framework-process.version}</version>
-    </dependency>
-    <!-- Regelunderprocesserna drar in en äldre version utan processvyUrl, som framework-process behöver -->
-    <dependency>
-      <groupId>se.fk.rimfrost.framework.regel</groupId>
-      <artifactId>rimfrost-framework-regel-asyncapi</artifactId>
-      <version>1.2.0</version>
     </dependency>
     <dependency>
       <groupId>se.fk.rimfrost.framework.process</groupId>
