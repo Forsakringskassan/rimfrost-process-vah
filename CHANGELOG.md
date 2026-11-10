@@ -2,6 +2,21 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.2.0 (2026-11-10)
+
+### Features
+
+-  add processbeskrivning and processvy-länk (FKPOC-1155) ([4acf4](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/4acf4ea633a3938) LisaWedin_Ductus)  
+
+### Bug Fixes
+
+-  **deps**  use released rimfrost-framework-process 2.0.0 (FKPOC-1155) ([27a99](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/27a997f8fdffbda) LisaWedin_Ductus)  
+-  rename PROCESSVY_URL property to processvy.url (FKPOC-1155) ([17ece](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/17ecea78c9a22f0) LisaWedin_Ductus)  
+-  address review comments (FKPOC-1155) ([99053](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/99053fd5aad6103) LisaWedin_Ductus)  
+
+### Other changes
+
+
 ## 1.1.8 (2026-11-10)
 
 ### Bug Fixes
