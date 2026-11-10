@@ -2,6 +2,33 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.1.8 (2026-11-10)
+
+### Bug Fixes
+
+-  **deps**  update dependency se.fk.rimfrost.framework.process:rimfrost-framework-process to v1.6.6 ([44fc7](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/44fc74f2162791f) renovate[bot])  
+-  **deps**  update dependency se.fk.github.rimfrost.regel.subprocess:rimfrost-regel-rtf-manuell-subprocess to v1.1.9 ([55cfa](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/55cfa261b117d9b) renovate[bot])  
+-  Fix config response timeout and retry delay not being used ([3eebf](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/3eebf82c5fcd07a) Lars Persson)  
+
+### Dependency updates
+
+- update forsakringskassan/.github digest to cbc0db8 ([e5739](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/e57397f567ab153) renovate[bot])  
+- update forsakringskassan/.github digest to 625efb1 ([63371](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/6337159ac43b026) renovate[bot])  
+- update forsakringskassan/.github digest to 733eb32 ([f0016](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/f0016ec20c386d9) renovate[bot])  
+- update forsakringskassan/.github digest to cbd74f1 ([092d1](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/092d1b48080fdfd) renovate[bot])  
+### Other changes
+
+**Fix/fkpoc 1283 update subprocess (#67)**
+
+* fix: bump subprocesses 
+* fix: bump versions 
+* fix: smoketests 
+
+[9414f](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/9414fa0d0a46828) NilsElveros *2026-11-10 11:42:08*
+
+
+## rimfrost-1_2 (2026-09-23)
+
 ## 1.1.7 (2026-09-23)
 
 ### Bug Fixes
