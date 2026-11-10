@@ -13,7 +13,7 @@ docker run -d \
 ```
 ## Processvy
 
-Processen har en processvy (stegindikatorn) som visar handläggaren var i processen en uppgift befinner sig. Processvy-länken `PROCESSVY_URL=/process/vah` i `application.properties` skickas med i regelanropen, och [processbeskrivning.json](src/main/resources/processbeskrivning.json) bredvid `vah.bpmn` listar processens steg och vilka aktivitets-ID:n som hör till varje steg. Stegen hämtas med `GET /processvy/steg?aktivitetId={uuid}`. Formatet beskrivs i [rimfrost-framework-process](https://github.com/Forsakringskassan/rimfrost-framework-process#processvy).
+Processen har en processvy (stegindikatorn) som visar handläggaren var i processen en uppgift befinner sig. Processvy-länken `processvy.url=/process/vah` i `application.properties` skickas med i regelanropen, och [processbeskrivning.json](src/main/resources/processbeskrivning.json) bredvid `vah.bpmn` listar processens steg och vilka aktivitets-ID:n som hör till varje steg. Stegen hämtas med `GET /processvy/steg?aktivitetId={uuid}`. Formatet beskrivs i [rimfrost-framework-process](https://github.com/Forsakringskassan/rimfrost-framework-process#processvy).
 
 Den som ändrar aktiviteterna i `vah.bpmn` uppdaterar även processbeskrivningen. `VahProcessbeskrivningTest` går sönder om ett aktivitets-ID i BPMN-filen saknas i processbeskrivningen. Kraven finns i [docs/krav.md](docs/krav.md).
 
