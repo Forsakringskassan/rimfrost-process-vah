@@ -2,6 +2,12 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.2.1 (2026-11-11)
+
+### Bug Fixes
+
+-  add group id to incoming handlaggning message (#68) ([01e2d](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/01e2d06cbe96f86) NilsElveros)  
+
 ## 1.2.0 (2026-11-10)
 
 ### Features
