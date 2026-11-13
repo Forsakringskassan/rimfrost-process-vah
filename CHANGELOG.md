@@ -2,6 +2,16 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.2.2 (2026-11-13)
+
+### Bug Fixes
+
+-  address review comments (FKPOC-1309) ([d6433](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/d643348c1d073dc) LisaWedin_Ductus)  
+-  **deps**  update dependency se.fk.rimfrost.framework.process:rimfrost-framework-process to v2.1.1 ([c8a30](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/c8a305d93f63e2b) renovate[bot])  
+
+### Other changes
+
+
 ## 1.2.1 (2026-11-11)
 
 ### Bug Fixes
