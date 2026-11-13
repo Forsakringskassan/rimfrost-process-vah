@@ -17,7 +17,7 @@ Processen har en processvy (stegindikatorn) som visar handläggaren var i proces
 
 Den som ändrar aktiviteterna i `vah.bpmn` uppdaterar även processbeskrivningen. `VahProcessbeskrivningTest` går sönder om ett aktivitets-ID i BPMN-filen saknas i processbeskrivningen. Kraven finns i [docs/krav.md](docs/krav.md).
 
-`maven-ci` validerar `processbeskrivning.json` mot ramverkets JSON Schema genom att anropa workflowet `validate-processbeskrivning.yaml` i rimfrost-framework-process. Schemat kontrollerar fälten och att inga andra fält finns, att aktivitets-ID:n är UUID, att ett steg har antingen `steg` eller `aktiviteter` och att det finns högst tre nivåer. Unika id och att ett aktivitets-ID bara hör till ett steg kontrolleras när processen startar. Ange samma version av ramverket i `uses:` och `framework-ref` som i `pom.xml`.
+`VahProcessbeskrivningTest` validerar `processbeskrivning.json` med ramverkets inläsare, samma som läser filen när processen startar, och körs med de andra testerna i bygget och i `maven-ci`. Inläsaren kontrollerar att de obligatoriska fälten finns och att inga andra fält finns, att aktivitets-ID:n är UUID, att ett steg har antingen `steg` eller `aktiviteter`, att det finns högst tre nivåer, att id är unika och att ett aktivitets-ID bara hör till ett steg. Valideringen följer ramverksversionen i `pom.xml` och behöver inte uppdateras separat.
 
 ## Testing the docker image
 
