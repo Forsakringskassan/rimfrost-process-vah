@@ -19,6 +19,12 @@
       "rubrik": "Bekräfta beslut",
       "beskrivning": "Handläggaren bekräftar beslutet innan den försäkrade informeras.",
       "aktiviteter": ["8cde2355-aea5-4951-916f-08319b2f1e99"]
+    },
+    {
+      "id": "kommunicering",
+      "rubrik": "Kommunicering",
+      "beskrivning": "Handläggaren mottar eventuell kommunicering från kund och justerar underlag vid behov",
+      "aktiviteter": ["50ad36b9-db3d-41ce-ab88-0c9493e1cdb9"]
     }
   ]
 }

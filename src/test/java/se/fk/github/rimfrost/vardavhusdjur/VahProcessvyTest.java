@@ -13,6 +13,7 @@ class VahProcessvyTest
    private static final String rtfMaskinellAktivitetId = "d4ab4820-68d9-41e0-abe1-cd8f9865d275";
    private static final String rtfManuellAktivitetId = "c58dd666-b3c1-4a30-91b8-76c3495668c6";
    private static final String bekraftaBeslutAktivitetId = "8cde2355-aea5-4951-916f-08319b2f1e99";
+   private static final String kommuniceringAktivitetId = "50ad36b9-db3d-41ce-ab88-0c9493e1cdb9";
 
    @Test
    void steg_should_mark_maskinell_kontroll_as_pagar()
@@ -25,8 +26,8 @@ class VahProcessvyTest
             .statusCode(200)
             .body("processId", equalTo("vah"))
             .body("processnamn", equalTo("Vård av husdjur"))
-            .body("steg.id", contains("maskinell-kontroll", "manuell-kontroll", "bekrafta-beslut"))
-            .body("steg.status", contains("PAGAR", "KOMMANDE", "KOMMANDE"));
+            .body("steg.id", contains("maskinell-kontroll", "manuell-kontroll", "bekrafta-beslut", "kommunicering"))
+            .body("steg.status", contains("PAGAR", "KOMMANDE", "KOMMANDE", "KOMMANDE"));
    }
 
    @Test
@@ -38,7 +39,7 @@ class VahProcessvyTest
             .get("/processvy/steg")
             .then()
             .statusCode(200)
-            .body("steg.status", contains("KLAR", "PAGAR", "KOMMANDE"));
+            .body("steg.status", contains("KLAR", "PAGAR", "KOMMANDE", "KOMMANDE"));
    }
 
    @Test
@@ -50,7 +51,19 @@ class VahProcessvyTest
             .get("/processvy/steg")
             .then()
             .statusCode(200)
-            .body("steg.status", contains("KLAR", "KLAR", "PAGAR"));
+            .body("steg.status", contains("KLAR", "KLAR", "PAGAR", "KOMMANDE"));
+   }
+
+   @Test
+   void steg_should_mark_kommunicering_as_pagar()
+   {
+      given()
+            .queryParam("aktivitetId", kommuniceringAktivitetId)
+            .when()
+            .get("/processvy/steg")
+            .then()
+            .statusCode(200)
+            .body("steg.status", contains("KLAR", "KLAR", "KLAR", "PAGAR"));
    }
 
    @Test

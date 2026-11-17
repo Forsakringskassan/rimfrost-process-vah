@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import se.fk.rimfrost.HandlaggningResponseMessagePayload;
 import se.fk.rimfrost.framework.regel.RegelRequestMessagePayload;
 import se.fk.rimfrost.framework.regel.Utfall;
+import se.fk.rimfrost.framework.regel.oul.RegelOulCancelledMessagePayload;
+
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -29,6 +31,8 @@ class VahSmokeTest extends VahTestBase
             rtfManuellResponseTopic, Utfall.JA, handlaggningId);
       CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
             bekraftaBeslutResponseTopic, Utfall.JA, handlaggningId);
+      CompletableFuture<Void> responderKommunicering = startKafkaResponder(kommuniceringRequestTopic, kommuniceringResponseTopic,
+            Utfall.JA, handlaggningId);
 
       sendVahHandlaggningRequest(handlaggningId, "A1");
 
@@ -73,6 +77,16 @@ class VahSmokeTest extends VahTestBase
 
       responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
 
+      String kommuniceringRequest = readKafkaRequestMessage(kommuniceringRequestTopic, handlaggningId);
+      System.out.println("Received kommuniceringRequest: " + kommuniceringRequest);
+      RegelRequestMessagePayload kommuniceringRequestMessagePayload = mapper.readValue(kommuniceringRequest,
+            RegelRequestMessagePayload.class);
+      assertEquals(handlaggningId, kommuniceringRequestMessagePayload.getData().getHandlaggningId());
+      assertEquals("50ad36b9-db3d-41ce-ab88-0c9493e1cdb9", kommuniceringRequestMessagePayload.getData().getAktivitetId());
+      assertEquals(processvyUrl, kommuniceringRequestMessagePayload.getData().getProcessvyUrl());
+
+      responderKommunicering.get(topicTimeout, TimeUnit.SECONDS);
+
       String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
       System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
       HandlaggningResponseMessagePayload handlaggningResponseMessagePayload = mapper.readValue(vahHandlaggningResponse,
@@ -91,6 +105,8 @@ class VahSmokeTest extends VahTestBase
             rtfMaskinellResponseTopic, Utfall.JA, handlaggningId);
       CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
             bekraftaBeslutResponseTopic, Utfall.JA, handlaggningId);
+      CompletableFuture<Void> responderKommunicering = startKafkaResponder(kommuniceringRequestTopic,
+            kommuniceringResponseTopic, Utfall.JA, handlaggningId);
 
       sendVahHandlaggningRequest(handlaggningId, "A1");
 
@@ -112,6 +128,11 @@ class VahSmokeTest extends VahTestBase
       assertEquals("8cde2355-aea5-4951-916f-08319b2f1e99", bekraftaPayload.getData().getAktivitetId());
 
       responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
+
+      String kommuniceringRequest = readKafkaRequestMessage(kommuniceringRequestTopic, handlaggningId);
+      System.out.println("Received kommuniceringRequest: " + kommuniceringRequest);
+
+      responderKommunicering.get(topicTimeout, TimeUnit.SECONDS);
 
       String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
       System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
@@ -140,6 +161,8 @@ class VahSmokeTest extends VahTestBase
             rtfManuellResponseTopic, Utfall.JA, handlaggningId);
       CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
             bekraftaBeslutResponseTopic, Utfall.JA, handlaggningId);
+      CompletableFuture<Void> responderKommunicering = startKafkaResponder(kommuniceringRequestTopic,
+            kommuniceringResponseTopic, Utfall.JA, handlaggningId);
 
       sendVahHandlaggningRequest(handlaggningId, "A1");
 
@@ -168,6 +191,68 @@ class VahSmokeTest extends VahTestBase
       String bekraftaBeslutRequest = readKafkaRequestMessage(bekraftaBeslutRequestTopic, handlaggningId);
       System.out.println("Received bekraftaBeslutRequest: " + bekraftaBeslutRequest);
       responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
+
+      String kommuniceringRequest = readKafkaRequestMessage(kommuniceringRequestTopic, handlaggningId);
+      System.out.println("Received kommuniceringRequest: " + kommuniceringRequest);
+      responderKommunicering.get(topicTimeout, TimeUnit.SECONDS);
+
+      String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
+      System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
+      HandlaggningResponseMessagePayload handlaggningResponseMessagePayload = mapper.readValue(vahHandlaggningResponse,
+            HandlaggningResponseMessagePayload.class);
+      assertEquals(handlaggningId, handlaggningResponseMessagePayload.getData().getHandlaggningId());
+      assertEquals("GODKÄND", handlaggningResponseMessagePayload.getData().getResultat());
+   }
+
+   /**
+    * Verifies that "Kommunicering" step returns "JA" response and send cancelled message before continuing on as
+    * normal when step receives no response at all and the kommunicering timeout timer fires.
+    */
+   @Test
+   void testVahKommuniceringTimeout() throws Exception
+   {
+      var handlaggningId = UUID.randomUUID().toString();
+      System.out.println("Starting testVahManuellKommunicering");
+
+      CompletableFuture<Void> responderRtfMaskinell = startKafkaResponder(rtfMaskinellRequestTopic,
+            rtfMaskinellResponseTopic, Utfall.UTREDNING, handlaggningId);
+      CompletableFuture<Void> responderRtfManuellKomplettering = startKafkaResponder(rtfManuellKompletteringRequestTopic,
+            rtfManuellKompletteringResponseTopic, Utfall.JA, handlaggningId);
+      CompletableFuture<Void> responderRtfManuell = startKafkaResponder(rtfManuellRequestTopic,
+            rtfManuellResponseTopic, Utfall.JA, handlaggningId);
+      CompletableFuture<Void> responderBekraftaBeslut = startKafkaResponder(bekraftaBeslutRequestTopic,
+            bekraftaBeslutResponseTopic, Utfall.JA, handlaggningId);
+
+      sendVahHandlaggningRequest(handlaggningId, "A1");
+
+      String rtfMaskinellRequest = readKafkaRequestMessage(rtfMaskinellRequestTopic, handlaggningId);
+      System.out.println("Received rtfMaskinellRequest: " + rtfMaskinellRequest);
+      responderRtfMaskinell.get(topicTimeout, TimeUnit.SECONDS);
+
+      String rtfManuellKompletteringRequest = readKafkaRequestMessage(rtfManuellKompletteringRequestTopic, handlaggningId);
+      System.out.println("Received rtfManuellKompletteringRequest: " + rtfManuellKompletteringRequest);
+      responderRtfManuellKomplettering.get(topicTimeout, TimeUnit.SECONDS);
+
+      String rtfManuellRequest = readKafkaRequestMessage(rtfManuellRequestTopic, handlaggningId);
+      System.out.println("Received rtfManuellRequest: " + rtfManuellRequest);
+      responderRtfManuell.get(topicTimeout, TimeUnit.SECONDS);
+
+      String bekraftaBeslutRequest = readKafkaRequestMessage(bekraftaBeslutRequestTopic, handlaggningId);
+      System.out.println("Received bekraftaBeslutRequest: " + bekraftaBeslutRequest);
+      responderBekraftaBeslut.get(topicTimeout, TimeUnit.SECONDS);
+
+      String kommuniceringRequest = readKafkaRequestMessage(kommuniceringRequestTopic, handlaggningId);
+      System.out.println("Received kommuniceringRequest: " + kommuniceringRequest);
+      RegelRequestMessagePayload kommuniceringRequestPayload = mapper.readValue(kommuniceringRequest,
+            RegelRequestMessagePayload.class);
+      assertEquals(handlaggningId, kommuniceringRequestPayload.getData().getHandlaggningId());
+      assertEquals("50ad36b9-db3d-41ce-ab88-0c9493e1cdb9", kommuniceringRequestPayload.getData().getAktivitetId());
+
+      String kommuniceringCancelledRequest = readKafkaRequestMessage(kommuniceringCancelledTopic, handlaggningId);
+      System.out.println("Received kommuniceringCancelledRequest: " + kommuniceringCancelledRequest);
+      RegelOulCancelledMessagePayload kommuniceringCancelledMessagePayload = mapper.readValue(kommuniceringCancelledRequest,
+            RegelOulCancelledMessagePayload.class);
+      assertEquals(handlaggningId, kommuniceringCancelledMessagePayload.getData().getHandlaggningId());
 
       String vahHandlaggningResponse = readKafkaRequestMessage(vahHandlaggningResponseTopic, handlaggningId);
       System.out.println("Received vahHandlaggningResponse: " + vahHandlaggningResponse);
