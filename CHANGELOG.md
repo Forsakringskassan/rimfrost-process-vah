@@ -2,6 +2,12 @@
 
 Changelog of rimfrost-process-vah.
 
+## 1.3.0 (2026-11-17)
+
+### Features
+
+-  Add kommunicering subprocess to vah.bpmn ([f8487](https://github.com/Forsakringskassan/rimfrost-process-vah/commit/f8487116fb952c6) Lars Persson)  
+
 ## 1.2.3 (2026-11-13)
 
 ### Bug Fixes
