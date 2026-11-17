@@ -47,6 +47,9 @@ abstract class VahTestBase
    protected static final String rtfManuellKompletteringResponseTopic = "rtf-manuell-komplettering-responses";
    protected static final String bekraftaBeslutRequestTopic = "bekraftabeslut-requests";
    protected static final String bekraftaBeslutResponseTopic = "bekraftabeslut-responses";
+   protected static final String kommuniceringRequestTopic = "kommunicering-requests";
+   protected static final String kommuniceringResponseTopic = "kommunicering-responses";
+   protected static final String kommuniceringCancelledTopic = "kommunicering-cancelled";
    protected static final int topicTimeout = 20;
 
    @ConfigProperty(name = "kafka.bootstrap.servers")

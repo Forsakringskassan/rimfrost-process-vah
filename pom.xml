@@ -107,6 +107,11 @@
       <version>1.1.10</version>
     </dependency>
     <dependency>
+      <groupId>se.fk.github.rimfrost.regel.subprocess</groupId>
+      <artifactId>rimfrost-regel-kommunicering-subprocess</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+    <dependency>
       <groupId>se.fk.rimfrost.framework.process</groupId>
       <artifactId>rimfrost-framework-process</artifactId>
       <version>${rimfrost-framework-process.version}</version>
